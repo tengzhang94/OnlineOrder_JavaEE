@@ -9,6 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <link rel="stylesheet" href="css/zerogrid.css">
+	<link rel="stylesheet" href="css/style.css">
+
+        <link rel="stylesheet" href="css/menu.css">
          
 <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -22,22 +27,186 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
-			<div class="row-fluid">
-				<div class="span4">
-					 <button class="btn" type="button">按钮</button>
+        <section id="container" class="sub-page">
+	<div class="wrap-container zerogrid">
+		<div class="crumbs">
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="menu.html">Menu</a></li>
+			</ul>
+		</div>
+		<div id="main-content">
+			<div class="wrap-content">
+				<div class="row">
+					<div class="col-1-3">
+						<div class="wrap-col">
+							<h3>Pasta Plates</h3>
+							<div class="post">
+								<a href="#"><img src="images/15.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								  <span>$25 - $26</span>
+								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><button type="button" class="btn btn-success btn-sm">add</button></span>
+                                                                         <span class="send-price">
+                                                                                       <button type="button" class="btn btn-danger btn-sm">delete</button>
+                                                                          </span>
+                                                                    <span>0</span>
+                                                                </div>
+							</div>
+							<div class="post">
+								<a href="#"><img src="images/10.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								   <span>$25 - $26</span>
+								</div>
+							</div>
+							<div class="post">
+								<a href="#"><img src="images/9.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								  <span>$25 - $26</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-1-3">
+						<div class="wrap-col">
+							<h3>Starters</h3>
+							<div class="post">
+								<a href="#"><img src="images/14.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								   <span>$25 - $26</span>
+								</div>
+							</div>
+							<div class="post">
+								<a href="#"><img src="images/8.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								  <span>$25 - $26</span>
+								</div>
+							</div>
+							<div class="post">
+								<a href="#"><img src="images/7.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								  <span>$25 - $26</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-1-3">
+						<div class="wrap-col">
+							<h3>Salads</h3>
+							<div class="post">
+								<a href="#"><img src="images/13.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								  <span>$25 - $26</span>
+								</div>
+							</div>
+							<div class="post">
+								<a href="#"><img src="images/4.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								  <span>$25 - $26</span>
+								</div>
+							</div>
+							<div class="post">
+								<a href="#"><img src="images/5.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								  <span>$25 - $26</span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="span4">
-					 <button class="btn" type="button">按钮</button>
-				</div>
-				<div class="span4">
-					 <button class="btn" type="button">按钮</button>
+				<div class="row">
+					<div class="col-1-3">
+						<div class="wrap-col">
+							<h3>Chef's Specials</h3>
+							<div class="post">
+								<a href="#"><img src="images/15.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								   <span>$25 - $26</span>
+								</div>
+							</div>
+							<div class="post">
+								<a href="#"><img src="images/10.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								  <span>$25 - $26</span>
+								</div>
+							</div>
+							<div class="post">
+								<a href="#"><img src="images/9.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								   <span>$25 - $26</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-1-3">
+						<div class="wrap-col">
+							<h3>Fast Food</h3>
+							<div class="post">
+								<a href="#"><img src="images/14.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								  <span>$25 - $26</span>
+								</div>
+							</div>
+							<div class="post">
+								<a href="#"><img src="images/8.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								   <span>$25 - $26</span>
+								</div>
+							</div>
+							<div class="post">
+								<a href="#"><img src="images/7.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								   <span>$25 - $26</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-1-3">
+						<div class="wrap-col">
+							<h3>Seafood Specials</h3>
+							<div class="post">
+								<a href="#"><img src="images/13.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								   <span>$25 - $26</span>
+								</div>
+							</div>
+							<div class="post">
+								<a href="#"><img src="images/4.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								   <span>$25 - $26</span>
+								</div>
+							</div>
+							<div class="post">
+								<a href="#"><img src="images/5.jpg"/></a>
+								<div class="wrapper">
+								  <h5><a href="#">Lorem ipsum dolor</a></h5>
+								   <span>$25 - $26</span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
+		</div> 
 	</div>
-</div>
+</section>
     </body>
 </html>
