@@ -41,6 +41,7 @@
 					<div class="col-1-3">
 						<div class="wrap-col">
 							<h3>Pasta Plates</h3>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/15.jpg"/></a>
 								<div class="wrapper">
@@ -48,79 +49,116 @@
 								  <span>$25 - $26</span>
 								</div>
                                                                 <div class="price">
-                                                                    <span class="start-price"><button type="button" class="btn btn-success btn-sm">add</button></span>
-                                                                         <span class="send-price">
-                                                                                       <button type="button" class="btn btn-danger btn-sm">delete</button>
-                                                                          </span>
-                                                                    <span>0</span>
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
                                                                 </div>
 							</div>
+                                                        </form>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/10.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								   <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/9.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								  <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
 						</div>
 					</div>
 					<div class="col-1-3">
 						<div class="wrap-col">
 							<h3>Starters</h3>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/14.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								   <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/8.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								  <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/7.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								  <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
 						</div>
 					</div>
 					<div class="col-1-3">
 						<div class="wrap-col">
 							<h3>Salads</h3>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/13.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								  <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/4.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								  <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/5.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								  <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
 						</div>
 					</div>
 				</div>
@@ -128,79 +166,124 @@
 					<div class="col-1-3">
 						<div class="wrap-col">
 							<h3>Chef's Specials</h3>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/15.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								   <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/10.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								  <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/9.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								   <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
 						</div>
 					</div>
 					<div class="col-1-3">
 						<div class="wrap-col">
 							<h3>Fast Food</h3>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/14.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								  <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/8.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								   <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/7.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								   <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
 						</div>
 					</div>
 					<div class="col-1-3">
 						<div class="wrap-col">
 							<h3>Seafood Specials</h3>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/13.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								   <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/4.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								   <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
+                                                        <form action="./MenuAddServlet" method="POST">
 							<div class="post">
 								<a href="#"><img src="images/5.jpg"/></a>
 								<div class="wrapper">
 								  <h5><a href="#">Lorem ipsum dolor</a></h5>
 								   <span>$25 - $26</span>
 								</div>
+                                                                <div class="price">
+                                                                    <span class="start-price"><input type="submit" name="action" value="Add" /></span>
+                                                                </div>
 							</div>
+                                                        </form>
 						</div>
 					</div>
 				</div>

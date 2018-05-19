@@ -6,12 +6,14 @@
 package dao;
 
 import javax.ejb.Local;
+import model.MenuOrdered;
 
 /**
  *
- * @author Zheng Liang
+ * @author Teng Zhang
  */
 @Local
 public interface MenuDaoLocal {
     
+    void addMenu(MenuOrdered menuOrdered);
 }
