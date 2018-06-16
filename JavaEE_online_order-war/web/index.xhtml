@@ -8,7 +8,9 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:link value="Personal cart" outcome="shopping_cart"></h:link>
+            <h:outputLink  value="shopping_cart.xhtml">Shopping cart</h:outputLink><br/>
+            <h:outputLink rendered="#{loginController1.name == null}" value="login.xhtml">Login</h:outputLink><br/>
+            <h:outputLink rendered="#{loginController1.name == null}" value="register.xtml">Register</h:outputLink><br/>
         <h:dataTable var="p" value="#{mainPageController.findAll()}" border ="1" cellpadding="2" cellspacing="2">
         <h:column>
             <f:facet name="header">Course</f:facet>
