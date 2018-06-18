@@ -16,6 +16,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -38,8 +39,7 @@ public class OnlineOrderMBean implements Serializable {
     private CustomerCredentialsBean customerCredentialsBean;
     @EJB
     private CourseOverviewBean courseOverviewBean;
-
-
+ 
     /**
      * Creates a new instance of OnlineOrderMBean
      */
@@ -52,6 +52,8 @@ public class OnlineOrderMBean implements Serializable {
      */
     public List<Course> getCourses()
     {
+        //ArrayList<Course> myList = new ArrayList<>();
+        //myList.add(new Course(2,"eten",15,6));
         return courseOverviewBean.getOverview();
     }
     
