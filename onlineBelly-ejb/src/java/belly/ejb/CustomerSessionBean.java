@@ -73,12 +73,16 @@ public class CustomerSessionBean {
     }
 
     /**
-     * 
+     * set the order on confirmed and persist in database
      * @return amount of time to wait fo the delivery
      */
     public int confirmOrder() {
         ArrayList<OrderCourse> myCourses = (ArrayList<OrderCourse>)order.getOrderCourseList();
         int waitTime;
+        
+        //indicate the order as completed
+        order.setComplete(true);
+        em.merge(order);                //change changes to database
         
         waitTime = myCourses.stream().mapToInt(oc -> oc.getCourse().getPreptime()).max().getAsInt();
         return waitTime;

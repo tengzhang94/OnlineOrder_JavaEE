@@ -92,7 +92,7 @@ public class FoodOrder implements Serializable {
         Optional<OrderCourse> orderCourse;
         
         orderCourse = orderCourseList.stream().filter((oc) ->(oc.getCourse().equals(course))).findFirst();
-        if (orderCourse.isPresent() & (orderCourse.get().decreaseCount()==0))
+        if (orderCourse.isPresent() & (orderCourse.get().decreaseCount()==0))       //case course is no more desired
         {
             orderCourseList.remove(orderCourse.get());
         }
