@@ -26,7 +26,6 @@ public class CourseOverviewBean {
 
     public List<Course> getOverview() {
         Query query = em.createNamedQuery("Course.findAll");
-        System.out.println("fetched list");
         return query.getResultList();
     }
 
