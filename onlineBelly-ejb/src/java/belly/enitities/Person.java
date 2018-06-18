@@ -37,6 +37,11 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Person.findByCredentials", query = "SELECT p FROM Person p WHERE p.login = :login AND p.password= :password")})
 public class Person implements Serializable {
 
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "PASSWORD")
+    private byte[] password;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -48,10 +53,6 @@ public class Person implements Serializable {
     @Basic(optional = false)
     @Column(name = "LOGIN")
     private String login;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "PASSWORD")
-    private byte[] password;
     @OneToMany(mappedBy = "personid")
     private List<FoodOrder> foodorderList;
 
@@ -85,13 +86,6 @@ public class Person implements Serializable {
         this.login = login;
     }
 
-    public byte[] getPassword() {
-        return password;
-    }
-
-    public void setPassword(byte[] password) {
-        this.password = password;
-    }
 
     @XmlTransient
     public List<FoodOrder> getFoodorderList() {
@@ -125,6 +119,14 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return name+"(personid= " + id + ")";
+    }
+
+    public byte[] getPassword() {
+        return password;
+    }
+
+    public void setPassword(byte[] password) {
+        this.password = password;
     }
     
 }
