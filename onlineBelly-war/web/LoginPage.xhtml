@@ -5,31 +5,26 @@ and open the template in the editor.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui = "http://java.sun.com/jsf/facelets">
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>login page</title>
+        <link rel="stylesheet" href="CSS/positionStyles.css"/>
+        <link rel="stylesheet" href="CSS/textStyles.css"/>
     </h:head>
     <h:body>
-        <p:panelGrid columns="3" style="align-self: stretch; border: hidden; list-style: none ">
-            <p:column width="25%"/>
-            <p:column width="50%" style="text-align: center"><h1><h:outputText value="MY ONLINE BELLY"/></h1></p:column>
-            <p:column width="25%" />
-        </p:panelGrid>
-
         <center>
+        <br><h:outputText class="myCol-100 webTitle" value="MY ONLINE BELLY"/></br>        
         <h2><h:outputText value="Please Login"/></h2>
         <h:form>
             <h:panelGrid columns="2" bgcolor="#eff5fa" cellspacing="5" frame="box">
             <h:outputLabel value="login name:"/>
-            <h:inputText value="#{onlineOrderMBean.loginName}" required="true" requiredMessage="fill in login name" />
+            <h:inputText value="#{onlineOrderMBean.loginName}" required="true" />
             <h:outputLabel value="password:"/>
-            <h:inputSecret value="#{onlineOrderMBean.password}" required="true" requiredMessage="fill in password"/>
+            <h:inputSecret value="#{onlineOrderMBean.password}" required="true"/>
             </h:panelGrid>
-            <h:commandButton id="login" value="Login" action="#{onlineOrderMBean.loginCustomer}"/>        
+            <h:commandButton id="login" value="Login" action="#{onlineOrderMBean.loginCustomer()}"/> 
         </h:form>
         <p:commandButton value="register new customer" action="RegisterPage"/>
         </center>

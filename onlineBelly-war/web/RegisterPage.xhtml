@@ -25,15 +25,15 @@ and open the template in the editor.
         <h:form id="registerForm">
             <h:panelGrid columns="2" bgcolor="#eff5fa" cellspacing="5" frame="box">
             <h:outputLabel value="nickname:"/>
-            <h:inputText value="#{onlineOrderMBean.nickName}" required="true" requiredMessage="fill in your own name" />
+            <h:inputText value="#{OnlineOrderMBean.nickName}" required="true" requiredMessage="fill in your own name" />
             <h:outputLabel value="login name:"/>
-            <h:inputText value="#{onlineOrderMBean.loginName}" required="true" requiredMessage="fill in login name" />
+            <h:inputText value="#{OnlineOrderMBean.loginName}" required="true" requiredMessage="fill in login name" />
             <h:outputLabel value="password:"/>
-            <p:password value="#{onlineOrderMBean.password}" match="pw_repeat" required="true" requiredMessage="fill in password"/>
+            <p:password value="#{OnlineOrdertMBean.password}" match="pw_repeat" required="true" requiredMessage="fill in password"/>
             <h:outputLabel value="repeat password:"/>
-            <p:password id="pw_repeat" value="#{onlineOrderMBean.password}" required="true" requiredMessage="fill in password"/>
+            <p:password id="pw_repeat" value="#{OnlineOrdertMBean.password}" required="true" requiredMessage="fill in password"/>
             </h:panelGrid>
-            <h:commandButton id="login" value="Register" action="#{onlineOrderMBean.registerCustomer}"/>        
+            <h:commandButton id="login" value="Register" action="#{OnlineOrdertMBean.registerCustomer}"/>        
         </h:form>
         </center>
     </h:body>
