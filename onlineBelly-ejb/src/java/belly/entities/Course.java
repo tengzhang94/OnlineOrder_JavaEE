@@ -18,8 +18,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -37,12 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Course.findByMaximumPreptime", query = "SELECT c FROM Course c WHERE c.preptime < :preptime")
     , @NamedQuery(name = "Course.findByMaximumPrice", query = "SELECT c FROM Course c WHERE c.price < :price")})
 public class Course implements Serializable {
-
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 80)
-    @Column(name = "PICTURE")
-    private String picture;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -150,14 +142,5 @@ public class Course implements Serializable {
     @Override
     public String toString() {
         return "belly.entities.Course[ id=" + id + " ]";
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-    
+    }    
 }
