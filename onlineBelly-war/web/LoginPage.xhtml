@@ -27,7 +27,7 @@ and open the template in the editor.
             <h:outputLabel value="login name:"/>
             <h:inputText value="#{onlineOrderMBean.loginName}" required="true" requiredMessage="fill in login name" />
             <h:outputLabel value="password:"/>
-            <h:inputSecret binding="#{onlineOrderMBean.password}" required="true" requiredMessage="fill in password"/>
+            <h:inputSecret value="#{onlineOrderMBean.password}" required="true" requiredMessage="fill in password"/>
             </h:panelGrid>
             <h:commandButton id="login" value="Login" action="#{onlineOrderMBean.loginCustomer}"/>        
         </h:form>

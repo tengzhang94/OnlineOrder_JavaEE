@@ -14,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author toon1
  */
 @Entity
-@Table(name = "COURSE")
+@Table(name = "course")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c")
@@ -47,18 +46,21 @@ public class Course implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
     @Basic(optional = false)
-    @Column(name = "PREPTIME")
+    @Column(name = "preptime")
     private int preptime;
     @Basic(optional = false)
-    @Column(name = "PRICE")
+    @Column(name = "price")
     private int price;
+    @Column(name = "picture")
+    private String picture;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
     private List<OrderCourse> orderCourseList;
 
@@ -79,31 +81,48 @@ public class Course implements Serializable {
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public int getPreptime() {
         return preptime;
     }
+
     public void setPreptime(int preptime) {
         this.preptime = preptime;
     }
+
     public int getPrice() {
         return price;
     }
+
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
     @XmlTransient
     public List<OrderCourse> getOrderCourseList() {
         return orderCourseList;
     }
+
     public void setOrderCourseList(List<OrderCourse> orderCourseList) {
         this.orderCourseList = orderCourseList;
     }
@@ -130,7 +149,7 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return name+"(CourseId= " + id + ")";
+        return "belly.entities.Course[ id=" + id + " ]";
     }
 
     public String getPicture() {

@@ -46,30 +46,12 @@ public class OnlineOrderMBean implements Serializable {
     private String password;
     private String nickName;
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    /**
+    public String getNickName() {return nickName;}
+    public void setNickName(String nickName) {this.nickName = nickName;}
+    public String getLoginName() {return loginName;}
+    public void setLoginName(String loginName) {this.loginName = loginName;}
+    public String getPassword() {return password;}
+    public void setPassword(String password) {this.password = password;}    /**
      * Creates a new instance of OnlineOrderMBean
      */
     public OnlineOrderMBean() {
@@ -103,6 +85,8 @@ public class OnlineOrderMBean implements Serializable {
         catch (InvalidCredentialsException e)
         {
             //display msg to try again
+            System.out.println("bad login attempt");            
+            System.out.println("filled in pw: "+new String(cypherBytes));
             return "RegisterPage";
         }
     }

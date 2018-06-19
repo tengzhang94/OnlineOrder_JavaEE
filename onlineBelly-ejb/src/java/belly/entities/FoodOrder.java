@@ -22,7 +22,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,43 +33,44 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author toon1
  */
 @Entity
-@Table(name = "FOODORDER")
+@Table(name = "foodorder")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Foodorder.findAll", query = "SELECT f FROM FoodOrder f")
-    , @NamedQuery(name = "Foodorder.findByPerson", query = "SELECT f FROM FoodOrder f WHERE f.personid = :personid")
-    , @NamedQuery(name = "Foodorder.findByPersonOpen", query = "SELECT f FROM FoodOrder f WHERE f.personid = :personid AND f.complete = FALSE")
-    , @NamedQuery(name = "Foodorder.findById", query = "SELECT f FROM FoodOrder f WHERE f.id = :id")
-    , @NamedQuery(name = "Foodorder.findByTimeSince", query = "SELECT f FROM FoodOrder f WHERE f.orderTime > :startTime")
-    , @NamedQuery(name = "Foodorder.findByComplete", query = "SELECT f FROM FoodOrder f WHERE f.complete = :complete")})
+    @NamedQuery(name = "FoodOrder.findAll", query = "SELECT f FROM FoodOrder f")
+    , @NamedQuery(name = "FoodOrder.findByPerson", query = "SELECT f FROM FoodOrder f WHERE f.personID = :personID")
+    , @NamedQuery(name = "FoodOrder.findByPersonOpen", query = "SELECT f FROM FoodOrder f WHERE f.personID = :personID AND f.complete = 0")
+    , @NamedQuery(name = "FoodOrder.findById", query = "SELECT f FROM FoodOrder f WHERE f.id = :id")
+    , @NamedQuery(name = "FoodOrder.findByTimeSince", query = "SELECT f FROM FoodOrder f WHERE f.ordertime > :startTime")
+    , @NamedQuery(name = "FoodOrder.findByComplete", query = "SELECT f FROM FoodOrder f WHERE f.complete = :complete")})
 public class FoodOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="LICENSE_SEQ")
-    @SequenceGenerator(name="LICENSE_SEQ",sequenceName="LICENSE_SEQ",allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "ORDERTIME")
+    @Column(name = "ordertime")
     @Temporal(TemporalType.DATE)
-    private Date orderTime;
+    private Date ordertime;
     @Basic(optional = false)
-    @Column(name = "COMPLETE")
-    private Boolean complete;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "foodorder")
+    @Column(name = "complete")
+    private short complete;
+    @JoinColumn(name = "personID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Person personID;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "foodOrder")
     private List<OrderCourse> orderCourseList;
-    @JoinColumn(name = "PERSONID", referencedColumnName = "ID")
-    @ManyToOne
-    private Person personid;
 
     public FoodOrder() {
     }
 
     public FoodOrder(Person customer) {
-        this.personid = customer;
-        this.orderTime = new Date();
+        this.personID = customer;
+        this.ordertime = new Date();
         this.orderCourseList = new ArrayList<>();
-        this.complete = false;
+        this.complete = 0;
     }
     
     public void addCourse(Course course)
@@ -97,17 +97,47 @@ public class FoodOrder implements Serializable {
             orderCourseList.remove(orderCourse.get());
         }
     }
-    
-    public Integer getId() {return id;}
-    public Date getOrderTime() {return orderTime;}
-    public void setOrderTime(Date orderTime) {this.orderTime = orderTime;}
-    public Boolean getComplete() {return complete;}
-    public void setComplete(Boolean complete) {this.complete = complete;}
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getOrdertime() {
+        return ordertime;
+    }
+
+    public void setOrdertime(Date ordertime) {
+        this.ordertime = ordertime;
+    }
+
+    public short getComplete() {
+        return complete;
+    }
+
+    public void setComplete(short complete) {
+        this.complete = complete;
+    }
+
+    public Person getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(Person personID) {
+        this.personID = personID;
+    }
+
     @XmlTransient
-    public List<OrderCourse> getOrderCourseList() {return orderCourseList;}
-    public void setOrderCourseList(List<OrderCourse> orderCourseList) {this.orderCourseList = orderCourseList;}
-    public Person getPersonid() {return personid;}
-    public void setPersonid(Person personid) {this.personid = personid;}
+    public List<OrderCourse> getOrderCourseList() {
+        return orderCourseList;
+    }
+
+    public void setOrderCourseList(List<OrderCourse> orderCourseList) {
+        this.orderCourseList = orderCourseList;
+    }
 
     @Override
     public int hashCode() {
@@ -131,7 +161,7 @@ public class FoodOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "Order " + id;
+        return "belly.entities.FoodOrder[ id=" + id + " ]";
     }
     
 }

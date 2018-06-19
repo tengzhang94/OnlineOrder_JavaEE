@@ -18,41 +18,41 @@ import javax.persistence.Embeddable;
 public class OrderCoursePK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "ORDERID")
-    private int orderid;
+    @Column(name = "orderId")
+    private int orderId;
     @Basic(optional = false)
-    @Column(name = "COURSEID")
-    private int courseid;
+    @Column(name = "courseId")
+    private int courseId;
 
     public OrderCoursePK() {
     }
 
-    public OrderCoursePK(int orderid, int courseid) {
-        this.orderid = orderid;
-        this.courseid = courseid;
+    public OrderCoursePK(int orderId, int courseId) {
+        this.orderId = orderId;
+        this.courseId = courseId;
     }
 
-    public int getOrderid() {
-        return orderid;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrderid(int orderid) {
-        this.orderid = orderid;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
-    public int getCourseid() {
-        return courseid;
+    public int getCourseId() {
+        return courseId;
     }
 
-    public void setCourseid(int courseid) {
-        this.courseid = courseid;
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) orderid;
-        hash += (int) courseid;
+        hash += (int) orderId;
+        hash += (int) courseId;
         return hash;
     }
 
@@ -63,10 +63,10 @@ public class OrderCoursePK implements Serializable {
             return false;
         }
         OrderCoursePK other = (OrderCoursePK) object;
-        if (this.orderid != other.orderid) {
+        if (this.orderId != other.orderId) {
             return false;
         }
-        if (this.courseid != other.courseid) {
+        if (this.courseId != other.courseId) {
             return false;
         }
         return true;
@@ -74,7 +74,7 @@ public class OrderCoursePK implements Serializable {
 
     @Override
     public String toString() {
-        return "[ orderid=" + orderid + ", courseid=" + courseid + " ]";
+        return "belly.entities.OrderCoursePK[ orderId=" + orderId + ", courseId=" + courseId + " ]";
     }
     
 }
