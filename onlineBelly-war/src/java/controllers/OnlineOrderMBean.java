@@ -42,6 +42,7 @@ public class OnlineOrderMBean implements Serializable {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/CredentialService/CredentialService.wsdl")
     private CredentialService_Service service;
+
     private webService_client.CustomerSessionBean customerSessionBean;
 
     @EJB
@@ -79,6 +80,7 @@ public class OnlineOrderMBean implements Serializable {
         try
         {
             customerSessionBean = loginCustomer_1(loginName, password);
+
             return "MenuList";
         }
         catch (InvalidCredentialsException_Exception e)
@@ -93,7 +95,9 @@ public class OnlineOrderMBean implements Serializable {
         try
         {
             System.out.println("creting new person");
+
             customerSessionBean = registerCustomer_1(loginName, password, nickName);
+
         }
         catch (NotUniqueCredentialsException_Exception e)
         {
@@ -136,6 +140,7 @@ public class OnlineOrderMBean implements Serializable {
         return request.getUserPrincipal();
     }
 
+
     private webService_client.CustomerSessionBean loginCustomer_1(java.lang.String loginName, String password) throws InvalidCredentialsException_Exception {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
@@ -144,6 +149,7 @@ public class OnlineOrderMBean implements Serializable {
     }
 
     private webService_client.CustomerSessionBean registerCustomer_1(java.lang.String loginName, String password, java.lang.String personName) throws NotUniqueCredentialsException_Exception {
+
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         webService_client.CredentialService port = service.getCredentialServicePort();
