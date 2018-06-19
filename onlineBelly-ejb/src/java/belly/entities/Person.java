@@ -19,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -38,7 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Person implements Serializable {
 
     @Basic(optional = false)
-    @Lob
+    @NotNull
+    @Lob()
     @Column(name = "PASSWORD")
     private byte[] password;
 

@@ -19,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -37,6 +39,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Course.findByMaximumPrice", query = "SELECT c FROM Course c WHERE c.price < :price")})
 public class Course implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 80)
+    @Column(name = "PICTURE")
+    private String picture;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -51,9 +59,6 @@ public class Course implements Serializable {
     @Basic(optional = false)
     @Column(name = "PRICE")
     private int price;
-    @Lob
-    @Column(name = "PICTURE")
-    private Serializable picture;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
     private List<OrderCourse> orderCourseList;
 
@@ -95,12 +100,6 @@ public class Course implements Serializable {
     public void setPrice(int price) {
         this.price = price;
     }
-    public Serializable getPicture() {
-        return picture;
-    }
-    public void setPicture(Serializable picture) {
-        this.picture = picture;
-    }
     @XmlTransient
     public List<OrderCourse> getOrderCourseList() {
         return orderCourseList;
@@ -132,6 +131,14 @@ public class Course implements Serializable {
     @Override
     public String toString() {
         return name+"(CourseId= " + id + ")";
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
     
 }
