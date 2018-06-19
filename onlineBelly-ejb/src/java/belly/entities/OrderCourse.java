@@ -22,25 +22,26 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author toon1
  */
 @Entity
-@Table(name = "ORDERCOURSE")
+@Table(name = "ordercourse")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OrderCourse.findAll", query = "SELECT o FROM OrderCourse o")
-    , @NamedQuery(name = "OrderCourse.findByOrderid", query = "SELECT o FROM OrderCourse o WHERE o.orderCoursePK.orderid = :orderid")})
+    , @NamedQuery(name = "OrderCourse.findByOrderId", query = "SELECT o FROM OrderCourse o WHERE o.orderCoursePK.orderId = :orderId")
+    , @NamedQuery(name = "OrderCourse.findByCourseId", query = "SELECT o FROM OrderCourse o WHERE o.orderCoursePK.courseId = :courseId")})
 public class OrderCourse implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected OrderCoursePK orderCoursePK;
     @Basic(optional = false)
-    @Column(name = "COUNT")
+    @Column(name = "count")
     private int count;
-    @JoinColumn(name = "COURSEID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @JoinColumn(name = "courseId", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Course course;
-    @JoinColumn(name = "ORDERID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @JoinColumn(name = "orderId", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private FoodOrder foodorder;
+    private FoodOrder foodOrder;
 
     public OrderCourse() {
     }
@@ -89,12 +90,12 @@ public class OrderCourse implements Serializable {
         this.course = course;
     }
 
-    public FoodOrder getFoodorder() {
-        return foodorder;
+    public FoodOrder getFoodOrder() {
+        return foodOrder;
     }
 
-    public void setFoodorder(FoodOrder foodorder) {
-        this.foodorder = foodorder;
+    public void setFoodOrder(FoodOrder foodOrder) {
+        this.foodOrder = foodOrder;
     }
 
     @Override
@@ -119,7 +120,7 @@ public class OrderCourse implements Serializable {
 
     @Override
     public String toString() {
-        return "OrderCourse " + orderCoursePK;
+        return "belly.entities.OrderCourse[ orderCoursePK=" + orderCoursePK + " ]";
     }
     
 }

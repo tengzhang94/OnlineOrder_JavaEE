@@ -81,7 +81,7 @@ public class CustomerSessionBean {
         int waitTime;
         
         //indicate the order as completed
-        order.setComplete(true);
+        order.setComplete((short) 1);
         em.merge(order);                //change changes to database
         
         waitTime = myCourses.stream().mapToInt(oc -> oc.getCourse().getPreptime()).max().getAsInt();

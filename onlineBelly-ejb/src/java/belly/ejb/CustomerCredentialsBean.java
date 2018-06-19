@@ -40,6 +40,7 @@ public class CustomerCredentialsBean {
         try
         {
             customer = validateCredentials(loginName,password);
+            System.out.println("retrieved :" +customer);
             myOrder = getLatestOrder(customer);
             return new CustomerSessionBean(customer,myOrder);
         }
@@ -93,11 +94,16 @@ public class CustomerCredentialsBean {
      **/
     private Person validateCredentials(String loginName, byte[] password) throws InvalidCredentialsException {
         
+        System.out.println("ben hier, login & pw ="+password+loginName);
         Query query = em.createNamedQuery("Person.findByCredentials");
         query.setParameter("login", loginName);
-        query.setParameter("password", password);
+        query.setParameter("password", "1234".getBytes());
+        System.out.println("ben hier, login & pw ="+password+loginName);
+        System.out.println(query.toString());
+        //return (Person) query.getSingleResult(); //[B@2fdc4fe5
         try
         {
+            System.out.println(query.getResultList());
             return (Person) query.getSingleResult();
         }
         catch(Exception e)                              //case invalid credentials
@@ -116,7 +122,7 @@ public class CustomerCredentialsBean {
         FoodOrder myOrder;
         
         Query query = em.createNamedQuery("FoodOrder.findByPersonOpen");
-        query.setParameter("personid",customer.getId());
+        query.setParameter("personID",customer);
         
         try
         {

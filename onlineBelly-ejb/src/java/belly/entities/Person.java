@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author toon1
  */
 @Entity
-@Table(name = "PERSON")
+@Table(name = "person")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
@@ -37,24 +38,24 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Person.findByCredentials", query = "SELECT p FROM Person p WHERE p.login = :login AND p.password= :password")})
 public class Person implements Serializable {
 
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "PASSWORD")
-    private byte[] password;
-
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
     @Basic(optional = false)
-    @Column(name = "LOGIN")
+    @Column(name = "login")
     private String login;
-    @OneToMany(mappedBy = "personid")
-    private List<FoodOrder> foodorderList;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "password")
+    private byte[] password;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personID")
+    private List<FoodOrder> foodOrderList;
 
     public Person() {
     }
@@ -63,15 +64,17 @@ public class Person implements Serializable {
         this.name = name;
         this.login = login;
         this.password = password;
-        this.foodorderList = new ArrayList<>();
+        this.foodOrderList = new ArrayList<>();
     }
 
     public Integer getId() {
         return id;
     }
-    public void setId(int i) {
-        this.id=i;
+
+    public void setId(Integer id) {
+        this.id = id;
     }
+
     public String getName() {
         return name;
     }
@@ -88,14 +91,21 @@ public class Person implements Serializable {
         this.login = login;
     }
 
-
-    @XmlTransient
-    public List<FoodOrder> getFoodorderList() {
-        return foodorderList;
+    public byte[] getPassword() {
+        return password;
     }
 
-    public void setFoodorderList(List<FoodOrder> foodorderList) {
-        this.foodorderList = foodorderList;
+    public void setPassword(byte[] password) {
+        this.password = password;
+    }
+
+    @XmlTransient
+    public List<FoodOrder> getFoodOrderList() {
+        return foodOrderList;
+    }
+
+    public void setFoodOrderList(List<FoodOrder> foodOrderList) {
+        this.foodOrderList = foodOrderList;
     }
 
     @Override
@@ -121,14 +131,6 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return name+"(personid= " + id + ")";
-    }
-
-    public byte[] getPassword() {
-        return password;
-    }
-
-    public void setPassword(byte[] password) {
-        this.password = password;
     }
     
 }
