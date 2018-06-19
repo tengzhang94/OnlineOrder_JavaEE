@@ -12,6 +12,7 @@ import belly.entities.Course;
 import belly.entities.Person;
 import belly.exceptions.InvalidCredentialsException;
 import belly.exceptions.NotUniqueCredentialsException;
+import static com.sun.mail.util.ASCIIUtility.getBytes;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +41,34 @@ public class OnlineOrderMBean implements Serializable {
     private CustomerCredentialsBean customerCredentialsBean;
     @EJB
     private CourseOverviewBean courseOverviewBean;
- 
+     
+    private String loginName;
+    private String password;
+    private String nickName;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     /**
      * Creates a new instance of OnlineOrderMBean
      */
@@ -63,22 +92,27 @@ public class OnlineOrderMBean implements Serializable {
         //case yes, add to order
         //else redirect to login view
     }
-    public void loginCustomer(String loginName,byte[] password)
+    public String loginCustomer()
     {
+        byte[] cypherBytes = getBytes(this.password);
         try
         {
-            customerSessionBean = customerCredentialsBean.loginCustomer(loginName, password);
+            customerSessionBean = customerCredentialsBean.loginCustomer(loginName, cypherBytes);
+            return "MenuList";
         }
         catch (InvalidCredentialsException e)
         {
             //display msg to try again
+            return "RegisterPage";
         }
     }
-    public void registerCustomer(String nickName, String loginName,byte[] password)
+    public void registerCustomer()
     {
+        byte[] cypherBytes = getBytes(this.password);
         try
         {
-            customerSessionBean = customerCredentialsBean.registerCustomer(loginName, password, nickName);
+            System.out.println("creting new person");
+            customerSessionBean = customerCredentialsBean.registerCustomer(loginName, cypherBytes, nickName);
         }
         catch (NotUniqueCredentialsException e)
         {
