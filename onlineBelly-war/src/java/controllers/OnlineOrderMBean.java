@@ -6,27 +6,16 @@
 package controllers;
 
 import belly.ejb.CourseOverviewBean;
-import belly.ejb.CustomerCredentialsBean;
-import belly.ejb.CustomerSessionBean;
 import belly.entities.Course;
 import belly.entities.Person;
-import belly.exceptions.InvalidCredentialsException;
-import belly.exceptions.NotUniqueCredentialsException;
-import static com.sun.mail.util.ASCIIUtility.getBytes;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.enterprise.context.RequestScoped;
 import java.io.Serializable;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.xml.ws.WebServiceRef;
 import webService_client.CredentialService_Service;
 import webService_client.InvalidCredentialsException_Exception;
@@ -80,18 +69,17 @@ public class OnlineOrderMBean implements Serializable {
         try
         {
             customerSessionBean = loginCustomer_1(loginName, password);
-
             return "MenuList";
         }
         catch (InvalidCredentialsException_Exception e)
         {
             //display msg to try again
-            return "RegisterPage";
+            System.out.println("invalid credits");
+            return "LoginPage";
         }
     }
     public void registerCustomer() 
     {
-        byte[] cypherBytes = getBytes(this.password);
         try
         {
             System.out.println("creting new person");
@@ -155,6 +143,13 @@ public class OnlineOrderMBean implements Serializable {
         webService_client.CredentialService port = service.getCredentialServicePort();
         return port.registerCustomer(loginName, password, personName);
     }
+
+    public String getLoginName() {return loginName;}
+    public void setLoginName(String loginName) {this.loginName = loginName;}
+    public String getNickName() {return nickName;}
+    public void setNickName(String nickName) {this.nickName = nickName;}
+    public String getPassword() {return password;}
+    public void setPassword(String password) {this.password = password;}
 
     
 }

@@ -96,7 +96,7 @@ public class CustomerCredentialsBean {
         query.setParameter("password", password);
         try
         {
-            System.out.println(query.getResultList());
+            System.out.println("persons found :" +query.getResultList());
             return (Person) query.getSingleResult();
         }
         catch(Exception e)                              //case invalid credentials
