@@ -53,60 +53,31 @@ public class Person implements Serializable {
     @Basic(optional = false)
     @Lob
     @Column(name = "password")
-    private byte[] password;
+    private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personID")
     private List<FoodOrder> foodOrderList;
 
     public Person() {
     }
 
-    public Person(String name, String login, byte[] password) {
+    public Person(String name, String login, String password) {
         this.name = name;
         this.login = login;
         this.password = password;
         this.foodOrderList = new ArrayList<>();
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public byte[] getPassword() {
-        return password;
-    }
-
-    public void setPassword(byte[] password) {
-        this.password = password;
-    }
-
+    public Integer getId() {return id;}
+    public void setId(Integer id) {this.id = id;}
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
+    public String getLogin() {return login;}
+    public void setLogin(String login) {this.login = login;}
+    public String getPassword() {return password;}
+    public void setPassword(String password) {this.password = password;}
     @XmlTransient
-    public List<FoodOrder> getFoodOrderList() {
-        return foodOrderList;
-    }
-
-    public void setFoodOrderList(List<FoodOrder> foodOrderList) {
-        this.foodOrderList = foodOrderList;
-    }
+    public List<FoodOrder> getFoodOrderList() {return foodOrderList;}
+    public void setFoodOrderList(List<FoodOrder> foodOrderList) {this.foodOrderList = foodOrderList;}
 
     @Override
     public int hashCode() {
@@ -130,7 +101,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return name+"(personid= " + id + ")";
+        return name+" (personid= " + id + ")";
     }
     
 }

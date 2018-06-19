@@ -34,7 +34,7 @@ public class CustomerCredentialsBean {
      * @return statefull session bean for the customer session
      * @throws InvalidCredentialsException in case the person entry doe not exist
      **/
-    public CustomerSessionBean loginCustomer(String loginName, byte[] password) throws InvalidCredentialsException {
+    public CustomerSessionBean loginCustomer(String loginName, String password) throws InvalidCredentialsException {
         Person customer;
         FoodOrder myOrder;        
         try
@@ -56,7 +56,7 @@ public class CustomerCredentialsBean {
      * @return new session with an order loaded
      * @throws NotUniqueCredentialsException in case the person cant be created due to parameter constraints
      **/
-    public CustomerSessionBean registerCustomer(String loginName, byte[] password, String personName) throws NotUniqueCredentialsException {
+    public CustomerSessionBean registerCustomer(String loginName, String password, String personName) throws NotUniqueCredentialsException {
         
         Person customer;
         FoodOrder myOrder;
@@ -75,11 +75,7 @@ public class CustomerCredentialsBean {
         }       
         
         customer = new Person(personName,loginName,password);       //create a new person
-        System.out.println("hbbbblo");
-        customer.setId(1);
-        System.out.println(customer.getLogin()+" "+customer.getPassword().toString()+" "+customer.getName()+" "+customer.getId()+" "+customer.getLogin()+" "+new String(customer.getPassword()));
         em.persist(customer);
-        System.out.println("haaaalo");
         myOrder = new FoodOrder(customer);                          //create a new order
         em.persist(myOrder);
         newSession = new CustomerSessionBean(customer,myOrder);
@@ -92,15 +88,12 @@ public class CustomerCredentialsBean {
      * @return boolean to indicate existe,ce or not
      * @throws InvalidCredentialsException in case the person entry doe not exist
      **/
-    private Person validateCredentials(String loginName, byte[] password) throws InvalidCredentialsException {
+    private Person validateCredentials(String loginName, String password) throws InvalidCredentialsException {
         
         System.out.println("ben hier, login & pw ="+password+loginName);
         Query query = em.createNamedQuery("Person.findByCredentials");
         query.setParameter("login", loginName);
-        query.setParameter("password", "1234".getBytes());
-        System.out.println("ben hier, login & pw ="+password+loginName);
-        System.out.println(query.toString());
-        //return (Person) query.getSingleResult(); //[B@2fdc4fe5
+        query.setParameter("password", password);
         try
         {
             System.out.println(query.getResultList());

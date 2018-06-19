@@ -68,47 +68,19 @@ public class Course implements Serializable {
         this.name = name;
         this.preptime = preptime;
         this.price = price;
+        this.picture = "IMAGES/default.jpg";
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getPreptime() {
-        return preptime;
-    }
-
-    public void setPreptime(int preptime) {
-        this.preptime = preptime;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
+    public Integer getId() {return id;}
+    public void setId(Integer id) {this.id = id;}
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
+    public int getPreptime() {return preptime;}
+    public void setPreptime(int preptime) {this.preptime = preptime;}
+    public int getPrice() {return price;}
+    public void setPrice(int price) {this.price = price;}
+    public String getPicture() {return picture;}
+    public void setPicture(String picture) {this.picture = picture;}
 
     @XmlTransient
     public List<OrderCourse> getOrderCourseList() {
@@ -141,7 +113,7 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return "belly.entities.Course[ id=" + id + " ]";
+        return name+"(CourseId= " + id + ")";
     }
     
 }

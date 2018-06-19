@@ -57,46 +57,16 @@ public class OrderCourse implements Serializable {
     }
     
     
-    public int increaseCount()
-    {
-        return ++this.count;
-    }
-    public int decreaseCount()
-    {
-        return --this.count;
-    }
-
-    public OrderCoursePK getOrderCoursePK() {
-        return orderCoursePK;
-    }
-
-    public void setOrderCoursePK(OrderCoursePK orderCoursePK) {
-        this.orderCoursePK = orderCoursePK;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public FoodOrder getFoodOrder() {
-        return foodOrder;
-    }
-
-    public void setFoodOrder(FoodOrder foodOrder) {
-        this.foodOrder = foodOrder;
-    }
+    public int increaseCount(){return ++this.count;}
+    public int decreaseCount(){return --this.count;}
+    public OrderCoursePK getOrderCoursePK() {return orderCoursePK;}
+    public void setOrderCoursePK(OrderCoursePK orderCoursePK) {this.orderCoursePK = orderCoursePK;}
+    public int getCount() {return count;}
+    public void setCount(int count) {this.count = count;}
+    public Course getCourse() {return course;}
+    public void setCourse(Course course) {this.course = course;}
+    public FoodOrder getFoodOrder() {return foodOrder;}
+    public void setFoodOrder(FoodOrder foodOrder) {this.foodOrder = foodOrder;}
 
     @Override
     public int hashCode() {
@@ -120,7 +90,7 @@ public class OrderCourse implements Serializable {
 
     @Override
     public String toString() {
-        return "belly.entities.OrderCourse[ orderCoursePK=" + orderCoursePK + " ]";
+        return "OrderCourse " + orderCoursePK;
     }
     
 }

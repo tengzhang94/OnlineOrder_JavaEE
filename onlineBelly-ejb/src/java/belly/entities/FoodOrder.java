@@ -98,37 +98,14 @@ public class FoodOrder implements Serializable {
         }
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getOrdertime() {
-        return ordertime;
-    }
-
-    public void setOrdertime(Date ordertime) {
-        this.ordertime = ordertime;
-    }
-
-    public short getComplete() {
-        return complete;
-    }
-
-    public void setComplete(short complete) {
-        this.complete = complete;
-    }
-
-    public Person getPersonID() {
-        return personID;
-    }
-
-    public void setPersonID(Person personID) {
-        this.personID = personID;
-    }
+    public Integer getId() {return id;}
+    public void setId(Integer id) {this.id = id;}
+    public Date getOrdertime() {return ordertime;}
+    public void setOrdertime(Date ordertime) {this.ordertime = ordertime;}
+    public short getComplete() {return complete;}
+    public void setComplete(short complete) {this.complete = complete;}
+    public Person getPersonID() {return personID;}
+    public void setPersonID(Person personID) {this.personID = personID;}
 
     @XmlTransient
     public List<OrderCourse> getOrderCourseList() {
@@ -161,7 +138,7 @@ public class FoodOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "belly.entities.FoodOrder[ id=" + id + " ]";
+        return "Order " + id;
     }
-    
+        
 }

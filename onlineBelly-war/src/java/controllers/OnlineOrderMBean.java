@@ -15,6 +15,7 @@ import belly.exceptions.NotUniqueCredentialsException;
 import static com.sun.mail.util.ASCIIUtility.getBytes;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import java.io.Serializable;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -38,20 +39,9 @@ public class OnlineOrderMBean implements Serializable {
     @EJB
     private CustomerSessionBean customerSessionBean;
     @EJB
-    private CustomerCredentialsBean customerCredentialsBean;
-    @EJB
     private CourseOverviewBean courseOverviewBean;
      
-    private String loginName;
-    private String password;
-    private String nickName;
-
-    public String getNickName() {return nickName;}
-    public void setNickName(String nickName) {this.nickName = nickName;}
-    public String getLoginName() {return loginName;}
-    public void setLoginName(String loginName) {this.loginName = loginName;}
-    public String getPassword() {return password;}
-    public void setPassword(String password) {this.password = password;}    /**
+    /**
      * Creates a new instance of OnlineOrderMBean
      */
     public OnlineOrderMBean() {
@@ -74,35 +64,7 @@ public class OnlineOrderMBean implements Serializable {
         //case yes, add to order
         //else redirect to login view
     }
-    public String loginCustomer()
-    {
-        byte[] cypherBytes = getBytes(this.password);
-        try
-        {
-            customerSessionBean = customerCredentialsBean.loginCustomer(loginName, cypherBytes);
-            return "MenuList";
-        }
-        catch (InvalidCredentialsException e)
-        {
-            //display msg to try again
-            System.out.println("bad login attempt");            
-            System.out.println("filled in pw: "+new String(cypherBytes));
-            return "RegisterPage";
-        }
-    }
-    public void registerCustomer()
-    {
-        byte[] cypherBytes = getBytes(this.password);
-        try
-        {
-            System.out.println("creting new person");
-            customerSessionBean = customerCredentialsBean.registerCustomer(loginName, cypherBytes, nickName);
-        }
-        catch (NotUniqueCredentialsException e)
-        {
-            //display msg to use other loginName
-        }
-    }
+       
     /**
      * see if a user is logged in, otherwise signal that  
      * @return the current customer
