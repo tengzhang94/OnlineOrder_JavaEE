@@ -54,6 +54,7 @@ public class OrderCourse implements Serializable {
     public OrderCourse(int orderid, int courseid) {
         this.orderCoursePK = new OrderCoursePK(orderid, courseid);
         this.count = 1;
+        this.course = new Course(orderid, "koe",15,3);
     }
     
     

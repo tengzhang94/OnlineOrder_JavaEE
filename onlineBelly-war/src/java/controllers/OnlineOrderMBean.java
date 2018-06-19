@@ -7,11 +7,13 @@ package controllers;
 
 import belly.ejb.CourseOverviewBean;
 import belly.entities.Course;
+import belly.entities.OrderCourse;
 import belly.entities.Person;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
@@ -40,6 +42,7 @@ public class OnlineOrderMBean implements Serializable {
     private String loginName;
     private String nickName;
     private String password;
+    private Course newCourse;
     
     /**
      * Creates a new instance of OnlineOrderMBean
@@ -51,15 +54,44 @@ public class OnlineOrderMBean implements Serializable {
      *
      * @return list of course objects to be displayed in the menu
      */
-    public List<Course> getCourses()
+    public List<Course> getAllCourses()
     {
         //ArrayList<Course> myList = new ArrayList<>();
         //myList.add(new Course(2,"eten",15,6));
         return courseOverviewBean.getOverview();
     }
     
+    public List<OrderCourse> getOrderedCourses()
+    {
+        ArrayList<OrderCourse> myOs = new ArrayList<>();
+        
+        myOs.add(new OrderCourse(1,1));
+        myOs.add(new OrderCourse(1,2));
+        myOs.add(new OrderCourse(1,3));
+        return myOs;//courseOverviewBean.getOverview();
+    }
+    
+    public int totalPrice()
+    {
+
+        return 42;
+    }
+    public String confirm()
+    {
+        System.out.println("finished session");
+        return "MenuList";
+    }
+    
     public void orderCourse()
     {
+        System.out.println("order : "+newCourse);
+        //check if logged in
+        //case yes, add to order
+        //else redirect to login view
+    }
+    public void deleteCourse()
+    {
+        System.out.println("cancel order : "+newCourse);
         //check if logged in
         //case yes, add to order
         //else redirect to login view
@@ -150,6 +182,8 @@ public class OnlineOrderMBean implements Serializable {
     public void setNickName(String nickName) {this.nickName = nickName;}
     public String getPassword() {return password;}
     public void setPassword(String password) {this.password = password;}
+    public Course getNewCourse() {return newCourse;}
+    public void setNewCourse(Course newCourse) {this.newCourse = newCourse;}
 
     
 }

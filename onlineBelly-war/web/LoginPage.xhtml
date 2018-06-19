@@ -20,11 +20,11 @@ and open the template in the editor.
         <h:form>
             <h:panelGrid columns="2" bgcolor="#eff5fa" cellspacing="5" frame="box">
             <h:outputLabel value="login name:"/>
-            <h:inputText value="#{onlineOrderMBean.loginName}" required="true" />
+            <h:inputText value="#{onlineOrderMBean.loginName}"  />
             <h:outputLabel value="password:"/>
-            <h:inputSecret value="#{onlineOrderMBean.password}" required="true"/>
+            <h:inputSecret value="#{onlineOrderMBean.password}"/>
             </h:panelGrid>
-            <h:commandButton id="login" value="Login" action="#{onlineOrderMBean.loginCustomer()}"/> 
+            <h:commandButton id="login" value="Login" action="#{onlineOrderMBean.loginCustomer()}" disabled="#{onlineOrderMBean.loginName and onlineOrderMBean.password}"/> 
         </h:form>
         <p:commandButton value="register new customer" action="RegisterPage"/>
         </center>
