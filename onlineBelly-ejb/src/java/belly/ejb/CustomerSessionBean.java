@@ -95,6 +95,19 @@ public class CustomerSessionBean {
         totalPrice = myCourses.stream().mapToInt(oc -> (oc.getCount()*oc.getCourse().getPrice())).sum();
         return totalPrice;
     }
+    
+    public double getPromo(){
+        
+         ArrayList<OrderCourse> myCourses = (ArrayList<OrderCourse>)order.getOrderCourseList();
+         int totalPrice;
+         double promoPrice;
+        
+        totalPrice = myCourses.stream().mapToInt(oc -> (oc.getCount()*oc.getCourse().getPrice())).sum();
+        promoPrice = totalPrice*0.8;
+        
+        return promoPrice;
+    
+    }
 
     public FoodOrder viewOrder() {
         //show for each course name, amount, price

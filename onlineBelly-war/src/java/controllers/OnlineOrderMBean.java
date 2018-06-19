@@ -97,6 +97,7 @@ public class OnlineOrderMBean implements Serializable {
         {
             System.out.println("creting new person");
             customerSessionBean = customerCredentialsBean.registerCustomer(loginName, cypherBytes, nickName);
+           // response.sendRedirect("welcome.jsp");
         }
         catch (NotUniqueCredentialsException e)
         {
