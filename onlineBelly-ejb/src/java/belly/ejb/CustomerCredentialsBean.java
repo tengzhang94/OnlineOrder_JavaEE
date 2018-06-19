@@ -14,6 +14,7 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 /**
@@ -73,7 +74,11 @@ public class CustomerCredentialsBean {
         }       
         
         customer = new Person(personName,loginName,password);       //create a new person
+        System.out.println("hbbbblo");
+        customer.setId(1);
+        System.out.println(customer.getLogin()+" "+customer.getPassword().toString()+" "+customer.getName()+" "+customer.getId()+" "+customer.getLogin()+" "+new String(customer.getPassword()));
         em.persist(customer);
+        System.out.println("haaaalo");
         myOrder = new FoodOrder(customer);                          //create a new order
         em.persist(myOrder);
         newSession = new CustomerSessionBean(customer,myOrder);

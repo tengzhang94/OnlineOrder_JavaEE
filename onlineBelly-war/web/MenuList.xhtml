@@ -7,42 +7,44 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui = "http://java.sun.com/jsf/facelets">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title>Customer Listing</title>
+        <title>menu page</title>
+        <link rel="stylesheet" href="CSS/positionStyles.css"/>
+        <link rel="stylesheet" href="CSS/textStyles.css"/>
     </h:head>
     <h:body>
-        <h1><h:outputText value="MY ONLINE BELLY"/></h1>
+        <p:panelGrid class="myCol-100">
+            <p:row class="myCol-100">
+                <p:column class="myCol-20" rowspan="2"/>
+                <p:column class="myCol-60 myCenter webTitle" rowspan="2">
+                    <h:outputText value="MY ONLINE BELLY"/>
+                </p:column>
+                <p:column class="myCol-20 myEnd">
+                        <p:commandButton value="LOG IN" action="LoginPage"/>                   
+                </p:column>
+            </p:row>
+            <p:row class="myCol-100">
+                <p:column class="myCol-20 myEnd">
+                        <p:commandButton value="CHECK OUT" action="LoginPage"/>                   
+                </p:column>
+             </p:row> 
+        </p:panelGrid>
         <h:form>
-            <h2><h:outputText value="FOOD MENU"/></h2>
-            <p:dataTable var="item" value="#{onlineOrderMBean.courses}" id="customerList"
-                         paginator="true" rows="10">
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="ID"/>
-                    </f:facet>
-                    <h:outputText value="#{item.id}"/>
+            <center><h2><h:outputText value="FOOD MENU"/></h2></center>
+            <p:dataGrid var="item" value="#{onlineOrderMBean.courses}" id="customerList" paginator="true" columns="3" rows="12">
+                <p:column class="myCol-100">
+                    <p:panel header="#{item.name}" class="myCenter myCol-100">
+                        <h:panelGrid class="myCol-100">
+                            <p:graphicImage  value="#{item.picture}" url="IMAGES/default.jpg" class="myImageDisplay myCenter" /> 
+                            <h:outputText value="price : €#{item.price}" />
+                            <h:outputText value="preparation time : #{item.preptime} minutes" />
+                        </h:panelGrid>
+                    </p:panel>
                 </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Name"/>
-                    </f:facet>
-                    <h:outputText value="#{item.name}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="price"/>
-                    </f:facet>
-                    <h:outputText value="#{item.price}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="preparation time"/>
-                    </f:facet>
-                    <h:outputText value="#{item.preptime}"/>
-                </p:column>
-            </p:dataTable>
+            </p:dataGrid>
         </h:form>
     </h:body>
 </html>
