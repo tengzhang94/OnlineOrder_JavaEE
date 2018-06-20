@@ -13,7 +13,6 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 
@@ -39,6 +38,7 @@ public class OnlineOrderMBean implements Serializable {
     private String loginName;
     private String password;
     private String nickName;
+    private Course myCourse;
 
     public String getNickName() {return nickName;}
     public void setNickName(String nickName) {this.nickName = nickName;}
@@ -64,35 +64,46 @@ public class OnlineOrderMBean implements Serializable {
     
     public List<OrderCourse> getOrderedCourses()
     {
-        ArrayList<OrderCourse> myOs = new ArrayList<>();
+        /**ArrayList<OrderCourse> myOs = new ArrayList<>();
         
         myOs.add(new OrderCourse(1,1));
         myOs.add(new OrderCourse(1,2));
         myOs.add(new OrderCourse(1,3));
-        return myOs;//courseOverviewBean.getOverview();
+        return myOs;
+        */
+        return customerSessionBean.getOrder().getOrderCourseList();
     }
     
     public int totalPrice()
     {
-
-        return 42;
+        return customerSessionBean.getTotalPrice();
+        //return 42;
     }
+    public int deliveryDuration()
+    {
+        return customerSessionBean.getDuration();
+        //return 42;
+    }
+    
     public String confirm()
     {
         System.out.println("finished session");
+        customerSessionBean.confirmOrder();
         return "MenuList";
     }
     
     public void orderCourse()
     {
-        System.out.println("order : ");
+        System.out.println("order : "+ this.myCourse);
+        customerSessionBean.orderCourse(myCourse, 1);
         //check if logged in
         //case yes, add to order
         //else redirect to login view
     }
     public void deleteCourse()
     {
-        System.out.println("cancel order : ");
+        System.out.println("cancel order : "+ this.myCourse);   
+        customerSessionBean.removeCourse(myCourse, 1);
         //check if logged in
         //case yes, add to order
         //else redirect to login view
@@ -163,6 +174,14 @@ public class OnlineOrderMBean implements Serializable {
                 (HttpServletRequest) FacesContext.getCurrentInstance().
                     getExternalContext().getRequest();
         return request.getUserPrincipal();
+    }
+
+    public Course getMyCourse() {
+        return myCourse;
+    }
+
+    public void setMyCourse(Course myCourse) {
+        this.myCourse = myCourse;
     }
 
     

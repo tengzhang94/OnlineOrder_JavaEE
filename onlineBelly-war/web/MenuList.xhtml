@@ -42,7 +42,7 @@ and open the template in the editor.
                             <h:outputText value="price : €#{item.price}" />
                             <h:outputText value="preparation time : #{item.preptime} minutes" />
                             <p:commandButton value="ORDER" action="#{onlineOrderMBean.orderCourse()}">
-                                <f:setPropertyActionListener value="#{item}" target="#{onlineOrderMBean.newCourse}" />
+                                <f:setPropertyActionListener value="#{item}" target="#{onlineOrderMBean.myCourse}" />
                             </p:commandButton>
                         </h:panelGrid>
                     </p:panel>

@@ -55,7 +55,7 @@ and open the template in the editor.
                                 <h:outputText value="Increase"/>
                             </f:facet>
                             <p:commandButton value="ADD 1" action="#{onlineOrderMBean.orderCourse()}">
-                                <f:setPropertyActionListener value="#{item.course}" target="#{onlineOrderMBean.newCourse}" />
+                                <f:setPropertyActionListener value="#{item.course}" target="#{onlineOrderMBean.myCourse}" />
                             </p:commandButton>
                         </h:column>
                         <h:column class="myCol-20">
@@ -63,13 +63,13 @@ and open the template in the editor.
                                 <h:outputText value="Decrease"/>
                             </f:facet>
                             <p:commandButton value="DEL 1" action="#{onlineOrderMBean.deleteCourse()}">
-                                <f:setPropertyActionListener value="#{item.course}" target="#{onlineOrderMBean.newCourse}" />
+                                <f:setPropertyActionListener value="#{item.course}" target="#{onlineOrderMBean.myCourse}" />
                             </p:commandButton>
                         </h:column>
                     </h:dataTable>
                     
                     <h:outputText class="myEnd" value="Total Price : €#{onlineOrderMBean.totalPrice()}"/><br/>
-                    <h:outputText class="myEnd" value="Preparation time : #{onlineOrderMBean.totalPrice()} mins"/><br/>
+                    <h:outputText class="myEnd" value="Preparation time : #{onlineOrderMBean.deliveryDuration()} mins"/><br/>
                     <p:commandButton class="myEnd" value="CONFIRM ORDER" action="#{onlineOrderMBean.confirm()}"/>                    
                 </h:form>
             </f:view>
