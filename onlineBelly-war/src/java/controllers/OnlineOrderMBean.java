@@ -53,39 +53,10 @@ public class OnlineOrderMBean implements Serializable {
     public OnlineOrderMBean() {
     }
     
-     /**
-     *
-     * @return list of course objects to be displayed in the menu
-     */
-    public List<Course> getCourses()
-    {
-        //ArrayList<Course> myList = new ArrayList<>();
-        //myList.add(new Course(2,"eten",15,6));
-        return courseOverviewBean.getOverview();
-    }
-    
-    public List<OrderCourse> getOrderedCourses()
-    {
-        /**ArrayList<OrderCourse> myOs = new ArrayList<>();
-        
-        myOs.add(new OrderCourse(1,1));
-        myOs.add(new OrderCourse(1,2));
-        myOs.add(new OrderCourse(1,3));
-        return myOs;
-        */
-        return customerSessionBean.getOrder().getOrderCourseList();
-    }
-    
-    public int totalPrice()
-    {
-        return customerSessionBean.getTotalPrice();
-        //return 42;
-    }
-    public int deliveryDuration()
-    {
-        return customerSessionBean.getDuration();
-        //return 42;
-    }
+    public List<Course> getCourses(){return courseOverviewBean.getOverview();}    
+    public List<OrderCourse> getOrderedCourses(){return customerSessionBean.getOrder().getOrderCourseList();}    
+    public int totalPrice(){return customerSessionBean.getTotalPrice();}
+    public int deliveryDuration()    {return customerSessionBean.getDuration();}
     
     public String confirm()
     {
@@ -102,27 +73,20 @@ public class OnlineOrderMBean implements Serializable {
         //case yes, add to order
         //else redirect to login view
     }
-    public String orderCourse(Course course)
+    public void orderCourse(Course course)
     {
         System.out.println("order : "+ course);
         customerSessionBean.orderCourse(course, 1);
-        
-        return  ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRequestURI();
     }
     public void deleteCourse()
-    {
-        System.out.println("cancel order : "+ this.myCourse);   
+    { 
+        System.out.println("remove : "+ this.myCourse);
         customerSessionBean.removeCourse(myCourse, 1);
-        //check if logged in
-        //case yes, add to order
-        //else redirect to login view
     }
-    public String deleteCourse(Course course) throws IOException
+    public void deleteCourse(Course course) throws IOException
     {
-        System.out.println("order : "+ course);
+        System.out.println("remove : "+ course);
         customerSessionBean.removeCourse(course, 1);
-        
-        return  ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRequestURI();
     }
     public String loginCustomer()
     {
@@ -192,13 +156,8 @@ public class OnlineOrderMBean implements Serializable {
         return request.getUserPrincipal();
     }
 
-    public Course getMyCourse() {
-        return myCourse;
-    }
-
-    public void setMyCourse(Course myCourse) {
-        this.myCourse = myCourse;
-    }
+    public Course getMyCourse() {return myCourse;}
+    public void setMyCourse(Course myCourse) {this.myCourse = myCourse;}
 
     
 }

@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import belly.interfaces.CourseOverviewBeanLocal;
+import javax.interceptor.Interceptors;
 
 /**
  *
@@ -24,6 +25,7 @@ public class CourseOverviewBean implements CourseOverviewBeanLocal {
     private EntityManager em;
 
     @Override
+    @Interceptors(PageHitInterceptor.class)
     public List<Course> getOverview() {
         Query query = em.createNamedQuery("Course.findAll");
         return query.getResultList();
