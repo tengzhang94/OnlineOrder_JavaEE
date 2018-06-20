@@ -17,10 +17,13 @@ import javax.ejb.Local;
 public interface CustomerSessionBeanLocal extends Serializable {
 
     FoodOrder setLatestOrder(Person customer);
-    int confirmOrder();
+    void confirmOrder();
     FoodOrder removeCourse(Course whatCourse, int amount);
     FoodOrder orderCourse(Course newCourse, int amount);
     int getTotalPrice();
+    int getDuration();
+    
+    
     void setCustomer(Person customer);
     void setOrder(FoodOrder order);
     FoodOrder getOrder();

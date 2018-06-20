@@ -77,21 +77,25 @@ public class FoodOrder implements FoodOrderLocalInterface {
         this.complete = 0;
     }
     
-    public void addCourse(CourseLocalInterface course)
+    @Override
+    public void addCourse(Course course)
     {
         Optional<OrderCourse> orderCourse;        
         
         orderCourse = orderCourseList.stream().filter((oc) ->(oc.getCourse().equals(course))).findFirst();
+        System.out.println("retrieved: "+orderCourse);
+        System.out.println("status: "+orderCourse.isPresent());
         if (!orderCourse.isPresent())
         {
             orderCourseList.add((OrderCourse) new OrderCourse(id,course.getId()));
         }
         else
         {
-            orderCourse.get().increaseCount();
+            orderCourse.get().increaseCount();            
         }
     }
-    public void removeCourse(CourseLocalInterface course)
+    @Override
+    public void removeCourse(Course course)
     {
         Optional<OrderCourse> orderCourse;
         
@@ -151,17 +155,5 @@ public class FoodOrder implements FoodOrderLocalInterface {
     @Override
     public String toString() {
         return "Order " + id;
-    }
-
-    @Override
-    public void addCourse(Course course) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeCourse(Course course) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  
+    } 
 }
