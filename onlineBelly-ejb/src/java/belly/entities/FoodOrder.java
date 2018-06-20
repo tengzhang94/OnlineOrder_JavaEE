@@ -77,25 +77,29 @@ public class FoodOrder implements FoodOrderLocalInterface {
         this.complete = 0;
     }
     
-    public void addCourse(CourseLocalInterface course)
+    @Override
+    public void addCourse(Course course)
     {
         Optional<OrderCourse> orderCourse;        
         
         orderCourse = orderCourseList.stream().filter((oc) ->(oc.getCourse().equals(course))).findFirst();
+        System.out.println("add: "+course);
         if (!orderCourse.isPresent())
         {
-            orderCourseList.add((OrderCourse) new OrderCourse(id,course.getId()));
+            orderCourseList.add((OrderCourse) new OrderCourse(this,course));
         }
         else
         {
-            orderCourse.get().increaseCount();
+            orderCourse.get().increaseCount();            
         }
     }
-    public void removeCourse(CourseLocalInterface course)
+    @Override
+    public void removeCourse(Course course)
     {
         Optional<OrderCourse> orderCourse;
         
         orderCourse = orderCourseList.stream().filter((oc) ->(oc.getCourse().equals(course))).findFirst();
+        System.out.println("remove: "+course);
         if (orderCourse.isPresent() & (orderCourse.get().decreaseCount()==0))       //case course is no more desired
         {
             orderCourseList.remove(orderCourse.get());
@@ -151,17 +155,5 @@ public class FoodOrder implements FoodOrderLocalInterface {
     @Override
     public String toString() {
         return "Order " + id;
-    }
-
-    @Override
-    public void addCourse(Course course) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeCourse(Course course) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  
+    } 
 }

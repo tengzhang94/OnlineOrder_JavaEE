@@ -7,7 +7,9 @@ package belly.ejb;
 
 import belly.interfaces.CustomerSessionBeanLocal;
 import belly.entities.*;
-import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import javax.annotation.PreDestroy;
+import javax.ejb.PrePassivate;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -54,16 +56,15 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
     
     @Override
     public FoodOrder getOrder() {return this.order;}
-
+    @Override
+    public void setOrder(FoodOrder order) {
+        this.order = order;
+    }
     @Override
     public Person getCustomer(){return this.customer;}    
     @Override
     public void setCustomer(Person customer) {
         this.customer = customer;
-    }
-    @Override
-    public void setOrder(FoodOrder order) {
-        this.order = order;
     }
     
     @Override
@@ -88,29 +89,50 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         em.persist(object);
     }
 
-    /**
-     * set the order on confirmed and persist in database
-     * @return amount of time to wait fo the delivery
-     */
     @Override
-    public int confirmOrder() {
-        ArrayList<OrderCourse> myCourses = (ArrayList<OrderCourse>)order.getOrderCourseList();
-        int waitTime;
+    public void confirmOrder() {
         
         //indicate the order as completed
         order.setComplete((short) 1);
         em.merge(order);                //change changes to database
-        
-        waitTime = myCourses.stream().mapToInt(oc -> oc.getCourse().getPreptime()).max().getAsInt();
-        return waitTime;
     }
     
     @Override
     public int getTotalPrice() {
-        ArrayList<OrderCourse> myCourses = (ArrayList<OrderCourse>)order.getOrderCourseList();
-        int totalPrice;
+        int totalPrice;        
+        try{
+            totalPrice = order.getOrderCourseList().stream().mapToInt(oc -> (oc.getCount()*oc.getCourse().getPrice())).sum();            
+            return totalPrice;
+        }
+        catch(NoSuchElementException e)
+        {
+                System.out.println("no orders yet");
+                return 0;
+        }
+    }
+    
+    @Override
+    public int getDuration() {
+        int waitTime;        
         
-        totalPrice = myCourses.stream().mapToInt(oc -> (oc.getCount()*oc.getCourse().getPrice())).sum();
-        return totalPrice;
+        try{
+            waitTime = order.getOrderCourseList().stream().mapToInt(oc -> oc.getCourse().getPreptime()).max().getAsInt();
+            return waitTime;
+        }
+        catch(NoSuchElementException e)
+        {
+                System.out.println("no orders yet");
+                return 0;
+        }
+    }
+    
+    @PreDestroy
+    @PrePassivate
+    private void doPersistency()
+    {
+        em.merge(this.customer);
+        em.merge(this.order);
+        order.getOrderCourseList().forEach((o) -> {em.merge(o);});
+        System.out.println("did cleanup");
     }
 }
