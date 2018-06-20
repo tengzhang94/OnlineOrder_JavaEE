@@ -5,18 +5,18 @@
  */
 package belly.entities;
 
-import belly.interfaces.OrderCoursePKLoclInterface;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import belly.interfaces.OrderCoursePKLocalInterface;
 
 /**
  *
  * @author toon1
  */
 @Embeddable
-public class OrderCoursePK implements OrderCoursePKLoclInterface {
+public class OrderCoursePK implements OrderCoursePKLocalInterface {
 
     @Basic(optional = false)
     @Column(name = "orderId")

@@ -5,7 +5,6 @@
  */
 package belly.interfaces;
 
-import belly.entities.Course;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,8 +14,7 @@ import java.util.List;
  */
 public interface CourseOverviewBeanLocal extends Serializable {
 
-    List<Course> getOverview();
+    List<CourseLocalInterface> getOverview();
 
-    void persist(Object object);
-    
+    void persist(Object object);    
 }

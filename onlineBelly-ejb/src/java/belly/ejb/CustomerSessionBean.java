@@ -10,12 +10,16 @@ import belly.entities.Course;
 import belly.entities.FoodOrder;
 import belly.entities.OrderCourse;
 import belly.entities.Person;
+import belly.interfaces.CourseLocalInterface;
+import belly.interfaces.FoodOrderLocalInterface;
+import belly.interfaces.OrderCourseLocalInterface;
+import belly.interfaces.PersonLocalInterface;
 import java.util.ArrayList;
-import java.util.Comparator;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -39,27 +43,53 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         this.order = order;        
     }
     
+        /**
+     * @param customer enity in database to retrieve lastest order
+     * @return order that has not been finished or a new order
+     **/
+    @Override
+    public FoodOrderLocalInterface getLatestOrder(PersonLocalInterface customer) {
+        // check if the is any unfinished order, otherwise create a new one
+        // return that order   
+        FoodOrder myOrder;
+        
+        Query query = em.createNamedQuery("FoodOrder.findByPersonOpen");
+        query.setParameter("personID",customer);
+        
+        try
+        {
+            myOrder = (FoodOrder) query.getSingleResult();
+        }
+        catch (Exception e)
+        {
+            myOrder = new FoodOrder(customer);
+            em.persist(myOrder);
+        }
+        
+        return myOrder;
+    }
+    
     /**
      * Get the value of order
      *
      * @return the value of order
      */
     @Override
-    public FoodOrder getOrder() {return order;}
+    public FoodOrderLocalInterface getOrder() {return this.order;}
     /**
      * Set the value of order
      *
      * @param order new value of order
      */
     @Override
-    public void setOrder(FoodOrder order) {this.order = order;}
+    public void setOrder(FoodOrderLocalInterface order) {this.order = (FoodOrder) order;}
     @Override
-    public Person getCustomer(){return customer;}
+    public PersonLocalInterface getCustomer(){return customer;}
     @Override
-    public void setCustomer(Person customer){this.customer = customer;}
+    public void setCustomer(PersonLocalInterface customer){this.customer = (Person) customer;}
     
     @Override
-    public FoodOrder orderCourse(Course newCourse, int amount) {
+    public FoodOrderLocalInterface orderCourse(CourseLocalInterface newCourse, int amount) {
         
         for (int i = 0;i<amount;i++){
             order.addCourse(newCourse);
@@ -68,7 +98,7 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
     }
 
     @Override
-    public FoodOrder removeCourse(Course whatCourse, int amount) {
+    public FoodOrderLocalInterface removeCourse(CourseLocalInterface whatCourse, int amount) {
         for (int i = 0;i<amount;i++){
             order.removeCourse(whatCourse);
         }
@@ -86,7 +116,7 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
      */
     @Override
     public int confirmOrder() {
-        ArrayList<OrderCourse> myCourses = (ArrayList<OrderCourse>)order.getOrderCourseList();
+        ArrayList<OrderCourseLocalInterface> myCourses = (ArrayList<OrderCourseLocalInterface>)order.getOrderCourseList();
         int waitTime;
         
         //indicate the order as completed
@@ -99,18 +129,11 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
     
     @Override
     public int getTotalPrice() {
-        ArrayList<OrderCourse> myCourses = (ArrayList<OrderCourse>)order.getOrderCourseList();
+        ArrayList<OrderCourseLocalInterface> myCourses = (ArrayList<OrderCourseLocalInterface>)order.getOrderCourseList();
         int totalPrice;
         
         totalPrice = myCourses.stream().mapToInt(oc -> (oc.getCount()*oc.getCourse().getPrice())).sum();
         return totalPrice;
-    }
-
-    @Override
-    public FoodOrder viewOrder() {
-        //show for each course name, amount, price
-        //show total price
-        return this.order;
     }
 
 }

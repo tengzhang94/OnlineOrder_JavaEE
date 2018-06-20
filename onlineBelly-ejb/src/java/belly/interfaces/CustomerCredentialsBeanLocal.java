@@ -5,7 +5,6 @@
  */
 package belly.interfaces;
 
-import belly.ejb.CustomerSessionBean;
 import belly.exceptions.InvalidCredentialsException;
 import belly.exceptions.NotUniqueCredentialsException;
 import java.io.Serializable;
@@ -16,23 +15,8 @@ import java.io.Serializable;
  */
 public interface CustomerCredentialsBeanLocal extends Serializable {
 
-    /**
-     * @param loginName username in Person table
-     * @param password hashed password in Person table
-     * @return statefull session bean for the customer session
-     * @throws InvalidCredentialsException in case the person entry doe not exist
-     **/
-    CustomerSessionBean loginCustomer(String loginName, String password) throws InvalidCredentialsException;
-
-    void persist(Object object);
-
-    /**
-     * @param loginName username in Person table
-     * @param password hashed password in Person table
-     * @param personName nickname for this customer
-     * @return new session with an order loaded
-     * @throws NotUniqueCredentialsException in case the person cant be created due to parameter constraints
-     **/
-    CustomerSessionBean registerCustomer(String loginName, String password, String personName) throws NotUniqueCredentialsException;
+    PersonLocalInterface loginCustomer(String loginName, String password) throws InvalidCredentialsException;
+    PersonLocalInterface registerCustomer(String loginName, String password, String personName) throws NotUniqueCredentialsException;
     
+    void persist(Object object);    
 }

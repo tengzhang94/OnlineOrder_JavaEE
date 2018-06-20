@@ -19,35 +19,25 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 public interface FoodOrderLocalInterface extends Serializable {
 
-    void addCourse(Course course);
-
-    boolean equals(Object object);
-
-    short getComplete();
+    void addCourse(CourseLocalInterface course);
+    void removeCourse(CourseLocalInterface course);
 
     Integer getId();
-
-    @XmlTransient
-    List<OrderCourse> getOrderCourseList();
-
-    Date getOrdertime();
-
-    Person getPersonID();
-
-    int hashCode();
-
-    void removeCourse(Course course);
-
+    short getComplete();
     void setComplete(short complete);
-
-    void setId(Integer id);
-
-    void setOrderCourseList(List<OrderCourse> orderCourseList);
-
+    Date getOrdertime();
     void setOrdertime(Date ordertime);
+    PersonLocalInterface getPersonID();
+    void setPersonID(PersonLocalInterface personID);
+    @XmlTransient
+    List<OrderCourseLocalInterface> getOrderCourseList();
+    void setOrderCourseList(List<OrderCourseLocalInterface> orderCourseList);
 
-    void setPersonID(Person personID);
-
+    @Override
+    boolean equals(Object object);
+    @Override
+    int hashCode();
+    @Override
     String toString();
     
 }

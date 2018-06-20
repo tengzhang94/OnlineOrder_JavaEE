@@ -5,9 +5,6 @@
  */
 package belly.interfaces;
 
-import belly.entities.Course;
-import belly.entities.FoodOrder;
-import belly.entities.Person;
 import java.io.Serializable;
 
 /**
@@ -16,20 +13,16 @@ import java.io.Serializable;
  */
 public interface CustomerSessionBeanLocal extends Serializable {
 
-    /**
-     * set the order on confirmed and persist in database
-     * @return amount of time to wait fo the delivery
-     */
-    int confirmOrder();
-
-    Person getCustomer();
-    FoodOrder getOrder();
+    FoodOrderLocalInterface getLatestOrder(PersonLocalInterface customer);int confirmOrder();
+    FoodOrderLocalInterface removeCourse(CourseLocalInterface whatCourse, int amount);
+    FoodOrderLocalInterface orderCourse(CourseLocalInterface newCourse, int amount);
     int getTotalPrice();
-    FoodOrder orderCourse(Course newCourse, int amount);
+
+    void setCustomer(PersonLocalInterface customer);
+    PersonLocalInterface getCustomer();
+    void setOrder(FoodOrderLocalInterface order);
+    FoodOrderLocalInterface getOrder();
+    
     void persist(Object object);
-    FoodOrder removeCourse(Course whatCourse, int amount);
-    void setCustomer(Person customer);
-    void setOrder(FoodOrder order);
-    FoodOrder viewOrder();
     
 }

@@ -5,7 +5,10 @@
  */
 package belly.entities;
 
+import belly.interfaces.CourseLocalInterface;
 import belly.interfaces.FoodOrderLocalInterface;
+import belly.interfaces.OrderCourseLocalInterface;
+import belly.interfaces.PersonLocalInterface;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,14 +63,14 @@ public class FoodOrder implements FoodOrderLocalInterface {
     private short complete;
     @JoinColumn(name = "personID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Person personID;
+    private PersonLocalInterface personID;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "foodOrder")
-    private List<OrderCourse> orderCourseList;
+    private List<OrderCourseLocalInterface> orderCourseList;
 
     public FoodOrder() {
     }
 
-    public FoodOrder(Person customer) {
+    public FoodOrder(PersonLocalInterface customer) {
         this.personID = customer;
         this.ordertime = new Date();
         this.orderCourseList = new ArrayList<>();
@@ -75,14 +78,14 @@ public class FoodOrder implements FoodOrderLocalInterface {
     }
     
     @Override
-    public void addCourse(Course course)
+    public void addCourse(CourseLocalInterface course)
     {
-        Optional<OrderCourse> orderCourse;        
+        Optional<OrderCourseLocalInterface> orderCourse;        
         
         orderCourse = orderCourseList.stream().filter((oc) ->(oc.getCourse().equals(course))).findFirst();
         if (!orderCourse.isPresent())
         {
-            orderCourseList.add(new OrderCourse(id,course.getId()));
+            orderCourseList.add((OrderCourseLocalInterface) new OrderCourse(id,course.getId()));
         }
         else
         {
@@ -90,9 +93,9 @@ public class FoodOrder implements FoodOrderLocalInterface {
         }
     }
     @Override
-    public void removeCourse(Course course)
+    public void removeCourse(CourseLocalInterface course)
     {
-        Optional<OrderCourse> orderCourse;
+        Optional<OrderCourseLocalInterface> orderCourse;
         
         orderCourse = orderCourseList.stream().filter((oc) ->(oc.getCourse().equals(course))).findFirst();
         if (orderCourse.isPresent() & (orderCourse.get().decreaseCount()==0))       //case course is no more desired
@@ -104,8 +107,6 @@ public class FoodOrder implements FoodOrderLocalInterface {
     @Override
     public Integer getId() {return id;}
     @Override
-    public void setId(Integer id) {this.id = id;}
-    @Override
     public Date getOrdertime() {return ordertime;}
     @Override
     public void setOrdertime(Date ordertime) {this.ordertime = ordertime;}
@@ -114,18 +115,18 @@ public class FoodOrder implements FoodOrderLocalInterface {
     @Override
     public void setComplete(short complete) {this.complete = complete;}
     @Override
-    public Person getPersonID() {return personID;}
+    public PersonLocalInterface getPersonID() {return personID;}
     @Override
-    public void setPersonID(Person personID) {this.personID = personID;}
+    public void setPersonID(PersonLocalInterface personID) {this.personID = personID;}
 
     @XmlTransient
     @Override
-    public List<OrderCourse> getOrderCourseList() {
+    public List<OrderCourseLocalInterface> getOrderCourseList() {
         return orderCourseList;
     }
 
     @Override
-    public void setOrderCourseList(List<OrderCourse> orderCourseList) {
+    public void setOrderCourseList(List<OrderCourseLocalInterface> orderCourseList) {
         this.orderCourseList = orderCourseList;
     }
 

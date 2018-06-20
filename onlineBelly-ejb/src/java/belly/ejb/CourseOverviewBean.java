@@ -6,6 +6,7 @@
 package belly.ejb;
 
 import belly.entities.Course;
+import belly.interfaces.CourseLocalInterface;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
@@ -26,7 +27,7 @@ public class CourseOverviewBean implements CourseOverviewBeanLocal {
     private EntityManager em;
 
     @Override
-    public List<Course> getOverview() {
+    public List<CourseLocalInterface> getOverview() {
         Query query = em.createNamedQuery("Course.findAll");
         return query.getResultList();
     }

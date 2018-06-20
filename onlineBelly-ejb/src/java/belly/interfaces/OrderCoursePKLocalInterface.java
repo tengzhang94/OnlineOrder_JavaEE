@@ -11,20 +11,18 @@ import java.io.Serializable;
  *
  * @author toon1
  */
-public interface OrderCoursePKLoclInterface extends Serializable {
-
-    boolean equals(Object object);
+public interface OrderCoursePKLocalInterface extends Serializable {
 
     int getCourseId();
-
-    int getOrderId();
-
-    int hashCode();
-
     void setCourseId(int courseId);
-
+    int getOrderId();
     void setOrderId(int orderId);
-
+    
+    @Override
+    boolean equals(Object object);
+    @Override
+    int hashCode();
+    @Override
     String toString();
     
 }

@@ -6,7 +6,7 @@
 package belly.entities;
 
 import belly.interfaces.CourseLocalInterface;
-import java.io.Serializable;
+import belly.interfaces.OrderCourseLocalInterface;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -55,7 +55,7 @@ public class Course implements CourseLocalInterface {
     @Column(name = "picture")
     private String picture;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
-    private List<OrderCourse> orderCourseList;
+    private List<OrderCourseLocalInterface> orderCourseList;
 
     public Course() {
     }
@@ -75,8 +75,6 @@ public class Course implements CourseLocalInterface {
     @Override
     public Integer getId() {return id;}
     @Override
-    public void setId(Integer id) {this.id = id;}
-    @Override
     public String getName() {return name;}
     @Override
     public void setName(String name) {this.name = name;}
@@ -95,12 +93,12 @@ public class Course implements CourseLocalInterface {
 
     @XmlTransient
     @Override
-    public List<OrderCourse> getOrderCourseList() {
+    public List<OrderCourseLocalInterface> getOrderCourseList() {
         return orderCourseList;
     }
 
     @Override
-    public void setOrderCourseList(List<OrderCourse> orderCourseList) {
+    public void setOrderCourseList(List<OrderCourseLocalInterface> orderCourseList) {
         this.orderCourseList = orderCourseList;
     }
 

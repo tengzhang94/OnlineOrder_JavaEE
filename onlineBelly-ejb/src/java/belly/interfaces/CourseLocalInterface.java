@@ -5,7 +5,6 @@
  */
 package belly.interfaces;
 
-import belly.entities.OrderCourse;
 import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
@@ -16,35 +15,24 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 public interface CourseLocalInterface extends Serializable {
 
-    boolean equals(Object object);
-
     Integer getId();
-
     String getName();
-
-    @XmlTransient
-    List<OrderCourse> getOrderCourseList();
-
-    String getPicture();
-
-    int getPreptime();
-
-    int getPrice();
-
-    int hashCode();
-
-    void setId(Integer id);
-
     void setName(String name);
-
-    void setOrderCourseList(List<OrderCourse> orderCourseList);
-
+    String getPicture();
     void setPicture(String picture);
-
+    int getPreptime();
     void setPreptime(int preptime);
-
+    int getPrice();
     void setPrice(int price);
-
+    @XmlTransient
+    List<OrderCourseLocalInterface> getOrderCourseList();
+    void setOrderCourseList(List<OrderCourseLocalInterface> orderCourseList);
+    
+    @Override
+    boolean equals(Object object);
+    @Override
+    int hashCode();
+    @Override
     String toString();
     
 }

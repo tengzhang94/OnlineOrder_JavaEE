@@ -16,31 +16,21 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 public interface PersonLocalInterface extends Serializable {
 
-    boolean equals(Object object);
-
-    @XmlTransient
-    List<FoodOrder> getFoodOrderList();
-
     Integer getId();
-
     String getLogin();
-
-    String getName();
-
-    String getPassword();
-
-    int hashCode();
-
-    void setFoodOrderList(List<FoodOrder> foodOrderList);
-
-    void setId(Integer id);
-
     void setLogin(String login);
-
+    String getName();
     void setName(String name);
-
-    void setPassword(String password);
-
+    String getPassword();
+    void setPassword(String password);    @XmlTransient
+    List<FoodOrder> getFoodOrderList();
+    void setFoodOrderList(List<FoodOrder> foodOrderList);
+    
+    @Override
+    boolean equals(Object object);
+    @Override
+    int hashCode();
+    @Override
     String toString();
     
 }

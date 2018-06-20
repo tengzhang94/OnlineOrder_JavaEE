@@ -5,11 +5,10 @@
  */
 package belly.entities;
 
-import belly.entities.Course;
-import belly.entities.FoodOrder;
-import belly.entities.OrderCourseLocalInterface;
-import belly.entities.OrderCoursePK;
-import java.io.Serializable;
+import belly.interfaces.OrderCourseLocalInterface;
+import belly.interfaces.CourseLocalInterface;
+import belly.interfaces.FoodOrderLocalInterface;
+import belly.interfaces.OrderCoursePKLocalInterface;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -36,21 +35,21 @@ public class OrderCourse implements OrderCourseLocalInterface {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected OrderCoursePK orderCoursePK;
+    protected OrderCoursePKLocalInterface orderCoursePK;
     @Basic(optional = false)
     @Column(name = "count")
     private int count;
     @JoinColumn(name = "courseId", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Course course;
+    private CourseLocalInterface course;
     @JoinColumn(name = "orderId", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private FoodOrder foodOrder;
+    private FoodOrderLocalInterface foodOrder;
 
     public OrderCourse() {
     }
 
-    public OrderCourse(OrderCoursePK orderCoursePK) {
+    public OrderCourse(OrderCoursePKLocalInterface orderCoursePK) {
         this.orderCoursePK = orderCoursePK;
         this.count = 1;
     }
@@ -67,21 +66,21 @@ public class OrderCourse implements OrderCourseLocalInterface {
     @Override
     public int decreaseCount(){return --this.count;}
     @Override
-    public OrderCoursePK getOrderCoursePK() {return orderCoursePK;}
+    public OrderCoursePKLocalInterface getOrderCoursePK() {return orderCoursePK;}
     @Override
-    public void setOrderCoursePK(OrderCoursePK orderCoursePK) {this.orderCoursePK = orderCoursePK;}
+    public void setOrderCoursePK(OrderCoursePKLocalInterface orderCoursePK) {this.orderCoursePK = orderCoursePK;}
     @Override
     public int getCount() {return count;}
     @Override
     public void setCount(int count) {this.count = count;}
     @Override
-    public Course getCourse() {return course;}
+    public CourseLocalInterface getCourse() {return course;}
     @Override
-    public void setCourse(Course course) {this.course = course;}
+    public void setCourse(CourseLocalInterface course) {this.course = course;}
     @Override
-    public FoodOrder getFoodOrder() {return foodOrder;}
+    public FoodOrderLocalInterface getFoodOrder() {return foodOrder;}
     @Override
-    public void setFoodOrder(FoodOrder foodOrder) {this.foodOrder = foodOrder;}
+    public void setFoodOrder(FoodOrderLocalInterface foodOrder) {this.foodOrder = foodOrder;}
 
     @Override
     public int hashCode() {

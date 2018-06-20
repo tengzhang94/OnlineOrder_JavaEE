@@ -5,7 +5,7 @@
  */
 package belly.interfaces;
 
-import belly.entities.*;
+import belly.entities.OrderCoursePK;
 import java.io.Serializable;
 
 /**
@@ -15,29 +15,20 @@ import java.io.Serializable;
 public interface OrderCourseLocalInterface extends Serializable {
 
     int decreaseCount();
-
-    boolean equals(Object object);
-
-    int getCount();
-
-    Course getCourse();
-
-    FoodOrder getFoodOrder();
-
-    OrderCoursePK getOrderCoursePK();
-
-    int hashCode();
-
     int increaseCount();
-
-    void setCount(int count);
-
-    void setCourse(Course course);
-
-    void setFoodOrder(FoodOrder foodOrder);
-
-    void setOrderCoursePK(OrderCoursePK orderCoursePK);
-
-    String toString();
     
+    OrderCoursePKLocalInterface getOrderCoursePK();
+    void setOrderCoursePK(OrderCoursePKLocalInterface orderCoursePK);int getCount();
+    void setCount(int count);
+    CourseLocalInterface getCourse();
+    void setCourse(CourseLocalInterface course);
+    FoodOrderLocalInterface getFoodOrder();
+    void setFoodOrder(FoodOrderLocalInterface foodOrder);
+
+    @Override
+    boolean equals(Object object);
+    @Override
+    int hashCode();
+    @Override
+    String toString();    
 }

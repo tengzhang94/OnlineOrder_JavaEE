@@ -6,7 +6,6 @@
 package belly.entities;
 
 import belly.interfaces.PersonLocalInterface;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
@@ -21,7 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -71,8 +69,6 @@ public class Person implements PersonLocalInterface {
 
     @Override
     public Integer getId() {return id;}
-    @Override
-    public void setId(Integer id) {this.id = id;}
     @Override
     public String getName() {return name;}
     @Override
