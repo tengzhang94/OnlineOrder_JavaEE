@@ -33,12 +33,7 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         this.customer = customer;
         this.order = order;        
     }
-    
-        /**
-     * @param customer enity in database to retrieve lastest order
-     * @return order that has not been finished or a new order
-     **/
-    
+
     @Override
     public FoodOrder setLatestOrder(Person customer) {
         
@@ -57,16 +52,19 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         return this.order;
     }
     
-    /**
-     * Get the value of order
-     *
-     * @return the value of order
-     */
     @Override
     public FoodOrder getOrder() {return this.order;}
 
     @Override
-    public Person getCustomer(){return customer;}
+    public Person getCustomer(){return this.customer;}    
+    @Override
+    public void setCustomer(Person customer) {
+        this.customer = customer;
+    }
+    @Override
+    public void setOrder(FoodOrder order) {
+        this.order = order;
+    }
     
     @Override
     public FoodOrder orderCourse(Course newCourse, int amount) {
@@ -115,15 +113,4 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         totalPrice = myCourses.stream().mapToInt(oc -> (oc.getCount()*oc.getCourse().getPrice())).sum();
         return totalPrice;
     }
-
-    @Override
-    public void setCustomer(Person customer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setOrder(FoodOrder order) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

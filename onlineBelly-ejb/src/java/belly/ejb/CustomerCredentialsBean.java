@@ -80,6 +80,7 @@ public class CustomerCredentialsBean implements CustomerCredentialsBeanLocal {
      * @return boolean to indicate existe,ce or not
      * @throws InvalidCredentialsException in case the person entry doe not exist
      **/
+    @Override
     public Person validateCredentials(String loginName, String password) throws InvalidCredentialsException {
         
         Query query = em.createNamedQuery("Person.findByCredentials");
@@ -95,32 +96,8 @@ public class CustomerCredentialsBean implements CustomerCredentialsBeanLocal {
             throw new InvalidCredentialsException();
         }
     }
-    /**
-     * @param customer enity in database to retrieve lastest order
-     * @return order that has not been finished or a new order
-     * @throws InvalidCredentialsException in case the person entry doe not exist
-     **/
-    public FoodOrder getLatestOrder(Person customer) {
-        // check if the is any unfinished order, otherwise create a new one
-        // return that order   
-        FoodOrder myOrder;
-        
-        Query query = em.createNamedQuery("FoodOrder.findByPersonOpen");
-        query.setParameter("personID",customer);
-        
-        try
-        {
-            myOrder = (FoodOrder) query.getSingleResult();
-        }
-        catch (Exception e)
-        {
-            myOrder = new FoodOrder(customer);
-            em.persist(myOrder);
-        }
-        
-        return myOrder;
-    }
-    
+
+    @Override
     public void persist(Object object) {
         em.persist(object);
     }
