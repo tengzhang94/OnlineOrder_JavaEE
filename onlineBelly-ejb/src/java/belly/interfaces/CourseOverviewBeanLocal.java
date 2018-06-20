@@ -8,11 +8,13 @@ package belly.interfaces;
 import belly.entities.Course;
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author toon1
  */
+@Local
 public interface CourseOverviewBeanLocal extends Serializable {
 
     List<Course> getOverview();

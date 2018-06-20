@@ -7,13 +7,8 @@ package belly.ejb;
 
 import belly.interfaces.CustomerSessionBeanLocal;
 import belly.entities.*;
-import belly.interfaces.CourseLocalInterface;
-import belly.interfaces.FoodOrderLocalInterface;
-import belly.interfaces.OrderCourseLocalInterface;
-import belly.interfaces.PersonLocalInterface;
 import java.util.ArrayList;
 import javax.ejb.Stateful;
-import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -23,7 +18,6 @@ import javax.persistence.Query;
  * @author toon1
  */
 @Stateful
-@LocalBean
 public class CustomerSessionBean implements CustomerSessionBeanLocal {
 
     

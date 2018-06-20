@@ -7,11 +7,13 @@ package belly.interfaces;
 
 import belly.entities.*;
 import java.io.Serializable;
+import javax.ejb.Local;
 
 /**
  *
  * @author toon1
  */
+@Local
 public interface CustomerSessionBeanLocal extends Serializable {
 
     FoodOrder setLatestOrder(Person customer);

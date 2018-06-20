@@ -9,11 +9,13 @@ import belly.entities.Person;
 import belly.exceptions.InvalidCredentialsException;
 import belly.exceptions.NotUniqueCredentialsException;
 import java.io.Serializable;
+import javax.ejb.Local;
 
 /**
  *
  * @author toon1
  */
+@Local
 public interface CustomerCredentialsBeanLocal extends Serializable {
 
     Person loginCustomer(String loginName, String password) throws InvalidCredentialsException;

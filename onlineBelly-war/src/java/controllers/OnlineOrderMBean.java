@@ -5,12 +5,9 @@
  */
 package controllers;
 
-import belly.ejb.CourseOverviewBean;
-import belly.ejb.CustomerCredentialsBean;
-import belly.ejb.CustomerSessionBean;
 import belly.entities.*;
-import belly.exceptions.InvalidCredentialsException;
-import belly.exceptions.NotUniqueCredentialsException;
+import belly.exceptions.*;
+import belly.interfaces.*;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -33,11 +30,11 @@ import javax.servlet.http.HttpServletRequest;
 public class OnlineOrderMBean implements Serializable {
 
     @EJB
-    private CustomerSessionBean customerSessionBean;
+    private CustomerSessionBeanLocal customerSessionBean;
     @EJB
-    private CustomerCredentialsBean customerCredentialsBean;
+    private CustomerCredentialsBeanLocal customerCredentialsBean;
     @EJB
-    private CourseOverviewBean courseOverviewBean;
+    private CourseOverviewBeanLocal courseOverviewBean;
      
     private String loginName;
     private String password;
@@ -102,32 +99,34 @@ public class OnlineOrderMBean implements Serializable {
     }
     public String loginCustomer()
     {
-        String psw = this.password;
         try
         {
-            Person p = customerCredentialsBean.loginCustomer(loginName, psw);
-            FoodOrder o = customerCredentialsBean.getLatestOrder(p);
-            customerSessionBean = new CustomerSessionBean(p,o);
+            Person p = customerCredentialsBean.loginCustomer(loginName, password);
+            customerSessionBean.setCustomer(p);
+            customerSessionBean.setLatestOrder(p);
             return "MenuList";
         }
         catch (InvalidCredentialsException e)
         {
             //display msg to try again
             
-            return "RegisterPage";
+            return "LoginPage";
         }
     }
-    public void registerCustomer()
+    public String registerCustomer()
     {
-        String cypherBytes = this.password;
         try
         {
             System.out.println("creting new person");
-            Person p = customerCredentialsBean.registerCustomer(loginName, cypherBytes, nickName);
+            Person newCustomer  = customerCredentialsBean.registerCustomer(loginName, password, nickName);
+            customerSessionBean.setCustomer(newCustomer);
+            customerSessionBean.setLatestOrder(newCustomer);            
+            return "MenuList";
         }
         catch (NotUniqueCredentialsException e)
         {
             //display msg to use other loginName
+            return "RegisterPage";
         }
     }
     /**

@@ -9,9 +9,7 @@ import belly.interfaces.CustomerCredentialsBeanLocal;
 import belly.entities.*;
 import belly.exceptions.InvalidCredentialsException;
 import belly.exceptions.NotUniqueCredentialsException;
-import belly.interfaces.PersonLocalInterface;
 import javax.ejb.Stateless;
-import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -22,7 +20,6 @@ import javax.persistence.Query;
  * @author toon1
  */
 @Stateless
-@LocalBean
 public class CustomerCredentialsBean implements CustomerCredentialsBeanLocal {
 
     @PersistenceContext(unitName = "onlineBelly-ejbPU")
