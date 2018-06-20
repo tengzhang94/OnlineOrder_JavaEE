@@ -8,8 +8,7 @@ package controllers;
 import belly.ejb.CourseOverviewBean;
 import belly.ejb.CustomerCredentialsBean;
 import belly.ejb.CustomerSessionBean;
-import belly.entities.Course;
-import belly.entities.Person;
+import belly.entities.*;
 import belly.exceptions.InvalidCredentialsException;
 import belly.exceptions.NotUniqueCredentialsException;
 
@@ -20,13 +19,10 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedProperty;
+
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.xml.ws.WebServiceRef;
 
 /**
  *
@@ -69,8 +65,37 @@ public class OnlineOrderMBean implements Serializable {
         return courseOverviewBean.getOverview();
     }
     
+    public List<OrderCourse> getOrderedCourses()
+    {
+        ArrayList<OrderCourse> myOs = new ArrayList<>();
+        
+        myOs.add(new OrderCourse(1,1));
+        myOs.add(new OrderCourse(1,2));
+        myOs.add(new OrderCourse(1,3));
+        return myOs;//courseOverviewBean.getOverview();
+    }
+    
+    public int totalPrice()
+    {
+
+        return 42;
+    }
+    public String confirm()
+    {
+        System.out.println("finished session");
+        return "MenuList";
+    }
+    
     public void orderCourse()
     {
+        System.out.println("order : ");
+        //check if logged in
+        //case yes, add to order
+        //else redirect to login view
+    }
+    public void deleteCourse()
+    {
+        System.out.println("cancel order : ");
         //check if logged in
         //case yes, add to order
         //else redirect to login view
@@ -80,7 +105,9 @@ public class OnlineOrderMBean implements Serializable {
         String psw = this.password;
         try
         {
-            customerSessionBean = customerCredentialsBean.loginCustomer(loginName, psw);
+            Person p = customerCredentialsBean.loginCustomer(loginName, psw);
+            FoodOrder o = customerCredentialsBean.getLatestOrder(p);
+            customerSessionBean = new CustomerSessionBean(p,o);
             return "MenuList";
         }
         catch (InvalidCredentialsException e)
@@ -96,7 +123,7 @@ public class OnlineOrderMBean implements Serializable {
         try
         {
             System.out.println("creting new person");
-            customerSessionBean = customerCredentialsBean.registerCustomer(loginName, cypherBytes, nickName);
+            Person p = customerCredentialsBean.registerCustomer(loginName, cypherBytes, nickName);
         }
         catch (NotUniqueCredentialsException e)
         {
@@ -107,7 +134,7 @@ public class OnlineOrderMBean implements Serializable {
      * see if a user is logged in, otherwise signal that  
      * @return the current customer
      */
- /*   public Person getCustomer()
+    public Person getCustomer()
     {
         if (checkLoggedInUser())
             return customerSessionBean.getCustomer();
@@ -115,7 +142,7 @@ public class OnlineOrderMBean implements Serializable {
                //redirect to login page;
         return null;    
     }
-*/
+
     private boolean checkLoggedInUser()
     {
         Principal loginUser = getLoggedInUser();

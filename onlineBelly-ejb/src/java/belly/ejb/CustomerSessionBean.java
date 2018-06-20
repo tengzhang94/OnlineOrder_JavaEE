@@ -45,7 +45,8 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
      * @return order that has not been finished or a new order
      **/
     
-    public FoodOrderLocalInterface getLatestOrder(Person customer) {
+    @Override
+    public FoodOrder getLatestOrder(Person customer) {
         // check if the is any unfinished order, otherwise create a new one
         // return that order   
         FoodOrder myOrder;
@@ -72,21 +73,18 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
      * @return the value of order
      */
     @Override
-    public FoodOrderLocalInterface getOrder() {return this.order;}
+    public FoodOrder getOrder() {return this.order;}
     /**
      * Set the value of order
      *
      * @param order new value of order
+     * @return 
      */
     @Override
-    public void setOrder(FoodOrderLocalInterface order) {this.order = (FoodOrder) order;}
-    @Override
-    public PersonLocalInterface getCustomer(){return customer;}
-    @Override
-    public void setCustomer(PersonLocalInterface customer){this.customer = (Person) customer;}
+    public Person getCustomer(){return customer;}
     
     @Override
-    public FoodOrderLocalInterface orderCourse(CourseLocalInterface newCourse, int amount) {
+    public FoodOrder orderCourse(Course newCourse, int amount) {
         
         for (int i = 0;i<amount;i++){
             order.addCourse(newCourse);
@@ -95,7 +93,7 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
     }
 
     @Override
-    public FoodOrderLocalInterface removeCourse(CourseLocalInterface whatCourse, int amount) {
+    public FoodOrder removeCourse(Course whatCourse, int amount) {
         for (int i = 0;i<amount;i++){
             order.removeCourse(whatCourse);
         }
@@ -134,7 +132,12 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
     }
 
     @Override
-    public FoodOrderLocalInterface getLatestOrder(PersonLocalInterface customer) {
+    public void setCustomer(Person customer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setOrder(FoodOrder order) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

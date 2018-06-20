@@ -5,6 +5,7 @@
  */
 package belly.interfaces;
 
+import belly.entities.*;
 import java.io.Serializable;
 
 /**
@@ -13,15 +14,14 @@ import java.io.Serializable;
  */
 public interface CustomerSessionBeanLocal extends Serializable {
 
-    FoodOrderLocalInterface getLatestOrder(PersonLocalInterface customer);int confirmOrder();
-    FoodOrderLocalInterface removeCourse(CourseLocalInterface whatCourse, int amount);
-    FoodOrderLocalInterface orderCourse(CourseLocalInterface newCourse, int amount);
+    FoodOrder getLatestOrder(Person customer);int confirmOrder();
+    FoodOrder removeCourse(Course whatCourse, int amount);
+    FoodOrder orderCourse(Course newCourse, int amount);
     int getTotalPrice();
-
-    void setCustomer(PersonLocalInterface customer);
-    PersonLocalInterface getCustomer();
-    void setOrder(FoodOrderLocalInterface order);
-    FoodOrderLocalInterface getOrder();
+    void setCustomer(Person customer);
+    void setOrder(FoodOrder order);
+    FoodOrder getOrder();
+    Person getCustomer();
     
     void persist(Object object);
     

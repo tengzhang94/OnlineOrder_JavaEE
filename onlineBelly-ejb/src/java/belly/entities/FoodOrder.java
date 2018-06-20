@@ -63,14 +63,14 @@ public class FoodOrder implements FoodOrderLocalInterface {
     private short complete;
     @JoinColumn(name = "personID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Person personID;
+    private PersonLocalInterface personID;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "foodOrder")
-    private List<OrderCourse> orderCourseList;
+    private List<OrderCourseLocalInterface> orderCourseList;
 
     public FoodOrder() {
     }
 
-    public FoodOrder(Person customer) {
+    public FoodOrder(PersonLocalInterface customer) {
         this.personID = customer;
         this.ordertime = new Date();
         this.orderCourseList = new ArrayList<>();
@@ -79,7 +79,7 @@ public class FoodOrder implements FoodOrderLocalInterface {
     
     public void addCourse(CourseLocalInterface course)
     {
-        Optional<OrderCourse> orderCourse;        
+        Optional<OrderCourseLocalInterface> orderCourse;        
         
         orderCourse = orderCourseList.stream().filter((oc) ->(oc.getCourse().equals(course))).findFirst();
         if (!orderCourse.isPresent())
@@ -93,7 +93,7 @@ public class FoodOrder implements FoodOrderLocalInterface {
     }
     public void removeCourse(CourseLocalInterface course)
     {
-        Optional<OrderCourse> orderCourse;
+        Optional<OrderCourseLocalInterface> orderCourse;
         
         orderCourse = orderCourseList.stream().filter((oc) ->(oc.getCourse().equals(course))).findFirst();
         if (orderCourse.isPresent() & (orderCourse.get().decreaseCount()==0))       //case course is no more desired
