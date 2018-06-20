@@ -4,6 +4,12 @@
     <service name="CredentialService">
       <implementation-class>belly.service.CredentialService</implementation-class>
     </service>
+    <service name="ValidateService">
+      <implementation-class>belly.service.ValidateService</implementation-class>
+    </service>
+    <service name="ValidateWebService">
+      <implementation-class>belly.ejb.ValidateWebService</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>

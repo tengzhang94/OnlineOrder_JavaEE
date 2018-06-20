@@ -88,7 +88,7 @@ public class CustomerCredentialsBean {
      * @return boolean to indicate existe,ce or not
      * @throws InvalidCredentialsException in case the person entry doe not exist
      **/
-    private Person validateCredentials(String loginName, String password) throws InvalidCredentialsException {
+    public Person validateCredentials(String loginName, String password) throws InvalidCredentialsException {
         
         System.out.println("ben hier, login & pw ="+password+loginName);
         Query query = em.createNamedQuery("Person.findByCredentials");
@@ -109,7 +109,7 @@ public class CustomerCredentialsBean {
      * @return order that has not been finished or a new order
      * @throws InvalidCredentialsException in case the person entry doe not exist
      **/
-    private FoodOrder getLatestOrder(Person customer) {
+    public FoodOrder getLatestOrder(Person customer) {
         // check if the is any unfinished order, otherwise create a new one
         // return that order   
         FoodOrder myOrder;

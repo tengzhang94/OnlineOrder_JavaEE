@@ -2,10 +2,10 @@
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services/>
   <clients>
-    <client name="CredentialService">
-      <wsdl-url>http://localhost:8080/CredentialService/CredentialService?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_8080/CredentialService/CredentialService.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">webService_client</package-name>
+    <client name="ValidateService">
+      <wsdl-url>http://localhost:8080/ValidateService/ValidateService?wsdl</wsdl-url>
+      <local-wsdl-file>localhost_8080/ValidateService/ValidateService.wsdl</local-wsdl-file>
+      <package-name>belly.service</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -22,7 +22,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8080/CredentialService/CredentialService?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://localhost:8080/ValidateService/ValidateService?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -31,10 +31,6 @@
         <wsimport-option>
           <wsimport-option-name>xendorsed</wsimport-option-name>
           <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>webService_client</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>

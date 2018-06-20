@@ -26,21 +26,21 @@
             <isset property="conf.dir"/>
         </condition>
     </target>
-    <target name="wsimport-client-CredentialService" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/CredentialService"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/CredentialService" destdir="${build.generated.dir}/jax-wsCache/CredentialService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/CredentialService/wsdl/localhost_8080/CredentialService/CredentialService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/CredentialService/CredentialService?wsdl" xnocompile="true" xendorsed="true" package="webService_client">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/CredentialService/wsdl/localhost_8080/CredentialService/CredentialService.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/CredentialService"/>
+    <target name="wsimport-client-ValidateService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/ValidateService"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ValidateService" destdir="${build.generated.dir}/jax-wsCache/ValidateService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ValidateService/wsdl/localhost_8080/ValidateService/ValidateService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ValidateService/ValidateService?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/ValidateService/wsdl/localhost_8080/ValidateService/ValidateService.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/ValidateService"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/CredentialService">
+            <fileset dir="${build.generated.dir}/jax-wsCache/ValidateService">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
     </target>
-    <target name="wsimport-client-clean-CredentialService" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/webService_client"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/CredentialService"/>
+    <target name="wsimport-client-clean-ValidateService" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/belly/service"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/ValidateService"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-CredentialService"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-ValidateService"/>
 </project>

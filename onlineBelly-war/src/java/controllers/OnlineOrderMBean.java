@@ -6,20 +6,27 @@
 package controllers;
 
 import belly.ejb.CourseOverviewBean;
+import belly.ejb.CustomerCredentialsBean;
+import belly.ejb.CustomerSessionBean;
 import belly.entities.Course;
 import belly.entities.Person;
+import belly.exceptions.InvalidCredentialsException;
+import belly.exceptions.NotUniqueCredentialsException;
+
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.WebServiceRef;
-import webService_client.CredentialService_Service;
-import webService_client.InvalidCredentialsException_Exception;
-import webService_client.NotUniqueCredentialsException_Exception;
 
 /**
  *
@@ -29,19 +36,23 @@ import webService_client.NotUniqueCredentialsException_Exception;
 @SessionScoped
 public class OnlineOrderMBean implements Serializable {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/CredentialService/CredentialService.wsdl")
-    private CredentialService_Service service;
-
-    private webService_client.CustomerSessionBean customerSessionBean;
-
+    @EJB
+    private CustomerSessionBean customerSessionBean;
+    @EJB
+    private CustomerCredentialsBean customerCredentialsBean;
     @EJB
     private CourseOverviewBean courseOverviewBean;
-
+     
     private String loginName;
-    private String nickName;
     private String password;
-    
-    /**
+    private String nickName;
+
+    public String getNickName() {return nickName;}
+    public void setNickName(String nickName) {this.nickName = nickName;}
+    public String getLoginName() {return loginName;}
+    public void setLoginName(String loginName) {this.loginName = loginName;}
+    public String getPassword() {return password;}
+    public void setPassword(String password) {this.password = password;}    /**
      * Creates a new instance of OnlineOrderMBean
      */
     public OnlineOrderMBean() {
@@ -66,28 +77,28 @@ public class OnlineOrderMBean implements Serializable {
     }
     public String loginCustomer()
     {
+        String psw = this.password;
         try
         {
-            customerSessionBean = loginCustomer_1(loginName, password);
+            customerSessionBean = customerCredentialsBean.loginCustomer(loginName, psw);
             return "MenuList";
         }
-        catch (InvalidCredentialsException_Exception e)
+        catch (InvalidCredentialsException e)
         {
             //display msg to try again
-            System.out.println("invalid credits");
-            return "LoginPage";
+            
+            return "RegisterPage";
         }
     }
-    public void registerCustomer() 
+    public void registerCustomer()
     {
+        String cypherBytes = this.password;
         try
         {
             System.out.println("creting new person");
-
-            customerSessionBean = registerCustomer_1(loginName, password, nickName);
-
+            customerSessionBean = customerCredentialsBean.registerCustomer(loginName, cypherBytes, nickName);
         }
-        catch (NotUniqueCredentialsException_Exception e)
+        catch (NotUniqueCredentialsException e)
         {
             //display msg to use other loginName
         }
@@ -96,7 +107,7 @@ public class OnlineOrderMBean implements Serializable {
      * see if a user is logged in, otherwise signal that  
      * @return the current customer
      */
-    public webService_client.Person getCustomer()
+ /*   public Person getCustomer()
     {
         if (checkLoggedInUser())
             return customerSessionBean.getCustomer();
@@ -104,7 +115,7 @@ public class OnlineOrderMBean implements Serializable {
                //redirect to login page;
         return null;    
     }
-
+*/
     private boolean checkLoggedInUser()
     {
         Principal loginUser = getLoggedInUser();
@@ -127,29 +138,6 @@ public class OnlineOrderMBean implements Serializable {
                     getExternalContext().getRequest();
         return request.getUserPrincipal();
     }
-
-
-    private webService_client.CustomerSessionBean loginCustomer_1(java.lang.String loginName, String password) throws InvalidCredentialsException_Exception {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        webService_client.CredentialService port = service.getCredentialServicePort();
-        return port.loginCustomer(loginName, password);
-    }
-
-    private webService_client.CustomerSessionBean registerCustomer_1(java.lang.String loginName, String password, java.lang.String personName) throws NotUniqueCredentialsException_Exception {
-
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        webService_client.CredentialService port = service.getCredentialServicePort();
-        return port.registerCustomer(loginName, password, personName);
-    }
-
-    public String getLoginName() {return loginName;}
-    public void setLoginName(String loginName) {this.loginName = loginName;}
-    public String getNickName() {return nickName;}
-    public void setNickName(String nickName) {this.nickName = nickName;}
-    public String getPassword() {return password;}
-    public void setPassword(String password) {this.password = password;}
 
     
 }
