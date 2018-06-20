@@ -14,7 +14,8 @@ import java.io.Serializable;
  */
 public interface CustomerSessionBeanLocal extends Serializable {
 
-    FoodOrder getLatestOrder(Person customer);int confirmOrder();
+    FoodOrder setLatestOrder(Person customer);
+    int confirmOrder();
     FoodOrder removeCourse(Course whatCourse, int amount);
     FoodOrder orderCourse(Course newCourse, int amount);
     int getTotalPrice();

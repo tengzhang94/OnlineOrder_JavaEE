@@ -46,25 +46,21 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
      **/
     
     @Override
-    public FoodOrder getLatestOrder(Person customer) {
-        // check if the is any unfinished order, otherwise create a new one
-        // return that order   
-        FoodOrder myOrder;
+    public FoodOrder setLatestOrder(Person customer) {
         
         Query query = em.createNamedQuery("FoodOrder.findByPersonOpen");
         query.setParameter("personID",customer);
         
         try
         {
-            myOrder = (FoodOrder) query.getSingleResult();
+            this.order = (FoodOrder) query.getSingleResult();
         }
         catch (Exception e)
         {
-            myOrder = new FoodOrder(customer);
-            em.persist(myOrder);
-        }
-        
-        return myOrder;
+            this.order = new FoodOrder(customer);
+            em.persist(this.order);
+        }        
+        return this.order;
     }
     
     /**
@@ -74,12 +70,7 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
      */
     @Override
     public FoodOrder getOrder() {return this.order;}
-    /**
-     * Set the value of order
-     *
-     * @param order new value of order
-     * @return 
-     */
+
     @Override
     public Person getCustomer(){return customer;}
     
