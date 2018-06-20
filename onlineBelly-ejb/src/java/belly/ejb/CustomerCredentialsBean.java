@@ -5,16 +5,14 @@
  */
 package belly.ejb;
 
-import belly.entities.FoodOrder;
-import belly.entities.Person;
+import belly.interfaces.CustomerCredentialsBeanLocal;
+import belly.entities.*;
 import belly.exceptions.InvalidCredentialsException;
 import belly.exceptions.NotUniqueCredentialsException;
 import javax.ejb.Stateless;
-import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 /**
@@ -22,8 +20,7 @@ import javax.persistence.Query;
  * @author toon1
  */
 @Stateless
-@LocalBean
-public class CustomerCredentialsBean {
+public class CustomerCredentialsBean implements CustomerCredentialsBeanLocal {
 
     @PersistenceContext(unitName = "onlineBelly-ejbPU")
     private EntityManager em;
@@ -31,18 +28,17 @@ public class CustomerCredentialsBean {
     /**
      * @param loginName username in Person table
      * @param password hashed password in Person table
-     * @return statefull session bean for the customer session
+     * @return customer object
      * @throws InvalidCredentialsException in case the person entry doe not exist
      **/
-    public CustomerSessionBean loginCustomer(String loginName, String password) throws InvalidCredentialsException {
-        Person customer;
-        FoodOrder myOrder;        
+    @Override
+    public Person loginCustomer(String loginName, String password) throws InvalidCredentialsException {
+        Person customer;        
         try
         {
             customer = validateCredentials(loginName,password);
             System.out.println("retrieved :" +customer);
-            myOrder = getLatestOrder(customer);
-            return new CustomerSessionBean(customer,myOrder);
+            return customer;
         }
         catch (InvalidCredentialsException e)
         {
@@ -56,11 +52,10 @@ public class CustomerCredentialsBean {
      * @return new session with an order loaded
      * @throws NotUniqueCredentialsException in case the person cant be created due to parameter constraints
      **/
-    public CustomerSessionBean registerCustomer(String loginName, String password, String personName) throws NotUniqueCredentialsException {
+    @Override
+    public Person registerCustomer(String loginName, String password, String personName) throws NotUniqueCredentialsException {
         
         Person customer;
-        FoodOrder myOrder;
-        CustomerSessionBean newSession;
         // check if loginName is unique, otherwise throw exception
         try
         {
@@ -76,11 +71,8 @@ public class CustomerCredentialsBean {
         
         customer = new Person(personName,loginName,password);       //create a new person
         em.persist(customer);
-        myOrder = new FoodOrder(customer);                          //create a new order
-        em.persist(myOrder);
-        newSession = new CustomerSessionBean(customer,myOrder);
         
-        return newSession;
+        return customer;
     }
     /**
      * @param loginName username in Person table
@@ -88,9 +80,9 @@ public class CustomerCredentialsBean {
      * @return boolean to indicate existe,ce or not
      * @throws InvalidCredentialsException in case the person entry doe not exist
      **/
-    private Person validateCredentials(String loginName, String password) throws InvalidCredentialsException {
+    @Override
+    public Person validateCredentials(String loginName, String password) throws InvalidCredentialsException {
         
-        System.out.println("ben hier, login & pw ="+password+loginName);
         Query query = em.createNamedQuery("Person.findByCredentials");
         query.setParameter("login", loginName);
         query.setParameter("password", password);
@@ -104,32 +96,8 @@ public class CustomerCredentialsBean {
             throw new InvalidCredentialsException();
         }
     }
-    /**
-     * @param customer enity in database to retrieve lastest order
-     * @return order that has not been finished or a new order
-     * @throws InvalidCredentialsException in case the person entry doe not exist
-     **/
-    private FoodOrder getLatestOrder(Person customer) {
-        // check if the is any unfinished order, otherwise create a new one
-        // return that order   
-        FoodOrder myOrder;
-        
-        Query query = em.createNamedQuery("FoodOrder.findByPersonOpen");
-        query.setParameter("personID",customer);
-        
-        try
-        {
-            myOrder = (FoodOrder) query.getSingleResult();
-        }
-        catch (Exception e)
-        {
-            myOrder = new FoodOrder(customer);
-            em.persist(myOrder);
-        }
-        
-        return myOrder;
-    }
-    
+
+    @Override
     public void persist(Object object) {
         em.persist(object);
     }

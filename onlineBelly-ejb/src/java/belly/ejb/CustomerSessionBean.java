@@ -5,24 +5,20 @@
  */
 package belly.ejb;
 
-import belly.entities.Course;
-import belly.entities.FoodOrder;
-import belly.entities.OrderCourse;
-import belly.entities.Person;
+import belly.interfaces.CustomerSessionBeanLocal;
+import belly.entities.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import javax.ejb.Stateful;
-import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author toon1
  */
 @Stateful
-@LocalBean
-public class CustomerSessionBean {
+public class CustomerSessionBean implements CustomerSessionBeanLocal {
 
     
     @PersistenceContext(unitName = "onlineBelly-ejbPU")
@@ -37,22 +33,40 @@ public class CustomerSessionBean {
         this.customer = customer;
         this.order = order;        
     }
+
+    @Override
+    public FoodOrder setLatestOrder(Person customer) {
+        
+        Query query = em.createNamedQuery("FoodOrder.findByPersonOpen");
+        query.setParameter("personID",customer);
+        
+        try
+        {
+            this.order = (FoodOrder) query.getSingleResult();
+        }
+        catch (Exception e)
+        {
+            this.order = new FoodOrder(customer);
+            em.persist(this.order);
+        }        
+        return this.order;
+    }
     
-    /**
-     * Get the value of order
-     *
-     * @return the value of order
-     */
-    public FoodOrder getOrder() {return order;}
-    /**
-     * Set the value of order
-     *
-     * @param order new value of order
-     */
-    public void setOrder(FoodOrder order) {this.order = order;}
-    public Person getCustomer(){return customer;}
-    public void setCustomer(Person customer){this.customer = customer;}
+    @Override
+    public FoodOrder getOrder() {return this.order;}
+
+    @Override
+    public Person getCustomer(){return this.customer;}    
+    @Override
+    public void setCustomer(Person customer) {
+        this.customer = customer;
+    }
+    @Override
+    public void setOrder(FoodOrder order) {
+        this.order = order;
+    }
     
+    @Override
     public FoodOrder orderCourse(Course newCourse, int amount) {
         
         for (int i = 0;i<amount;i++){
@@ -61,6 +75,7 @@ public class CustomerSessionBean {
         return order;
     }
 
+    @Override
     public FoodOrder removeCourse(Course whatCourse, int amount) {
         for (int i = 0;i<amount;i++){
             order.removeCourse(whatCourse);
@@ -68,6 +83,7 @@ public class CustomerSessionBean {
         return order;
     }
 
+    @Override
     public void persist(Object object) {
         em.persist(object);
     }
@@ -76,6 +92,7 @@ public class CustomerSessionBean {
      * set the order on confirmed and persist in database
      * @return amount of time to wait fo the delivery
      */
+    @Override
     public int confirmOrder() {
         ArrayList<OrderCourse> myCourses = (ArrayList<OrderCourse>)order.getOrderCourseList();
         int waitTime;
@@ -88,6 +105,7 @@ public class CustomerSessionBean {
         return waitTime;
     }
     
+    @Override
     public int getTotalPrice() {
         ArrayList<OrderCourse> myCourses = (ArrayList<OrderCourse>)order.getOrderCourseList();
         int totalPrice;
@@ -95,24 +113,4 @@ public class CustomerSessionBean {
         totalPrice = myCourses.stream().mapToInt(oc -> (oc.getCount()*oc.getCourse().getPrice())).sum();
         return totalPrice;
     }
-    
-    public double getPromo(){
-        
-         ArrayList<OrderCourse> myCourses = (ArrayList<OrderCourse>)order.getOrderCourseList();
-         int totalPrice;
-         double promoPrice;
-        
-        totalPrice = myCourses.stream().mapToInt(oc -> (oc.getCount()*oc.getCourse().getPrice())).sum();
-        promoPrice = totalPrice*0.8;
-        
-        return promoPrice;
-    
-    }
-
-    public FoodOrder viewOrder() {
-        //show for each course name, amount, price
-        //show total price
-        return this.order;
-    }
-
 }

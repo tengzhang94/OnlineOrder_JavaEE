@@ -2,4 +2,8 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/CredentialService/CredentialService?wsdl" uri="src/conf/xml-resources/web-service-references/CredentialService/wsdl/localhost_8080/CredentialService/CredentialService.wsdl"/>
     <system systemId="http://localhost:8080/CredentialService/CredentialService?xsd=1" uri="src/conf/xml-resources/web-service-references/CredentialService/wsdl/localhost_8080/CredentialService/CredentialService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ValidateWebService/ValidateWebService?wsdl" uri="src/conf/xml-resources/web-service-references/ValidateWebService/wsdl/localhost_8080/ValidateWebService/ValidateWebService.wsdl"/>
+    <system systemId="http://localhost:8080/ValidateWebService/ValidateWebService?xsd=1" uri="src/conf/xml-resources/web-service-references/ValidateWebService/wsdl/localhost_8080/ValidateWebService/ValidateWebService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ValidateService/ValidateService?wsdl" uri="src/conf/xml-resources/web-service-references/ValidateService/wsdl/localhost_8080/ValidateService/ValidateService.wsdl"/>
+    <system systemId="http://localhost:8080/ValidateService/ValidateService?xsd=1" uri="src/conf/xml-resources/web-service-references/ValidateService/wsdl/localhost_8080/ValidateService/ValidateService.xsd_1.xsd"/>
 </catalog>

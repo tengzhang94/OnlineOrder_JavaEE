@@ -1,10 +1,14 @@
-<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://service.belly/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://service.belly/">
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.4.0 (wsit240-7e98ff4; 2017-08-03T21:19:54+0200) JAXWS-RI/2.3.0 JAXWS-API/2.3.0 JAXB-RI/2.3.0 JAXB-API/2.3.0 svn-revision#unknown. --><xs:schema xmlns:tns="http://ejb.belly/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ejb.belly/">
 
 <xs:element name="InvalidCredentialsException" type="tns:InvalidCredentialsException"/>
 
 <xs:element name="NotUniqueCredentialsException" type="tns:NotUniqueCredentialsException"/>
 
 <xs:element name="foodOrder" type="tns:foodOrder"/>
+
+<xs:element name="getLatestOrder" type="tns:getLatestOrder"/>
+
+<xs:element name="getLatestOrderResponse" type="tns:getLatestOrderResponse"/>
 
 <xs:element name="loginCustomer" type="tns:loginCustomer"/>
 
@@ -18,11 +22,9 @@
 
 <xs:element name="registerCustomerResponse" type="tns:registerCustomerResponse"/>
 
-<xs:complexType name="persist">
-<xs:sequence>
-<xs:element name="object" type="xs:anyType" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
+<xs:element name="validateCredentials" type="tns:validateCredentials"/>
+
+<xs:element name="validateCredentialsResponse" type="tns:validateCredentialsResponse"/>
 
 <xs:complexType name="registerCustomer">
 <xs:sequence>
@@ -69,6 +71,24 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="persist">
+<xs:sequence>
+<xs:element name="object" type="xs:anyType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLatestOrder">
+<xs:sequence>
+<xs:element name="customer" type="tns:person" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLatestOrderResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:foodOrder" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="loginCustomer">
 <xs:sequence>
 <xs:element name="loginName" type="xs:string" minOccurs="0"/>
@@ -85,6 +105,19 @@
 <xs:complexType name="InvalidCredentialsException">
 <xs:sequence>
 <xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="validateCredentials">
+<xs:sequence>
+<xs:element name="loginName" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="validateCredentialsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:person" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>
