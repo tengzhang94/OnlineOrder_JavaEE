@@ -5,7 +5,8 @@
  */
 package belly.entities;
 
-import java.io.Serializable;
+import belly.interfaces.CourseLocalInterface;
+import belly.interfaces.OrderCourseLocalInterface;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -34,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name")
     , @NamedQuery(name = "Course.findByMaximumPreptime", query = "SELECT c FROM Course c WHERE c.preptime < :preptime")
     , @NamedQuery(name = "Course.findByMaximumPrice", query = "SELECT c FROM Course c WHERE c.price < :price")})
-public class Course implements Serializable {
+public class Course implements CourseLocalInterface {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -71,22 +72,32 @@ public class Course implements Serializable {
         this.picture = "IMAGES/default.jpg";
     }
 
+    @Override
     public Integer getId() {return id;}
-    public void setId(Integer id) {this.id = id;}
+    @Override
     public String getName() {return name;}
+    @Override
     public void setName(String name) {this.name = name;}
+    @Override
     public int getPreptime() {return preptime;}
+    @Override
     public void setPreptime(int preptime) {this.preptime = preptime;}
+    @Override
     public int getPrice() {return price;}
+    @Override
     public void setPrice(int price) {this.price = price;}
+    @Override
     public String getPicture() {return picture;}
+    @Override
     public void setPicture(String picture) {this.picture = picture;}
 
     @XmlTransient
+    @Override
     public List<OrderCourse> getOrderCourseList() {
         return orderCourseList;
     }
 
+    @Override
     public void setOrderCourseList(List<OrderCourse> orderCourseList) {
         this.orderCourseList = orderCourseList;
     }

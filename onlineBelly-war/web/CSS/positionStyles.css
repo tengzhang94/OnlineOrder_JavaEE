@@ -8,6 +8,18 @@ and open the template in the editor.
     Author     : toon1
 */
 
+.myCol-10
+{
+    width: 10%;
+    border-style: hidden !important;
+     
+}
+.myCol-15
+{
+    width: 15%;
+    border-style: hidden !important;
+     
+}
 .myCol-20
 {
     width: 20%;

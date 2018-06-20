@@ -5,7 +5,7 @@
  */
 package belly.entities;
 
-import java.io.Serializable;
+import belly.interfaces.PersonLocalInterface;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
@@ -20,7 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -37,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Person.findByName", query = "SELECT p FROM Person p WHERE p.name = :name")
     , @NamedQuery(name = "Person.findByLogin", query = "SELECT p FROM Person p WHERE p.login = :login")
     , @NamedQuery(name = "Person.findByCredentials", query = "SELECT p FROM Person p WHERE p.login = :login AND p.password= :password")})
-public class Person implements Serializable {
+public class Person implements PersonLocalInterface {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -68,16 +67,24 @@ public class Person implements Serializable {
         this.foodOrderList = new ArrayList<>();
     }
 
+    @Override
     public Integer getId() {return id;}
-    public void setId(Integer id) {this.id = id;}
+    @Override
     public String getName() {return name;}
+    @Override
     public void setName(String name) {this.name = name;}
+    @Override
     public String getLogin() {return login;}
+    @Override
     public void setLogin(String login) {this.login = login;}
+    @Override
     public String getPassword() {return password;}
+    @Override
     public void setPassword(String password) {this.password = password;}
     @XmlTransient
+    @Override
     public List<FoodOrder> getFoodOrderList() {return foodOrderList;}
+    @Override
     public void setFoodOrderList(List<FoodOrder> foodOrderList) {this.foodOrderList = foodOrderList;}
 
     @Override

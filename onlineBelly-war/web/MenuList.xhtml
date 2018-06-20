@@ -28,19 +28,22 @@ and open the template in the editor.
             </p:row>
             <p:row class="myCol-100">
                 <p:column class="myCol-20 myEnd">
-                        <p:commandButton value="CHECK OUT" action="LoginPage"/>                   
+                        <p:commandButton value="CHECK OUT" action="CheckoutPage"/>                   
                 </p:column>
              </p:row> 
         </p:panelGrid>
         <h:form>
             <center><h2><h:outputText value="FOOD MENU"/></h2></center>
-            <p:dataGrid var="item" value="#{onlineOrderMBean.courses}" id="customerList" paginator="true" columns="3" rows="12">
+            <p:dataGrid var="item" value="#{onlineOrderMBean.getCourses()}" id="customerList" paginator="true" columns="3" rows="12">
                 <p:column class="myCol-100">
                     <p:panel header="#{item.name}" class="myCenter myCol-100">
                         <h:panelGrid class="myCol-100">
                             <p:graphicImage  value="#{item.picture}" alt="delicious meal" class="myImageDisplay myCenter" /> 
                             <h:outputText value="price : €#{item.price}" />
                             <h:outputText value="preparation time : #{item.preptime} minutes" />
+                            <p:commandButton value="ORDER" action="#{onlineOrderMBean.orderCourse()}">
+                                <f:setPropertyActionListener value="#{item}" target="#{onlineOrderMBean.newCourse}" />
+                            </p:commandButton>
                         </h:panelGrid>
                     </p:panel>
                 </p:column>
