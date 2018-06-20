@@ -5,7 +5,7 @@
     <client name="CredentialService">
       <wsdl-url>http://localhost:8080/CredentialService/CredentialService?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8080/CredentialService/CredentialService.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">webService_client</package-name>
+      <package-name forceReplace="true">webservice_client</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -34,7 +34,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>webService_client</wsimport-option-value>
+          <wsimport-option-value>webservice_client</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>
