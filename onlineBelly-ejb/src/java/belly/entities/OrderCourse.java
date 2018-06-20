@@ -52,10 +52,11 @@ public class OrderCourse implements OrderCourseLocalInterface {
         this.count = 1;
     }
 
-    public OrderCourse(int orderid, int courseid) {
-        this.orderCoursePK = new OrderCoursePK(orderid, courseid);
+    public OrderCourse(FoodOrder order, Course course) {
+        this.orderCoursePK = new OrderCoursePK(order.getId(), course.getId());
         this.count = 1;
-        this.course = new Course(orderid, "koe",15,3);
+        this.course = course;        
+        this.foodOrder = order;
     }
     
     

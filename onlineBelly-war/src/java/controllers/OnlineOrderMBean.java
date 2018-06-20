@@ -8,6 +8,7 @@ package controllers;
 import belly.entities.*;
 import belly.exceptions.*;
 import belly.interfaces.*;
+import java.io.IOException;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 import java.security.Principal;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.ExternalContext;
 
 import javax.faces.context.FacesContext;
 
@@ -100,6 +102,13 @@ public class OnlineOrderMBean implements Serializable {
         //case yes, add to order
         //else redirect to login view
     }
+    public String orderCourse(Course course)
+    {
+        System.out.println("order : "+ course);
+        customerSessionBean.orderCourse(course, 1);
+        
+        return  ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRequestURI();
+    }
     public void deleteCourse()
     {
         System.out.println("cancel order : "+ this.myCourse);   
@@ -107,6 +116,13 @@ public class OnlineOrderMBean implements Serializable {
         //check if logged in
         //case yes, add to order
         //else redirect to login view
+    }
+    public String deleteCourse(Course course) throws IOException
+    {
+        System.out.println("order : "+ course);
+        customerSessionBean.removeCourse(course, 1);
+        
+        return  ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRequestURI();
     }
     public String loginCustomer()
     {

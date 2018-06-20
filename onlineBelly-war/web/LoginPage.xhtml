@@ -24,7 +24,7 @@ and open the template in the editor.
             <h:outputLabel value="password:"/>
             <h:inputSecret value="#{onlineOrderMBean.password}"/>
             </h:panelGrid>
-            <h:commandButton id="login" value="Login" action="#{onlineOrderMBean.loginCustomer()}" disabled="#{onlineOrderMBean.loginName and onlineOrderMBean.password}"/> 
+            <p:commandButton id="login" value="Login" action="#{onlineOrderMBean.loginCustomer()}" resetValues="true"/> 
         </h:form>
         <p:commandButton value="register new customer" action="RegisterPage"/>
         </center>
