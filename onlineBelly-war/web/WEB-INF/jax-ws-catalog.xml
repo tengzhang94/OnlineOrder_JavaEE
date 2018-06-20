@@ -6,4 +6,9 @@
     <system systemId="http://localhost:8080/ValidateService/ValidateService?xsd=1" uri="wsdl/localhost_8080/ValidateService/ValidateService.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ValidateWebService/ValidateWebService?wsdl" uri="wsdl/localhost_8080/ValidateWebService/ValidateWebService.wsdl"/>
     <system systemId="http://localhost:8080/ValidateWebService/ValidateWebService?xsd=1" uri="wsdl/localhost_8080/ValidateWebService/ValidateWebService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/SoapWS/SoapWS?wsdl" uri="wsdl/localhost_8080/SoapWS/SoapWS.wsdl"/>
+    <system systemId="http://localhost:8080/SoapWS/SoapWS?xsd=1" uri="wsdl/localhost_8080/SoapWS/SoapWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/SoapWSImpl/SoapWSLocalInterfaceImpl?wsdl" uri="wsdl/localhost_8080/SoapWSImpl/SoapWSLocalInterfaceImpl.wsdl"/>
+    <system systemId="http://localhost:8080/SoapWSImpl/SoapWSLocalInterfaceImpl?wsdl=1" uri="wsdl/localhost_8080/SoapWSImpl/SoapWSLocalInterfaceImpl.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:8080/SoapWSImpl/SoapWSLocalInterfaceImpl?xsd=1" uri="wsdl/localhost_8080/SoapWSImpl/SoapWSLocalInterfaceImpl.xsd_1.xsd"/>
 </catalog>

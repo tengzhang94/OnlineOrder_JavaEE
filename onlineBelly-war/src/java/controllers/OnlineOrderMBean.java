@@ -5,9 +5,14 @@
  */
 package controllers;
 
+import belly.ejb.SoapWS_Service;
 import belly.entities.*;
 import belly.exceptions.*;
-import belly.interfaces.*;
+import belly.interfaces.CourseOverviewBeanLocal;
+import belly.interfaces.CustomerCredentialsBeanLocal;
+import belly.interfaces.CustomerSessionBeanLocal;
+import belly.interfaces.SoapWSLocalInterface;
+
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -19,6 +24,7 @@ import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.WebServiceRef;
 
 /**
  *
@@ -27,6 +33,9 @@ import javax.servlet.http.HttpServletRequest;
 @Named(value = "onlineOrderMBean")
 @SessionScoped
 public class OnlineOrderMBean implements Serializable {
+
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/SoapWS/SoapWS.wsdl")
+    private SoapWS_Service service;
 
     @EJB
     private CustomerSessionBeanLocal customerSessionBean;
@@ -59,7 +68,11 @@ public class OnlineOrderMBean implements Serializable {
     {
         //ArrayList<Course> myList = new ArrayList<>();
         //myList.add(new Course(2,"eten",15,6));
-        return courseOverviewBean.getOverview();
+        
+        //return courseOverviewBean.getOverview();
+        
+        return getOverview_1();
+        
     }
     
     public List<OrderCourse> getOrderedCourses()
@@ -182,6 +195,20 @@ public class OnlineOrderMBean implements Serializable {
 
     public void setMyCourse(Course myCourse) {
         this.myCourse = myCourse;
+    }
+
+    private java.util.List<belly.ejb.Course> getOverview() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        belly.ejb.SoapWS port = service.getSoapWSPort();
+        return port.getOverview();
+    }
+
+    private List<Course> getOverview_1() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        SoapWSLocalInterface port = service.getPort(SoapWSLocalInterface.class);
+        return port.getOverview();
     }
 
     
