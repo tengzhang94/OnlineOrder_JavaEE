@@ -33,21 +33,21 @@ public class OrderCourse implements OrderCourseLocalInterface {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected OrderCoursePKLocalInterface orderCoursePK;
+    protected OrderCoursePK orderCoursePK;
     @Basic(optional = false)
     @Column(name = "count")
     private int count;
     @JoinColumn(name = "courseId", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private CourseLocalInterface course;
+    private Course course;
     @JoinColumn(name = "orderId", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private FoodOrderLocalInterface foodOrder;
+    private FoodOrder foodOrder;
 
     public OrderCourse() {
     }
 
-    public OrderCourse(OrderCoursePKLocalInterface orderCoursePK) {
+    public OrderCourse(OrderCoursePK orderCoursePK) {
         this.orderCoursePK = orderCoursePK;
         this.count = 1;
     }

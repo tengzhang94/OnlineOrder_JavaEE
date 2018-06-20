@@ -55,7 +55,7 @@ public class Course implements CourseLocalInterface {
     @Column(name = "picture")
     private String picture;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
-    private List<OrderCourseLocalInterface> orderCourseList;
+    private List<OrderCourse> orderCourseList;
 
     public Course() {
     }
