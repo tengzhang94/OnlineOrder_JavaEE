@@ -5,6 +5,7 @@
  */
 package belly.ejb;
 
+import belly.interfaces.CustomerCredentialsBeanLocal;
 import belly.entities.FoodOrder;
 import belly.entities.Person;
 import belly.exceptions.InvalidCredentialsException;
@@ -23,7 +24,7 @@ import javax.persistence.Query;
  */
 @Stateless
 @LocalBean
-public class CustomerCredentialsBean {
+public class CustomerCredentialsBean implements CustomerCredentialsBeanLocal {
 
     @PersistenceContext(unitName = "onlineBelly-ejbPU")
     private EntityManager em;
@@ -34,6 +35,7 @@ public class CustomerCredentialsBean {
      * @return statefull session bean for the customer session
      * @throws InvalidCredentialsException in case the person entry doe not exist
      **/
+    @Override
     public CustomerSessionBean loginCustomer(String loginName, String password) throws InvalidCredentialsException {
         Person customer;
         FoodOrder myOrder;        
@@ -56,6 +58,7 @@ public class CustomerCredentialsBean {
      * @return new session with an order loaded
      * @throws NotUniqueCredentialsException in case the person cant be created due to parameter constraints
      **/
+    @Override
     public CustomerSessionBean registerCustomer(String loginName, String password, String personName) throws NotUniqueCredentialsException {
         
         Person customer;
@@ -130,6 +133,7 @@ public class CustomerCredentialsBean {
         return myOrder;
     }
     
+    @Override
     public void persist(Object object) {
         em.persist(object);
     }

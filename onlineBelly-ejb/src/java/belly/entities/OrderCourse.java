@@ -5,6 +5,10 @@
  */
 package belly.entities;
 
+import belly.entities.Course;
+import belly.entities.FoodOrder;
+import belly.entities.OrderCourseLocalInterface;
+import belly.entities.OrderCoursePK;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -28,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OrderCourse.findAll", query = "SELECT o FROM OrderCourse o")
     , @NamedQuery(name = "OrderCourse.findByOrderId", query = "SELECT o FROM OrderCourse o WHERE o.orderCoursePK.orderId = :orderId")
     , @NamedQuery(name = "OrderCourse.findByCourseId", query = "SELECT o FROM OrderCourse o WHERE o.orderCoursePK.courseId = :courseId")})
-public class OrderCourse implements Serializable {
+public class OrderCourse implements OrderCourseLocalInterface {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -58,15 +62,25 @@ public class OrderCourse implements Serializable {
     }
     
     
+    @Override
     public int increaseCount(){return ++this.count;}
+    @Override
     public int decreaseCount(){return --this.count;}
+    @Override
     public OrderCoursePK getOrderCoursePK() {return orderCoursePK;}
+    @Override
     public void setOrderCoursePK(OrderCoursePK orderCoursePK) {this.orderCoursePK = orderCoursePK;}
+    @Override
     public int getCount() {return count;}
+    @Override
     public void setCount(int count) {this.count = count;}
+    @Override
     public Course getCourse() {return course;}
+    @Override
     public void setCourse(Course course) {this.course = course;}
+    @Override
     public FoodOrder getFoodOrder() {return foodOrder;}
+    @Override
     public void setFoodOrder(FoodOrder foodOrder) {this.foodOrder = foodOrder;}
 
     @Override

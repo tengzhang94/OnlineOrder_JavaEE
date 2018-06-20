@@ -5,6 +5,7 @@
  */
 package belly.ejb;
 
+import belly.interfaces.CustomerSessionBeanLocal;
 import belly.entities.Course;
 import belly.entities.FoodOrder;
 import belly.entities.OrderCourse;
@@ -22,7 +23,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateful
 @LocalBean
-public class CustomerSessionBean {
+public class CustomerSessionBean implements CustomerSessionBeanLocal {
 
     
     @PersistenceContext(unitName = "onlineBelly-ejbPU")
@@ -43,16 +44,21 @@ public class CustomerSessionBean {
      *
      * @return the value of order
      */
+    @Override
     public FoodOrder getOrder() {return order;}
     /**
      * Set the value of order
      *
      * @param order new value of order
      */
+    @Override
     public void setOrder(FoodOrder order) {this.order = order;}
+    @Override
     public Person getCustomer(){return customer;}
+    @Override
     public void setCustomer(Person customer){this.customer = customer;}
     
+    @Override
     public FoodOrder orderCourse(Course newCourse, int amount) {
         
         for (int i = 0;i<amount;i++){
@@ -61,6 +67,7 @@ public class CustomerSessionBean {
         return order;
     }
 
+    @Override
     public FoodOrder removeCourse(Course whatCourse, int amount) {
         for (int i = 0;i<amount;i++){
             order.removeCourse(whatCourse);
@@ -68,6 +75,7 @@ public class CustomerSessionBean {
         return order;
     }
 
+    @Override
     public void persist(Object object) {
         em.persist(object);
     }
@@ -76,6 +84,7 @@ public class CustomerSessionBean {
      * set the order on confirmed and persist in database
      * @return amount of time to wait fo the delivery
      */
+    @Override
     public int confirmOrder() {
         ArrayList<OrderCourse> myCourses = (ArrayList<OrderCourse>)order.getOrderCourseList();
         int waitTime;
@@ -88,6 +97,7 @@ public class CustomerSessionBean {
         return waitTime;
     }
     
+    @Override
     public int getTotalPrice() {
         ArrayList<OrderCourse> myCourses = (ArrayList<OrderCourse>)order.getOrderCourseList();
         int totalPrice;
@@ -96,6 +106,7 @@ public class CustomerSessionBean {
         return totalPrice;
     }
 
+    @Override
     public FoodOrder viewOrder() {
         //show for each course name, amount, price
         //show total price

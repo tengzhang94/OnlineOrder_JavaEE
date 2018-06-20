@@ -5,6 +5,7 @@
  */
 package belly.entities;
 
+import belly.interfaces.OrderCoursePKLoclInterface;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import javax.persistence.Embeddable;
  * @author toon1
  */
 @Embeddable
-public class OrderCoursePK implements Serializable {
+public class OrderCoursePK implements OrderCoursePKLoclInterface {
 
     @Basic(optional = false)
     @Column(name = "orderId")
@@ -32,18 +33,22 @@ public class OrderCoursePK implements Serializable {
         this.courseId = courseId;
     }
 
+    @Override
     public int getOrderId() {
         return orderId;
     }
 
+    @Override
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
+    @Override
     public int getCourseId() {
         return courseId;
     }
 
+    @Override
     public void setCourseId(int courseId) {
         this.courseId = courseId;
     }

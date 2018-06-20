@@ -5,6 +5,7 @@
  */
 package belly.entities;
 
+import belly.interfaces.FoodOrderLocalInterface;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,7 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "FoodOrder.findById", query = "SELECT f FROM FoodOrder f WHERE f.id = :id")
     , @NamedQuery(name = "FoodOrder.findByTimeSince", query = "SELECT f FROM FoodOrder f WHERE f.ordertime > :startTime")
     , @NamedQuery(name = "FoodOrder.findByComplete", query = "SELECT f FROM FoodOrder f WHERE f.complete = :complete")})
-public class FoodOrder implements Serializable {
+public class FoodOrder implements FoodOrderLocalInterface {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -73,6 +74,7 @@ public class FoodOrder implements Serializable {
         this.complete = 0;
     }
     
+    @Override
     public void addCourse(Course course)
     {
         Optional<OrderCourse> orderCourse;        
@@ -87,6 +89,7 @@ public class FoodOrder implements Serializable {
             orderCourse.get().increaseCount();
         }
     }
+    @Override
     public void removeCourse(Course course)
     {
         Optional<OrderCourse> orderCourse;
@@ -98,20 +101,30 @@ public class FoodOrder implements Serializable {
         }
     }
 
+    @Override
     public Integer getId() {return id;}
+    @Override
     public void setId(Integer id) {this.id = id;}
+    @Override
     public Date getOrdertime() {return ordertime;}
+    @Override
     public void setOrdertime(Date ordertime) {this.ordertime = ordertime;}
+    @Override
     public short getComplete() {return complete;}
+    @Override
     public void setComplete(short complete) {this.complete = complete;}
+    @Override
     public Person getPersonID() {return personID;}
+    @Override
     public void setPersonID(Person personID) {this.personID = personID;}
 
     @XmlTransient
+    @Override
     public List<OrderCourse> getOrderCourseList() {
         return orderCourseList;
     }
 
+    @Override
     public void setOrderCourseList(List<OrderCourse> orderCourseList) {
         this.orderCourseList = orderCourseList;
     }
