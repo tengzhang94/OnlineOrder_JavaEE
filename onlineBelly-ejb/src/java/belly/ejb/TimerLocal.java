@@ -13,5 +13,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface TimerLocal {
-   public void timer(Timer timer);
+    public void timer(Timer timer);
 }

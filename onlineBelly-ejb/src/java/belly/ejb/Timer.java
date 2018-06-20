@@ -7,10 +7,9 @@ package belly.ejb;
 
 import java.util.Date;
 import javax.ejb.Schedule;
-import javax.ejb.Singleton;
-import belly.ejb.CourseOverviewBean;
+import javax.inject.Singleton;
 
-/*
+/**
  *
  * @author Zheng Liang
  */
@@ -18,10 +17,10 @@ import belly.ejb.CourseOverviewBean;
 public class Timer implements TimerLocal {
 
     @Override
-    @Schedule(second = "0", minute = "*", hour = "*")
+    @Schedule(second = "0", minute = "12", hour = "20")
     public void timer(Timer timer) {
         System.out.println(new Date()) ; //To change body of generated methods, choose Tools | Templates.
-        
     }
-
+    // Add business logic below. (Right-click in editor and choose
+    // "Insert Code > Add Business Method")
 }
