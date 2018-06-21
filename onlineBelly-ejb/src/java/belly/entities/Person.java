@@ -49,7 +49,7 @@ public class Person implements PersonLocalInterface {
     private String name;
     @Basic(optional = false)
     @Column(name = "login")
-    private String login;
+    public String login;
     @Basic(optional = false)
     @Lob
     @Column(name = "password")

@@ -25,7 +25,7 @@ public class CourseOverviewBean implements CourseOverviewBeanLocal {
     private EntityManager em;
 
     @Override
-    @Interceptors(PageHitInterceptor.class)
+    @Interceptors(PageRenderInterceptor.class)
     public List<Course> getOverview() {
         Query query = em.createNamedQuery("Course.findAll");
         return query.getResultList();

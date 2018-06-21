@@ -71,15 +71,21 @@ public class OnlineOrderMBean implements Serializable {
     public int totalPrice(){return customerSessionBean.getTotalPrice();}
     public int deliveryDuration()    {return customerSessionBean.getDuration();}
     
-    public String confirm()
+    public void confirm() throws IOException
     {
         System.out.println("finished session");
         customerSessionBean.confirmOrder();
-        return "MenuList";
+        ExternalContext ec =FacesContext.getCurrentInstance().getExternalContext();
+         ec.redirect(ec.getRequestContextPath() + "/Comment.html");
     }
     
-    public void orderCourse()
+    public void orderCourse() throws IOException
     {
+        if(!checkLoggedInUser()){
+            ExternalContext ec =FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(ec.getRequestContextPath() + "/LoginPage.jsf");
+        }
+            
         System.out.println("order : "+ this.myCourse);
         customerSessionBean.orderCourse(myCourse, 1);
         //check if logged in
@@ -108,6 +114,9 @@ public class OnlineOrderMBean implements Serializable {
             Person p = customerCredentialsBean.loginCustomer(loginName, password);
             customerSessionBean.setCustomer(p);
             customerSessionBean.setLatestOrder(p);
+            System.out.println("MenuList");
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user",p);
+            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap());
             return "MenuList";
         }
         catch (InvalidCredentialsException e)
@@ -125,6 +134,7 @@ public class OnlineOrderMBean implements Serializable {
             Person newCustomer  = customerCredentialsBean.registerCustomer(loginName, password, nickName);
             customerSessionBean.setCustomer(newCustomer);
             customerSessionBean.setLatestOrder(newCustomer);            
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user",newCustomer);
             return "MenuList";
         }
         catch (NotUniqueCredentialsException e)
@@ -146,9 +156,9 @@ public class OnlineOrderMBean implements Serializable {
         return null;    
     }
 
-    private boolean checkLoggedInUser()
+    public boolean checkLoggedInUser()
     {
-        Principal loginUser = getLoggedInUser();
+        Person loginUser = getLoggedInUser();
         return (loginUser != null);
     }
 
@@ -161,12 +171,12 @@ public class OnlineOrderMBean implements Serializable {
      *
      * @return Principal of the logged-in user
      */
-    private Principal getLoggedInUser()
+    private Person getLoggedInUser()
     {
         HttpServletRequest request =
                 (HttpServletRequest) FacesContext.getCurrentInstance().
                     getExternalContext().getRequest();
-        return request.getUserPrincipal();
+        return (Person) request.getAttribute("user");
     }
 
     public Course getMyCourse() {return myCourse;}
