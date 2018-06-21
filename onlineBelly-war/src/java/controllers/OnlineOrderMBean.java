@@ -67,6 +67,8 @@ public class OnlineOrderMBean implements Serializable {
     
     public void orderCourse()
     {
+        if(!checkLoggedInUser())
+            
         System.out.println("order : "+ this.myCourse);
         customerSessionBean.orderCourse(myCourse, 1);
         //check if logged in
@@ -139,7 +141,7 @@ public class OnlineOrderMBean implements Serializable {
 
     public boolean checkLoggedInUser()
     {
-        Principal loginUser = getLoggedInUser();
+        Person loginUser = getLoggedInUser();
         return (loginUser != null);
     }
 
@@ -152,12 +154,12 @@ public class OnlineOrderMBean implements Serializable {
      *
      * @return Principal of the logged-in user
      */
-    private Principal getLoggedInUser()
+    private Person getLoggedInUser()
     {
         HttpServletRequest request =
                 (HttpServletRequest) FacesContext.getCurrentInstance().
                     getExternalContext().getRequest();
-        return request.getUserPrincipal();
+        return (Person) request.getAttribute("user");
     }
 
     public Course getMyCourse() {return myCourse;}
