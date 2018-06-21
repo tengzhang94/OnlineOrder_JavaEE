@@ -94,7 +94,7 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         
         //indicate the order as completed
         order.setComplete((short) 1);
-        em.merge(order);                //change changes to database
+        em.merge(order);                //save changes to database
     }
     
     @Override
@@ -106,7 +106,7 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         }
         catch(NoSuchElementException e)
         {
-                System.out.println("no orders yet");
+                //System.out.println("no orders yet");
                 return 0;
         }
     }
@@ -128,7 +128,7 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
     
     @PreDestroy
     @PrePassivate
-    private void doPersistency()
+    public void doPersistency()
     {
         em.merge(this.customer);
         em.merge(this.order);

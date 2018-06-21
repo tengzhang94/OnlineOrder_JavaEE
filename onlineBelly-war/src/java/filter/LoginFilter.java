@@ -53,7 +53,7 @@ public class LoginFilter implements Filter {
 //                          {
 				System.out.println("login fail");
                                 //resp.sendRedirect(req.getContextPath()+"/login.jsp");
-				resp.sendRedirect(req.getServletContext().getContextPath()+"/LoginPage.xhtml");
+				resp.sendRedirect(req.getServletContext().getContextPath()+"/LoginPage.jsf");
  //                         }
 			}else{
 				System.out.println("login sucess");
