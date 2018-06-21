@@ -66,7 +66,7 @@ public class OnlineOrderMBean implements Serializable {
     public OnlineOrderMBean() {
     }
     
-    public List<Course> getCourses(){return courseOverviewBean.getOverview();}    
+    public List<belly.ejb.Course> getCourses(){return getOverview();}    
     public List<OrderCourse> getOrderedCourses(){return customerSessionBean.getOrder().getOrderCourseList();}    
     public int totalPrice(){return customerSessionBean.getTotalPrice();}
     public int deliveryDuration()    {return customerSessionBean.getDuration();}
