@@ -95,6 +95,9 @@ public class OnlineOrderMBean implements Serializable {
             Person p = customerCredentialsBean.loginCustomer(loginName, password);
             customerSessionBean.setCustomer(p);
             customerSessionBean.setLatestOrder(p);
+            System.out.println("MenuList");
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user",p);
+            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap());
             return "MenuList";
         }
         catch (InvalidCredentialsException e)
@@ -112,6 +115,7 @@ public class OnlineOrderMBean implements Serializable {
             Person newCustomer  = customerCredentialsBean.registerCustomer(loginName, password, nickName);
             customerSessionBean.setCustomer(newCustomer);
             customerSessionBean.setLatestOrder(newCustomer);            
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user",newCustomer);
             return "MenuList";
         }
         catch (NotUniqueCredentialsException e)
@@ -133,7 +137,7 @@ public class OnlineOrderMBean implements Serializable {
         return null;    
     }
 
-    private boolean checkLoggedInUser()
+    public boolean checkLoggedInUser()
     {
         Principal loginUser = getLoggedInUser();
         return (loginUser != null);

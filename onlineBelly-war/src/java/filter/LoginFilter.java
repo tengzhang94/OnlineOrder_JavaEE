@@ -5,19 +5,24 @@
  */
 package filter;
 
+
 import belly.entities.Person;
+import controllers.OnlineOrderMBean;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import javax.faces.context.FacesContext;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -41,23 +46,25 @@ public class LoginFilter implements Filter {
         if (debug) {
             log("LoginFilter:DoBeforeProcessing");
         }
-
+        
         		HttpServletRequest req=(HttpServletRequest) request;
 			HttpServletResponse resp=(HttpServletResponse) response;
-			//String session=(String) req.getSession().getAttribute("");
-                       // String session = null;
-                       Person session = (Person) req.getSession().getAttribute("Person");
-//                       String url = req.getRequestURI();
-			if(session==null){
-//                          if(url.indexOf("MenuList.xhtml") >=0)
-//                          {
-				System.out.println("login fail");
+ System.out.println("1");
+    //HttpSession session =req.getSession(false);
+    System.out.println("2");
+    //String p = (String) session.getAttribute("password");
+    Person p = (Person)req.getSession().getAttribute("user");
+    System.out.println(req.getSession().getAttributeNames());
+    //HttpSession bean =(HttpSession) req.getSession().getAttribute("MenuList");
+    System.out.println("3");
+			if( p == null ){
+				System.out.println("login fail, user ="+ p);
                                 //resp.sendRedirect(req.getContextPath()+"/login.jsp");
 				resp.sendRedirect(req.getServletContext().getContextPath()+"/LoginPage.jsf");
- //                         }
+                                
 			}else{
-				System.out.println("login sucess");
-				resp.sendRedirect(req.getServletContext().getContextPath());
+				System.out.println("login sucess user ="+ p);
+				//resp.sendRedirect(req.getServletContext().getContextPath()+"/Comment.html");
 			}
     }    
     
