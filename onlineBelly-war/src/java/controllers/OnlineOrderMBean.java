@@ -58,16 +58,20 @@ public class OnlineOrderMBean implements Serializable {
     public int totalPrice(){return customerSessionBean.getTotalPrice();}
     public int deliveryDuration()    {return customerSessionBean.getDuration();}
     
-    public String confirm()
+    public void confirm() throws IOException
     {
         System.out.println("finished session");
         customerSessionBean.confirmOrder();
-        return "MenuList";
+        ExternalContext ec =FacesContext.getCurrentInstance().getExternalContext();
+         ec.redirect(ec.getRequestContextPath() + "/Comment.html");
     }
     
-    public void orderCourse()
+    public void orderCourse() throws IOException
     {
-        if(!checkLoggedInUser())
+        if(!checkLoggedInUser()){
+            ExternalContext ec =FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(ec.getRequestContextPath() + "/LoginPage.jsf");
+        }
             
         System.out.println("order : "+ this.myCourse);
         customerSessionBean.orderCourse(myCourse, 1);

@@ -68,7 +68,7 @@ and open the template in the editor.
                     <p:outputPanel class="myCol-60 myEnd" autoUpdate="true">
                         <h:outputText class="myEnd" value="Total Price : €#{onlineOrderMBean.totalPrice()}"/><br/>
                         <h:outputText class="myEnd" value="Preparation time : #{onlineOrderMBean.deliveryDuration()} mins"/><br/>                        
-                        <p:commandButton class="myEnd" value="CONFIRM ORDER" action="#{onlineOrderMBean.confirm()}"/> 
+                        <p:commandButton class="myEnd" value="CONFIRM ORDER" actionListener="#{onlineOrderMBean.confirm()}"/> 
                     </p:outputPanel>
                                        
                 </h:form>
