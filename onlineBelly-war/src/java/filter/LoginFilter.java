@@ -47,6 +47,8 @@ public class LoginFilter implements Filter {
 			//String session=(String) req.getSession().getAttribute("");
                        // String session = null;
                        Person session = (Person) req.getSession().getAttribute("Person");
+                       System.out.println(req.getSession());
+                       System.out.println(session);
 //                       String url = req.getRequestURI();
 			if(session==null){
 //                          if(url.indexOf("MenuList.xhtml") >=0)
