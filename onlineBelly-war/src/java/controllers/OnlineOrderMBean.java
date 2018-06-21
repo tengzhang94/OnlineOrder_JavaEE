@@ -5,14 +5,14 @@
  */
 package controllers;
 
+
+import belly.ejb.Soap;
 import belly.ejb.SoapWS_Service;
+import belly.ejb.Soap_Service;
 import belly.entities.*;
 import belly.exceptions.*;
-import belly.interfaces.CourseOverviewBeanLocal;
-import belly.interfaces.CustomerCredentialsBeanLocal;
-import belly.interfaces.CustomerSessionBeanLocal;
-import belly.interfaces.SoapWSLocalInterface;
-
+import belly.interfaces.*;
+import java.io.IOException;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.security.Principal;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.ExternalContext;
 
 import javax.faces.context.FacesContext;
 
@@ -34,8 +35,13 @@ import javax.xml.ws.WebServiceRef;
 @SessionScoped
 public class OnlineOrderMBean implements Serializable {
 
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/Soap/Soap.wsdl")
+    private Soap_Service service_1;
+
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/SoapWS/SoapWS.wsdl")
     private SoapWS_Service service;
+
+
 
     @EJB
     private CustomerSessionBeanLocal customerSessionBean;
@@ -60,43 +66,10 @@ public class OnlineOrderMBean implements Serializable {
     public OnlineOrderMBean() {
     }
     
-     /**
-     *
-     * @return list of course objects to be displayed in the menu
-     */
-    public List<Course> getCourses()
-    {
-        //ArrayList<Course> myList = new ArrayList<>();
-        //myList.add(new Course(2,"eten",15,6));
-        
-        //return courseOverviewBean.getOverview();
-        
-        return getOverview_1();
-        
-    }
-    
-    public List<OrderCourse> getOrderedCourses()
-    {
-        /**ArrayList<OrderCourse> myOs = new ArrayList<>();
-        
-        myOs.add(new OrderCourse(1,1));
-        myOs.add(new OrderCourse(1,2));
-        myOs.add(new OrderCourse(1,3));
-        return myOs;
-        */
-        return customerSessionBean.getOrder().getOrderCourseList();
-    }
-    
-    public int totalPrice()
-    {
-        return customerSessionBean.getTotalPrice();
-        //return 42;
-    }
-    public int deliveryDuration()
-    {
-        return customerSessionBean.getDuration();
-        //return 42;
-    }
+    public List<Course> getCourses(){return courseOverviewBean.getOverview();}    
+    public List<OrderCourse> getOrderedCourses(){return customerSessionBean.getOrder().getOrderCourseList();}    
+    public int totalPrice(){return customerSessionBean.getTotalPrice();}
+    public int deliveryDuration()    {return customerSessionBean.getDuration();}
     
     public String confirm()
     {
@@ -113,13 +86,20 @@ public class OnlineOrderMBean implements Serializable {
         //case yes, add to order
         //else redirect to login view
     }
-    public void deleteCourse()
+    public void orderCourse(Course course)
     {
-        System.out.println("cancel order : "+ this.myCourse);   
+        System.out.println("order : "+ course);
+        customerSessionBean.orderCourse(course, 1);
+    }
+    public void deleteCourse()
+    { 
+        System.out.println("remove : "+ this.myCourse);
         customerSessionBean.removeCourse(myCourse, 1);
-        //check if logged in
-        //case yes, add to order
-        //else redirect to login view
+    }
+    public void deleteCourse(Course course) throws IOException
+    {
+        System.out.println("remove : "+ course);
+        customerSessionBean.removeCourse(course, 1);
     }
     public String loginCustomer()
     {
@@ -189,15 +169,10 @@ public class OnlineOrderMBean implements Serializable {
         return request.getUserPrincipal();
     }
 
-    public Course getMyCourse() {
-        return myCourse;
-    }
+    public Course getMyCourse() {return myCourse;}
+    public void setMyCourse(Course myCourse) {this.myCourse = myCourse;}
 
-    public void setMyCourse(Course myCourse) {
-        this.myCourse = myCourse;
-    }
-
-    private java.util.List<belly.ejb.Course> getOverview() {
+    private List<belly.ejb.Course> getOverview() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         belly.ejb.SoapWS port = service.getSoapWSPort();
@@ -207,9 +182,10 @@ public class OnlineOrderMBean implements Serializable {
     private List<Course> getOverview_1() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        SoapWSLocalInterface port = service.getPort(SoapWSLocalInterface.class);
+        SoapWSLocalInterface port = service_1.getPort(SoapWSLocalInterface.class);
         return port.getOverview();
     }
 
+  
     
 }

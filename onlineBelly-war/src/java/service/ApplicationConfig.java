@@ -12,7 +12,7 @@ import javax.ws.rs.core.Application;
  *
  * @author dell
  */
-@javax.ws.rs.ApplicationPath("myroot")
+@javax.ws.rs.ApplicationPath("/myroot/")
 public class ApplicationConfig extends Application {
 
     @Override

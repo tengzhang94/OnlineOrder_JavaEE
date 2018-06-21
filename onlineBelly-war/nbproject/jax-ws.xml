@@ -2,9 +2,9 @@
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services/>
   <clients>
-    <client name="SoapWS">
-      <wsdl-url>http://localhost:8080/SoapWS/SoapWS?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_8080/SoapWS/SoapWS.wsdl</local-wsdl-file>
+    <client name="Soap">
+      <wsdl-url>http://localhost:8080/Soap/Soap?wsdl</wsdl-url>
+      <local-wsdl-file>localhost_8080/Soap/Soap.wsdl</local-wsdl-file>
       <package-name>belly.ejb</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
@@ -22,7 +22,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8080/SoapWS/SoapWS?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://localhost:8080/Soap/Soap?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -34,7 +34,7 @@
         </wsimport-option>
       </wsimport-options>
     </client>
-    <client name="SoapWS_1">
+    <client name="SoapWS">
       <wsdl-url>http://localhost:8080/SoapWS/SoapWS?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8080/SoapWS/SoapWS.wsdl</local-wsdl-file>
       <package-name>belly.ejb</package-name>

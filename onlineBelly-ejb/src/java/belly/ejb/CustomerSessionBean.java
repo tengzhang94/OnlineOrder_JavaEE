@@ -7,8 +7,9 @@ package belly.ejb;
 
 import belly.interfaces.CustomerSessionBeanLocal;
 import belly.entities.*;
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import javax.annotation.PreDestroy;
+import javax.ejb.PrePassivate;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -88,16 +89,12 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         em.persist(object);
     }
 
-    /**
-     * set the order on confirmed and persist in database
-     * @return amount of time to wait fo the delivery
-     */
     @Override
     public void confirmOrder() {
         
         //indicate the order as completed
         order.setComplete((short) 1);
-        em.merge(order);                //change changes to database
+        em.merge(order);                //save changes to database
     }
     
     @Override
@@ -109,7 +106,7 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         }
         catch(NoSuchElementException e)
         {
-                System.out.println("no orders yet");
+                //System.out.println("no orders yet");
                 return 0;
         }
     }
@@ -127,5 +124,15 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
                 System.out.println("no orders yet");
                 return 0;
         }
+    }
+    
+    @PreDestroy
+    @PrePassivate
+    public void doPersistency()
+    {
+        em.merge(this.customer);
+        em.merge(this.order);
+        order.getOrderCourseList().forEach((o) -> {em.merge(o);});
+        System.out.println("did cleanup");
     }
 }

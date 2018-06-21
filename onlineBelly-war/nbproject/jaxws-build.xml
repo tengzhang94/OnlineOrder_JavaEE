@@ -26,6 +26,22 @@
             <isset property="conf.dir"/>
         </condition>
     </target>
+    <target name="wsimport-client-Soap" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/Soap"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Soap" destdir="${build.generated.dir}/jax-wsCache/Soap" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/Soap/wsdl/localhost_8080/Soap/Soap.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/Soap/Soap?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/Soap/wsdl/localhost_8080/Soap/Soap.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/Soap"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/Soap">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-Soap" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/belly/ejb"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/Soap"/>
+    </target>
     <target name="wsimport-client-SoapWS" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/SoapWS"/>
         <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/SoapWS" destdir="${build.generated.dir}/jax-wsCache/SoapWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/SoapWS/wsdl/localhost_8080/SoapWS/SoapWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/SoapWS/SoapWS?wsdl" xnocompile="true" xendorsed="true">
@@ -42,21 +58,5 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/belly/ejb"/>
         <delete dir="${build.generated.dir}/jax-wsCache/SoapWS"/>
     </target>
-    <target name="wsimport-client-SoapWS_1" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/SoapWS_1"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/SoapWS_1" destdir="${build.generated.dir}/jax-wsCache/SoapWS_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/SoapWS_1/wsdl/localhost_8080/SoapWS/SoapWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/SoapWS/SoapWS?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/SoapWS_1/wsdl/localhost_8080/SoapWS/SoapWS.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/SoapWS_1"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/SoapWS_1">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-SoapWS_1" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/belly/ejb"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/SoapWS_1"/>
-    </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-SoapWS, wsimport-client-SoapWS_1"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-Soap, wsimport-client-SoapWS"/>
 </project>

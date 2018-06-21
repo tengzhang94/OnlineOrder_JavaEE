@@ -29,51 +29,50 @@ and open the template in the editor.
         </p:panelGrid>
         <h:form>
             <f:view>
-                <h:form class="myCol-60">
+                <h:form class="myCol-60" id="myDataTable">
                     <h1><h:outputText value="My Orders"/></h1>
-                    <h:dataTable value="#{onlineOrderMBean.orderedCourses}" var="item">
-                        <h:column class="myCol-20">
+                    <p:dataTable class="myCol-60" value="#{onlineOrderMBean.orderedCourses}" var="item" id="myTable">
+                        <p:column class="myCol-20">
                             <f:facet name="header">
                                 <h:outputText value="Name"/>
                             </f:facet>
                             <h:outputText value="#{item.course.name}"/>
-                        </h:column>
-                        <h:column class="myCol-15">
+                        </p:column>
+                        <p:column class="myCol-15 myCenter">
                             <f:facet name="header">
                                 <h:outputText value="Price"/>
                             </f:facet>
                             <h:outputText value="€#{item.course.price}"/>
-                        </h:column>
-                        <h:column class="myCol-10">
+                        </p:column>
+                        <p:column class="myCol-10 myCenter">
                             <f:facet name="header">
                                 <h:outputText value="Amount"/>
                             </f:facet>
                             <h:outputText value="#{item.count}"/>
-                        </h:column>
-                        <h:column class="myCol-20">
+                        </p:column>
+                        <p:column class="myCol-20 myCenter">
                             <f:facet name="header">
                                 <h:outputText value="Increase"/>
                             </f:facet>
-                            <p:commandButton value="ADD 1" action="#{onlineOrderMBean.orderCourse()}">
-                                <f:setPropertyActionListener value="#{item.course}" target="#{onlineOrderMBean.myCourse}" />
+                            <p:commandButton process="@form" value="ADD" actionListener="#{onlineOrderMBean.orderCourse(item.course)}" update="myTable">
                             </p:commandButton>
-                        </h:column>
-                        <h:column class="myCol-20">
+                        </p:column>
+                        <p:column class="myCol-20 myCenter">
                             <f:facet name="header">
                                 <h:outputText value="Decrease"/>
                             </f:facet>
-                            <p:commandButton value="DEL 1" action="#{onlineOrderMBean.deleteCourse()}">
-                                <f:setPropertyActionListener value="#{item.course}" target="#{onlineOrderMBean.myCourse}" />
+                            <p:commandButton value="DEL" actionListener="#{onlineOrderMBean.deleteCourse(item.course)}" update="myTable">
                             </p:commandButton>
-                        </h:column>
-                    </h:dataTable>
-                    
-                    <h:outputText class="myEnd" value="Total Price : €#{onlineOrderMBean.totalPrice()}"/><br/>
-                    <h:outputText class="myEnd" value="Preparation time : #{onlineOrderMBean.deliveryDuration()} mins"/><br/>
-                    <p:commandButton class="myEnd" value="CONFIRM ORDER" action="#{onlineOrderMBean.confirm()}"/>                    
+                        </p:column>
+                    </p:dataTable>                    
+                    <p:outputPanel class="myCol-60 myEnd" autoUpdate="true">
+                        <h:outputText class="myEnd" value="Total Price : €#{onlineOrderMBean.totalPrice()}"/><br/>
+                        <h:outputText class="myEnd" value="Preparation time : #{onlineOrderMBean.deliveryDuration()} mins"/><br/>                        
+                        <p:commandButton class="myEnd" value="CONFIRM ORDER" action="#{onlineOrderMBean.confirm()}"/> 
+                    </p:outputPanel>
+                                       
                 </h:form>
             </f:view>
-
         </h:form>
     </h:body>
 </html>

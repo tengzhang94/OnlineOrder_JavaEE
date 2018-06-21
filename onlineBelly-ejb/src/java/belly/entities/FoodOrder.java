@@ -83,11 +83,10 @@ public class FoodOrder implements FoodOrderLocalInterface {
         Optional<OrderCourse> orderCourse;        
         
         orderCourse = orderCourseList.stream().filter((oc) ->(oc.getCourse().equals(course))).findFirst();
-        System.out.println("retrieved: "+orderCourse);
-        System.out.println("status: "+orderCourse.isPresent());
+        //System.out.println("add: "+course);
         if (!orderCourse.isPresent())
         {
-            orderCourseList.add((OrderCourse) new OrderCourse(id,course.getId()));
+            orderCourseList.add((OrderCourse) new OrderCourse(this,course));
         }
         else
         {
@@ -100,6 +99,7 @@ public class FoodOrder implements FoodOrderLocalInterface {
         Optional<OrderCourse> orderCourse;
         
         orderCourse = orderCourseList.stream().filter((oc) ->(oc.getCourse().equals(course))).findFirst();
+        //System.out.println("remove: "+course);
         if (orderCourse.isPresent() & (orderCourse.get().decreaseCount()==0))       //case course is no more desired
         {
             orderCourseList.remove(orderCourse.get());

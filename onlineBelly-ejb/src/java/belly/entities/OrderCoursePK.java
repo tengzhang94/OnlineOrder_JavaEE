@@ -79,7 +79,7 @@ public class OrderCoursePK implements OrderCoursePKLocalInterface {
 
     @Override
     public String toString() {
-        return "belly.entities.OrderCoursePK[ orderId=" + orderId + ", courseId=" + courseId + " ]";
+        return "OrderCoursePK[ orderId=" + orderId + ", courseId=" + courseId + " ]";
     }
     
 }

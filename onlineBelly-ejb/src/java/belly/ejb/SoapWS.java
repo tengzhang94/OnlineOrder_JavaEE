@@ -7,6 +7,7 @@ package belly.ejb;
 
 import belly.entities.Course;
 import belly.interfaces.CourseOverviewBeanLocal;
+import belly.interfaces.SoapWSLocalInterface;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
@@ -14,14 +15,14 @@ import javax.ejb.Stateless;
 import javax.jws.Oneway;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import belly.interfaces.SoapWSLocalInterface;
+
 
 /**
  *
  * @author dell
  */
 @WebService(serviceName = "SoapWS")
-@Stateless()
+@Stateless
 public class SoapWS implements SoapWSLocalInterface {
 
     @EJB
