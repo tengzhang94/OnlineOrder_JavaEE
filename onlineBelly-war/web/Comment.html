@@ -13,10 +13,13 @@ and open the template in the editor.
     <body>
         <form action="MyServlet">
             <input type="text" name="t1"><br>
-            <input type="submit" value="Confirm">
+            <input type="submit" name = "sendText" value="Confirm">
         </form>
-        <form action="MenuList">
-            <input type="submit" value="RETURN TO MENU">
+        <!-- by teng in August
+             return to the front menu page
+        -->
+        <form action="MyServlet">
+            <input type="submit" name = "return" value="Return to menu page">
         </form>
     </body>
 </html>

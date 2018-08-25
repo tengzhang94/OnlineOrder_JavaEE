@@ -17,7 +17,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author toon1
+ * @author toon1&teng
  */
 @Stateless
 public class CustomerCredentialsBean implements CustomerCredentialsBeanLocal {
@@ -37,7 +37,7 @@ public class CustomerCredentialsBean implements CustomerCredentialsBeanLocal {
         try
         {
             customer = validateCredentials(loginName,password);
-            System.out.println("retrieved :" +customer);
+            System.out.println("login validated:" +customer);
             return customer;
         }
         catch (InvalidCredentialsException e)

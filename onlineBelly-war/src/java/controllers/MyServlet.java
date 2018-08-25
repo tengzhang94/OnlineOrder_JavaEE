@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Zheng Liang
+ * @author Zheng Liang & teng
  */
 public class MyServlet extends HttpServlet {
 
@@ -44,14 +44,24 @@ public class MyServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        String str = request.getParameter("t1");
-        PrintWriter out = response.getWriter();
-        //out.println("Demo");
-        sendJMSMessageToNavinDest(str);
-        out.println("<h1>your message is record</h1>");
         
+        if (request.getParameter("sendText") != null) 
+        {
+            response.setContentType("text/html;charset=UTF-8");
+
+            String str = request.getParameter("t1");
+            PrintWriter out = response.getWriter();
+            //out.println("Demo");
+            sendJMSMessageToNavinDest(str);
+            //out.println("<h1>your message is record</h1>");
+            System.out.println("Your message is sent!");
+        }
+        // by teng in August
+        // return to the menu page
+        if (request.getParameter("return") != null) {
+            System.out.println("return is submitted");
+            response.sendRedirect("MenuList.jsf");
+        }
         
     }
 

@@ -18,19 +18,32 @@ and open the template in the editor.
     <h:body>
         <p:panelGrid class="myCol-100">
             <p:row class="myCol-100">
-                <p:column class="myCol-20" rowspan="2"/>
-                <p:column class="myCol-60 myCenter webTitle" rowspan="2">
+                <p:column class="myCol-20" rowspan="3"/>
+                <p:column class="myCol-60 myCenter webTitle" rowspan="3">
                     <h:outputText value="MY ONLINE BELLY"/>
                 </p:column>
                 <p:column class="myCol-20 myEnd">
-                        <p:commandButton value="LOG IN" action="LoginPage"/>                   
+                        <p:button value="LOG IN" outcome="LoginPage"/>                   
                 </p:column>
             </p:row>
             <p:row class="myCol-100">
                 <p:column class="myCol-20 myEnd">
-                        <p:commandButton value="CHECK OUT" action="CheckoutPage"/>                   
+                        <!-- by teng in August
+                             to log out
+                        -->
+                        <p:commandButton value="LOG OUT" actionListener="#{onlineOrderMBean.tryLogout()}"/>             
                 </p:column>
              </p:row> 
+            <p:row class="myCol-100">
+                <p:column class="myCol-20 myEnd">
+                        <!-- by teng in August
+                             with no user logged in a checkout should not be permitted
+                             so we try first
+                        -->
+                        <p:commandButton value="CHECK OUT" actionListener="#{onlineOrderMBean.tryAccessCheckout()}"/>             
+                </p:column>
+             </p:row> 
+            
         </p:panelGrid>
         <h:form>
             <center><h2><h:outputText value="FOOD MENU"/></h2></center>

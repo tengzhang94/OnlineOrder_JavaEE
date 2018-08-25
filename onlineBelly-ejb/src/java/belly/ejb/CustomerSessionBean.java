@@ -37,7 +37,7 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
     }
 
     @Override
-    public FoodOrder setLatestOrder(Person customer) {
+    public FoodOrder unConfirmedOrder(Person customer) {
         
         Query query = em.createNamedQuery("FoodOrder.findByPersonOpen");
         query.setParameter("personID",customer);
@@ -53,9 +53,13 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         }        
         return this.order;
     }
-    
+    // by teng in August
+    // when an order is made then return from comment page
+    // if we simply get this.order the previous confirmed order will show up again
+    // so we need to use setLatestOrder to get order this customer
+    // has not confirmed yet
     @Override
-    public FoodOrder getOrder() {return this.order;}
+    public FoodOrder getOrder() {return unConfirmedOrder(this.customer);}
     @Override
     public void setOrder(FoodOrder order) {
         this.order = order;
@@ -73,6 +77,11 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         for (int i = 0;i<amount;i++){
             order.addCourse(newCourse);
         }
+        // by teng in August
+        // so everytime it adds, it is already saved in the database
+        // if another logs in then this user logs in again the order is still there
+        // otherwise it would be lost
+        em.merge(order);
         return order;
     }
 
@@ -81,6 +90,10 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         for (int i = 0;i<amount;i++){
             order.removeCourse(whatCourse);
         }
+        // by teng in August
+        // so everytime it decreases, it is already saved in the database
+        // if another logs in then this user logs in again the order is still there
+        em.merge(order);
         return order;
     }
 
@@ -91,7 +104,6 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
 
     @Override
     public void confirmOrder() {
-        
         //indicate the order as completed
         order.setComplete((short) 1);
         em.merge(order);                //save changes to database

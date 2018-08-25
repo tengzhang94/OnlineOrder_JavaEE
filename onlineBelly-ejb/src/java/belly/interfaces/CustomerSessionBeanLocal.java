@@ -16,7 +16,7 @@ import javax.ejb.Local;
 @Local
 public interface CustomerSessionBeanLocal extends Serializable {
 
-    FoodOrder setLatestOrder(Person customer);
+    FoodOrder unConfirmedOrder(Person customer);
     void confirmOrder();
     FoodOrder removeCourse(Course whatCourse, int amount);
     FoodOrder orderCourse(Course newCourse, int amount);

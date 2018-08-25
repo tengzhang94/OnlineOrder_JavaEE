@@ -6,9 +6,9 @@
 package controllers;
 
 
-import belly.ejb.Soap;
-import belly.ejb.SoapWS_Service;
-import belly.ejb.Soap_Service;
+//import belly.ejb.Soap;
+//import belly.ejb.SoapWS_Service;
+//import belly.ejb.Soap_Service;
 import belly.entities.*;
 import belly.exceptions.*;
 import belly.interfaces.*;
@@ -25,21 +25,21 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.ws.WebServiceRef;
+//import javax.xml.ws.WebServiceRef;
 
 /**
  *
- * @author toon1
+ * @author toon1&teng
  */
 @Named(value = "onlineOrderMBean")
 @SessionScoped
 public class OnlineOrderMBean implements Serializable {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/Soap/Soap.wsdl")
-    private Soap_Service service_1;
+    //@WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/Soap/Soap.wsdl")
+    //private Soap_Service service_1;
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/SoapWS/SoapWS.wsdl")
-    private SoapWS_Service service;
+    //@WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/SoapWS/SoapWS.wsdl")
+    //private SoapWS_Service service;
 
 
 
@@ -66,28 +66,26 @@ public class OnlineOrderMBean implements Serializable {
     public OnlineOrderMBean() {
     }
     
-    public List<belly.ejb.Course> getCourses(){return getOverview();}    
+    public List<Course> getCourses(){return courseOverviewBean.getOverview();}    
     public List<OrderCourse> getOrderedCourses(){return customerSessionBean.getOrder().getOrderCourseList();}    
     public int totalPrice(){return customerSessionBean.getTotalPrice();}
     public int deliveryDuration()    {return customerSessionBean.getDuration();}
-    
-    public void confirm() throws IOException
-    {
-        System.out.println("finished session");
-        customerSessionBean.confirmOrder();
-        ExternalContext ec =FacesContext.getCurrentInstance().getExternalContext();
-         ec.redirect(ec.getRequestContextPath() + "/Comment.html");
-    }
+
     
     public void orderCourse() throws IOException
     {
+        //by teng in August
+        //without this condition throws noEJBException for the 1st order without login first
+        //because the checkLoggedInUser was always false before
+        //it is always login and menuList switching from each other 
         if(!checkLoggedInUser()){
             ExternalContext ec =FacesContext.getCurrentInstance().getExternalContext();
             ec.redirect(ec.getRequestContextPath() + "/LoginPage.jsf");
         }
-            
+        else{
         System.out.println("order : "+ this.myCourse);
-        customerSessionBean.orderCourse(myCourse, 1);
+        customerSessionBean.orderCourse(this.myCourse, 1);
+        }
         //check if logged in
         //case yes, add to order
         //else redirect to login view
@@ -97,6 +95,15 @@ public class OnlineOrderMBean implements Serializable {
         System.out.println("order : "+ course);
         customerSessionBean.orderCourse(course, 1);
     }
+        
+    public void confirm() throws IOException
+    {
+        System.out.println("finished session");
+        customerSessionBean.confirmOrder();
+        ExternalContext ec =FacesContext.getCurrentInstance().getExternalContext();
+         ec.redirect(ec.getRequestContextPath() + "/Comment.html");
+    }
+    
     public void deleteCourse()
     { 
         System.out.println("remove : "+ this.myCourse);
@@ -107,33 +114,80 @@ public class OnlineOrderMBean implements Serializable {
         System.out.println("remove : "+ course);
         customerSessionBean.removeCourse(course, 1);
     }
-    public String loginCustomer()
+    public void loginCustomer() throws IOException
     {
         try
         {
             Person p = customerCredentialsBean.loginCustomer(loginName, password);
+            //by teng in August
+            //have to check if this user has logged in otherwise it stays
+            //without this check the same user logs in again
+            //another stateful session bean will be created
+            if(checkLoggedInUser()){
+            Person pNow = (Person)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+            if(pNow.getName().equals(p.getName()))
+            {
+                System.out.println("This is the current user!");
+                ////return "MenuList";
+                ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+                ec.redirect(ec.getRequestContextPath() + "/MenuList.jsf");
+                return;
+            }
+        }
             customerSessionBean.setCustomer(p);
-            customerSessionBean.setLatestOrder(p);
-            System.out.println("MenuList");
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user",p);
-            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap());
-            return "MenuList";
+            customerSessionBean.unConfirmedOrder(p);
+            System.out.println("Login done!");
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.getSessionMap().put("user",p);
+            ec.redirect(ec.getRequestContextPath() + "/MenuList.jsf");
+            //return "MenuList";
         }
         catch (InvalidCredentialsException e)
         {
             //display msg to try again
-            
-            return "LoginPage";
+            System.out.println("Invalid credential, try again!!");
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(ec.getRequestContextPath() + "/LoginPage.jsf");
+                
+            //////return "LoginPage";
         }
+    }
+    // by teng in August
+    // only go to the checkout page when it is logged in
+    public void tryAccessCheckout() throws IOException
+    {
+        if(checkLoggedInUser())
+        {
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(ec.getRequestContextPath() + "/CheckoutPage.jsf");
+            return ;
+        }
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect(ec.getRequestContextPath() + "/MenuList.jsf");
+    }
+    // by teng in August
+    // log out user if it is already logged in
+    public void tryLogout() throws IOException
+    {
+        if(checkLoggedInUser())
+        {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+            System.out.println("user successfully logged out");
+           
+        }
+         System.out.println("Not logged in yet");
+         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+         ec.redirect(ec.getRequestContextPath() + "/MenuList.jsf");
     }
     public String registerCustomer()
     {
         try
         {
-            System.out.println("creting new person");
+            System.out.println("creating new person");
             Person newCustomer  = customerCredentialsBean.registerCustomer(loginName, password, nickName);
             customerSessionBean.setCustomer(newCustomer);
-            customerSessionBean.setLatestOrder(newCustomer);            
+            customerSessionBean.unConfirmedOrder(newCustomer);            
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user",newCustomer);
             return "MenuList";
         }
@@ -158,7 +212,7 @@ public class OnlineOrderMBean implements Serializable {
 
     public boolean checkLoggedInUser()
     {
-        Person loginUser = getLoggedInUser();
+        Person loginUser = this.getLoggedInUser();
         return (loginUser != null);
     }
 
@@ -173,29 +227,31 @@ public class OnlineOrderMBean implements Serializable {
      */
     private Person getLoggedInUser()
     {
-        HttpServletRequest request =
-                (HttpServletRequest) FacesContext.getCurrentInstance().
-                    getExternalContext().getRequest();
-        return (Person) request.getAttribute("user");
+        //HttpServletRequest request =
+        //        (HttpServletRequest) FacesContext.getCurrentInstance().
+        //            getExternalContext().getRequest();
+         return (Person)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        //return (Person) request.getAttribute("user");
     }
 
     public Course getMyCourse() {return myCourse;}
     public void setMyCourse(Course myCourse) {this.myCourse = myCourse;}
 
-    private List<belly.ejb.Course> getOverview() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        belly.ejb.SoapWS port = service.getSoapWSPort();
-        return port.getOverview();
-    }
+   // private List<belly.ejb.Course> getOverview() {
+   //     // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+   //     // If the calling of port operations may lead to race condition some synchronization is required.
+   //     belly.ejb.SoapWS port = service.getSoapWSPort();
+   //     return port.getOverview();
+   // }
 
-    private List<Course> getOverview_1() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        SoapWSLocalInterface port = service_1.getPort(SoapWSLocalInterface.class);
-        return port.getOverview();
-    }
+   // private List<Course> getOverview_1() {
+   //     // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+   //     // If the calling of port operations may lead to race condition some synchronization is required.
+   //     SoapWSLocalInterface port = service_1.getPort(SoapWSLocalInterface.class);
+   //     return port.getOverview();
+    //}
 
+ 
   
     
 }
