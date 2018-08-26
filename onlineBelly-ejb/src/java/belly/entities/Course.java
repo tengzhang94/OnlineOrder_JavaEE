@@ -34,7 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Course.findById", query = "SELECT c FROM Course c WHERE c.id = :id")
     , @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name")
     , @NamedQuery(name = "Course.findByMaximumPreptime", query = "SELECT c FROM Course c WHERE c.preptime < :preptime")
-    , @NamedQuery(name = "Course.findByMaximumPrice", query = "SELECT c FROM Course c WHERE c.price < :price")})
+    , @NamedQuery(name = "Course.findByMaximumPrice", query = "SELECT c FROM Course c WHERE c.price < :price")
+    , @NamedQuery(name = "Course.getCourseNr", query = "SELECT count(c) FROM Course c")})
+
 public class Course implements CourseLocalInterface {
 
     private static final long serialVersionUID = 1L;

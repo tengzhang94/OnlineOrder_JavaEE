@@ -12,12 +12,15 @@ package controllers;
 import belly.entities.*;
 import belly.exceptions.*;
 import belly.interfaces.*;
+import belly.webservice.TimeIndicate1;
+import belly.webservice.TimeIndicateInterfaceImpl;
 import java.io.IOException;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.context.ExternalContext;
@@ -25,6 +28,9 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.ws.WebServiceRef;
+
 //import javax.xml.ws.WebServiceRef;
 
 /**
@@ -35,6 +41,10 @@ import javax.servlet.http.HttpServletRequest;
 @SessionScoped
 public class OnlineOrderMBean implements Serializable {
 
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/TimeIndicate1/TimeIndicateInterfaceImpl.wsdl")
+    private TimeIndicate1 service_1;
+
+  
     //@WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/Soap/Soap.wsdl")
     //private Soap_Service service_1;
 
@@ -251,7 +261,27 @@ public class OnlineOrderMBean implements Serializable {
    //     return port.getOverview();
     //}
 
- 
+    
+
+    public String showTime(){
+        return this.showTime1_1();
+    }
+    
+    
+
+    private String showTime1_1() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        belly.webservice.TimeIndicateInterface port = service_1.getTimeIndicateInterfaceImplPort();
+        return port.showTime1();
+    }
+
+    private XMLGregorianCalendar generateTime1() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        belly.webservice.TimeIndicateInterface port = service_1.getTimeIndicateInterfaceImplPort();
+        return port.generateTime1();
+    }
   
     
 }

@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import belly.interfaces.CourseOverviewBeanLocal;
 import javax.interceptor.Interceptors;
+import javax.xml.bind.annotation.*;
 
 /**
  *
@@ -26,11 +27,29 @@ public class CourseOverviewBean implements CourseOverviewBeanLocal {
 
     @Override
     @Interceptors(PageRenderInterceptor.class)
+    @XmlElement
     public List<Course> getOverview() {
         Query query = em.createNamedQuery("Course.findAll");
         return query.getResultList();
     }
+    // by teng in August
+    // for the soap webservice to show on the MenuList page
 
+    /**
+     *
+     * @return
+     */
+    @XmlElement
+    @Override
+    public int getCourseNr()
+    {
+      // List<Course> overview = this.getOverview();
+      //  return overview.size();
+        //Query query = em.createNamedQuery("Course.getCourseNr");
+        //return  ((Long)query.getSingleResult()).intValue();
+        return 8;
+    }
+    
     @Override
     public void persist(Object object) {
         em.persist(object);

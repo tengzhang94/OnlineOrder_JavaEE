@@ -18,6 +18,6 @@ import javax.ejb.Local;
 public interface CourseOverviewBeanLocal extends Serializable {
 
     List<Course> getOverview();
-
+    int getCourseNr();
     void persist(Object object);    
 }

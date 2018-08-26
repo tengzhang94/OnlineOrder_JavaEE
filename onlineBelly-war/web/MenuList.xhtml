@@ -18,7 +18,10 @@ and open the template in the editor.
     <h:body>
         <p:panelGrid class="myCol-100">
             <p:row class="myCol-100">
-                <p:column class="myCol-20" rowspan="3"/>
+                <p:column class="myCol-20" rowspan="3">
+                    <h:outputText value="Current time is #{onlineOrderMBean.showTime()}, make an order and we will deliever in 20mins "/>
+                
+                 </p:column>    
                 <p:column class="myCol-60 myCenter webTitle" rowspan="3">
                     <h:outputText value="MY ONLINE BELLY"/>
                 </p:column>
@@ -47,7 +50,7 @@ and open the template in the editor.
         </p:panelGrid>
         <h:form>
             <center><h2><h:outputText value="FOOD MENU"/></h2></center>
-            <p:dataGrid var="item" value="#{onlineOrderMBean.getCourses()}" id="customerList" paginator="true" columns="3" rows="12">
+            <p:dataGrid var="item" value="#{onlineOrderMBean.getCourses()}" id="customerList" paginator="true" columns="3" rows="4">
                 <p:column class="myCol-100">
                     <p:panel header="#{item.name}" class="myCenter myCol-100">
                         <h:panelGrid class="myCol-100">

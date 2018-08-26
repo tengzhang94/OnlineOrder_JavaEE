@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <definitions 
+ xmlns="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="soap" targetNamespace="http://ejb.belly/" xmlns:tns="http://ejb.belly/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" 
+ >
+    <message name="getOverview"/>
+    <message name="getOverviewResponse"/>
+    <message name="getCourseNr"/>
+    <message name="getCourseNrResponse"/>
+    <message name="persist"/>
+    <message name="persistResponse"/>
+    <portType name="soap">
+        <operation name="getOverview">
+            <input message="tns:getOverview"/>
+            <output message="tns:getOverviewResponse"/>
+        </operation>
+        <operation name="getCourseNr">
+            <input message="tns:getCourseNr"/>
+            <output message="tns:getCourseNrResponse"/>
+        </operation>
+        <operation name="persist">
+            <input message="tns:persist"/>
+            <output message="tns:persistResponse"/>
+        </operation>
+    </portType>
+    <binding name="soapPortBinding" type="tns:soap">
+        <wsp:PolicyReference URI="#soapPortBindingPolicy"/>
+        <operation name="getOverview">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="getCourseNr">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="persist">
+            <input/>
+            <output/>
+        </operation>
+    </binding>
+    <service name="soap">
+        <port name="soapPort" binding="tns:soapPortBinding"/>
+    </service>
+    <wsp:Policy wsu:Id="soapPortBindingPolicy">
+        <wsp:ExactlyOne>
+            <wsp:All/>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+</definitions>

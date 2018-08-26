@@ -21,7 +21,7 @@ public class TimerBean  {
     TimerService timerService;
 
     //@Override
-    @Schedule(dayOfWeek = "4", minute = "40", hour = "8")
+    @Schedule(dayOfWeek = "6", minute = "00", hour = "19")
     public void happyHour() {
         System.out.println("ITS HAPPY HOUR") ; //To change body of generated methods, choose Tools | Templates.
     }

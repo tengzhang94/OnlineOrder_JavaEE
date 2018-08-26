@@ -15,4 +15,11 @@
     <system systemId="http://localhost:8080/Soap/Soap?xsd=1" uri="wsdl/localhost_8080/Soap/Soap.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/TestSoap/TestSoap?wsdl" uri="wsdl/localhost_8080/TestSoap/TestSoap.wsdl"/>
     <system systemId="http://localhost:8080/TestSoap/TestSoap?xsd=1" uri="wsdl/localhost_8080/TestSoap/TestSoap.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/soap/soap?wsdl" uri="wsdl/localhost_8080/soap/soap.wsdl"/>
+    <system systemId="http://localhost:8080/soap/soap?xsd=1" uri="wsdl/localhost_8080/soap/soap.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TimeIndicate/TimeIndicate?wsdl" uri="wsdl/localhost_8080/TimeIndicate/TimeIndicate.wsdl"/>
+    <system systemId="http://localhost:8080/TimeIndicate/TimeIndicate?xsd=1" uri="wsdl/localhost_8080/TimeIndicate/TimeIndicate.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TimeIndicate1/TimeIndicateInterfaceImpl?wsdl" uri="wsdl/localhost_8080/TimeIndicate1/TimeIndicateInterfaceImpl.wsdl"/>
+    <system systemId="http://localhost:8080/TimeIndicate1/TimeIndicateInterfaceImpl?wsdl=1" uri="wsdl/localhost_8080/TimeIndicate1/TimeIndicateInterfaceImpl.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:8080/TimeIndicate1/TimeIndicateInterfaceImpl?xsd=1" uri="wsdl/localhost_8080/TimeIndicate1/TimeIndicateInterfaceImpl.xsd_1.xsd"/>
 </catalog>
