@@ -14,14 +14,14 @@ and open the template in the editor.
         <title>menu page</title>
         <link rel="stylesheet" href="CSS/positionStyles.css"/>
         <link rel="stylesheet" href="CSS/textStyles.css"/>
+        <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" ></script>
     </h:head>
     <h:body>
         <p:panelGrid class="myCol-100">
             <p:row class="myCol-100">
                 <p:column class="myCol-20" rowspan="3">
-                    <h:outputText value="Current time is #{onlineOrderMBean.showTime()}, make an order and we will deliever in 20mins "/>
-                
-                 </p:column>    
+                    <h:outputText value="Hi #{onlineOrderMBean.greetByName()},order now and get a meal at your doorstep before #{onlineOrderMBean.showTime()}"/>
+                </p:column>
                 <p:column class="myCol-60 myCenter webTitle" rowspan="3">
                     <h:outputText value="MY ONLINE BELLY"/>
                 </p:column>

@@ -3,7 +3,6 @@
   <persistence-unit name="onlineBelly-ejbPU" transaction-type="JTA">
     <jta-data-source>jdbc/onlineBelly2</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-    </properties>
+    
   </persistence-unit>
 </persistence>
