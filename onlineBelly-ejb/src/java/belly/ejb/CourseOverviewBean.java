@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.*;
 
 /**
  *
- * @author toon1
+ * @author toon1& teng
  */
 @Singleton
 public class CourseOverviewBean implements CourseOverviewBeanLocal {

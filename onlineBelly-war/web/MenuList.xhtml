@@ -45,6 +45,14 @@ and open the template in the editor.
                         -->
                         <p:commandButton value="CHECK OUT" actionListener="#{onlineOrderMBean.tryAccessCheckout()}"/>             
                 </p:column>
+             </p:row>
+            <p:row class="myCol-100">
+                <p:column class="myCol-20 myEnd" style="align-items: right">
+                        <!-- by teng in August
+                             to log out
+                        -->
+                        <p:button value="CHECK OUR LOCATIONS" outcome="LocationList"/>             
+                </p:column>
              </p:row> 
             
         </p:panelGrid>

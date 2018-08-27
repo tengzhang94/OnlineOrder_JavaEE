@@ -53,6 +53,12 @@ public class OnlineOrderMBean implements Serializable {
     private String password;
     private String nickName;
     private Course myCourse;
+    
+    /**
+     * Creates a new instance of OnlineOrderMBean
+     */
+    public OnlineOrderMBean() {
+    }
 
     public String getNickName() {
         return nickName;
@@ -76,12 +82,6 @@ public class OnlineOrderMBean implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    /**
-     * Creates a new instance of OnlineOrderMBean
-     */
-    public OnlineOrderMBean() {
     }
 
     public List<Course> getCourses() {

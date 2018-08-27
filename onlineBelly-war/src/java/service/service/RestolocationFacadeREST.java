@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
 
-import belly.entities.Course;
+// by teng in August
+package service.service;
+
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,33 +20,34 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import service.Restolocation;
 
 /**
  *
- * @author dell
+ * @author teng
  */
 @Stateless
-@Path("belly.entities.course")
-public class CourseFacadeREST extends AbstractFacade<Course> {
+@Path("restolocation")
+public class RestolocationFacadeREST extends AbstractFacade<Restolocation> {
 
     @PersistenceContext(unitName = "onlineBelly-warPU")
     private EntityManager em;
 
-    public CourseFacadeREST() {
-        super(Course.class);
+    public RestolocationFacadeREST() {
+        super(Restolocation.class);
     }
 
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Course entity) {
+    public void create(Restolocation entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Course entity) {
+    public void edit(@PathParam("id") Integer id, Restolocation entity) {
         super.edit(entity);
     }
 
@@ -58,21 +60,21 @@ public class CourseFacadeREST extends AbstractFacade<Course> {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Course find(@PathParam("id") Integer id) {
+    public Restolocation find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Course> findAll() {
+    public List<Restolocation> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Course> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Restolocation> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
