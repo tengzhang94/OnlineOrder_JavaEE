@@ -16,9 +16,9 @@ import javax.jws.WebService;
  */
 @WebService()
 public interface TimeIndicateInterface extends Serializable {
-    @WebMethod (operationName="showTime1")
+    @WebMethod (operationName="showTime")
     public String showTime();
-    @WebMethod (operationName = "generateTime1")
+    @WebMethod (operationName = "generateTime")
      public Date generateTime();
      
 }

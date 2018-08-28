@@ -11,12 +11,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.ejb.Stateless;
-import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 // by teng in August
 @Stateless()
-@WebService(serviceName = "TimeIndicate1", endpointInterface= "belly.interfaces.TimeIndicateInterface")
+@WebService(serviceName = "TimeIndicate", endpointInterface= "belly.interfaces.TimeIndicateInterface")
 
 public class TimeIndicateInterfaceImpl implements TimeIndicateInterface {
     

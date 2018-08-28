@@ -20,9 +20,8 @@ and open the template in the editor.
         <p:panelGrid class="myCol-100">
             <p:row class="myCol-100">
                 <p:column class="myCol-20" rowspan="4">
-                    <h:outputText value="Hi #{onlineOrderMBean.greetByName()},order now and get a meal at your doorstep before #{onlineOrderMBean.showTime()}, you can now also drop by one of our restaurants for a discount"/>
-                    
-                        <!-- by teng in August
+                    <h:outputText value="Hi #{onlineOrderMBean.greetByName()},order now and get a meal at your doorstep before #{onlineOrderMBean.showtime()}, you can now also drop by one of our restaurants for a discount"/>
+                    <!-- by teng in August
                              to log out
                         -->
                         <p:button value="OUR LOCATIONS" outcome="LocationList"/>             
@@ -62,24 +61,14 @@ and open the template in the editor.
                         <p:commandButton value="Check out" actionListener="#{onlineOrderMBean.tryAccessCheckout()}"/>             
                 </p:column>
              </p:row>
-            <!--
-            <p:row class="myCol-100">
-                <p:column class="myCol-20 myEnd">
-                        // by teng in August
-                        //     to log out
-                        
-                        <p:button value="OUR LOCATIONS" outcome="LocationList"/>             
-                </p:column>
-             </p:row> 
-            -->
         </p:panelGrid>
         <h:form>
             <center><h2><h:outputText value="FOOD MENU"/></h2></center>
-            <p:dataGrid var="item" value="#{onlineOrderMBean.getCourses()}" id="customerList" paginator="true" columns="3" rows="4">
+            <p:dataGrid var="item" value="#{onlineOrderMBean.getCourses()}" id="customerList" paginator="true" columns="4" rows="3">
                 <p:column class="myCol-100">
                     <p:panel header="#{item.name}" class="myCenter myCol-100">
                         <h:panelGrid class="myCol-100">
-                            <p:graphicImage  value="#{item.picture}" alt="delicious meal" class="myImageDisplay myCenter" /> 
+                            <p:graphicImage  url="#{item.picture}" alt="course" class="myImageDisplay myCenter" /> 
                             <h:outputText value="price : €#{item.price}" />
                             <h:outputText value="preparation time : #{item.preptime} minutes" />
                             <p:commandButton value="ORDER" action="#{onlineOrderMBean.orderCourse()}">

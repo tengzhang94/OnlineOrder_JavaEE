@@ -28,8 +28,8 @@
     </target>
     <target name="wsimport-client-TimeIndicateInterfaceImpl" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/TimeIndicateInterfaceImpl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TimeIndicateInterfaceImpl" destdir="${build.generated.dir}/jax-wsCache/TimeIndicateInterfaceImpl" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/TimeIndicateInterfaceImpl/wsdl/localhost_8080/TimeIndicate1/TimeIndicateInterfaceImpl.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/TimeIndicate1/TimeIndicateInterfaceImpl?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/TimeIndicateInterfaceImpl/wsdl/localhost_8080/TimeIndicate1/TimeIndicateInterfaceImpl.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TimeIndicateInterfaceImpl" destdir="${build.generated.dir}/jax-wsCache/TimeIndicateInterfaceImpl" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/TimeIndicateInterfaceImpl/wsdl/localhost_8080/TimeIndicate/TimeIndicateInterfaceImpl.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/TimeIndicate/TimeIndicateInterfaceImpl?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/TimeIndicateInterfaceImpl/wsdl/localhost_8080/TimeIndicate/TimeIndicateInterfaceImpl.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/TimeIndicateInterfaceImpl"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">

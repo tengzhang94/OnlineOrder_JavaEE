@@ -22,4 +22,7 @@
     <system systemId="http://localhost:8080/TimeIndicate1/TimeIndicateInterfaceImpl?wsdl" uri="src/conf/xml-resources/web-service-references/TimeIndicateInterfaceImpl/wsdl/localhost_8080/TimeIndicate1/TimeIndicateInterfaceImpl.wsdl"/>
     <system systemId="http://localhost:8080/TimeIndicate1/TimeIndicateInterfaceImpl?wsdl=1" uri="src/conf/xml-resources/web-service-references/TimeIndicateInterfaceImpl/wsdl/localhost_8080/TimeIndicate1/TimeIndicateInterfaceImpl.wsdl_1.wsdl"/>
     <system systemId="http://localhost:8080/TimeIndicate1/TimeIndicateInterfaceImpl?xsd=1" uri="src/conf/xml-resources/web-service-references/TimeIndicateInterfaceImpl/wsdl/localhost_8080/TimeIndicate1/TimeIndicateInterfaceImpl.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TimeIndicate/TimeIndicateInterfaceImpl?wsdl" uri="src/conf/xml-resources/web-service-references/TimeIndicateInterfaceImpl/wsdl/localhost_8080/TimeIndicate/TimeIndicateInterfaceImpl.wsdl"/>
+    <system systemId="http://localhost:8080/TimeIndicate/TimeIndicateInterfaceImpl?wsdl=1" uri="src/conf/xml-resources/web-service-references/TimeIndicateInterfaceImpl/wsdl/localhost_8080/TimeIndicate/TimeIndicateInterfaceImpl.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:8080/TimeIndicate/TimeIndicateInterfaceImpl?xsd=1" uri="src/conf/xml-resources/web-service-references/TimeIndicateInterfaceImpl/wsdl/localhost_8080/TimeIndicate/TimeIndicateInterfaceImpl.xsd_1.xsd"/>
 </catalog>
