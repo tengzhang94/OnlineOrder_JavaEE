@@ -217,7 +217,7 @@ public class OnlineOrderMBean implements Serializable {
             return;
         }
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(ec.getRequestContextPath() + "/MenuList.jsf");
+        ec.redirect(ec.getRequestContextPath() + "/LoginPage.jsf");
     }
 
     // by teng in August
