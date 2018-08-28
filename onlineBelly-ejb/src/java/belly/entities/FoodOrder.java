@@ -100,10 +100,13 @@ public class FoodOrder implements FoodOrderLocalInterface {
         
         orderCourse = orderCourseList.stream().filter((oc) ->(oc.getCourse().equals(course))).findFirst();
         //System.out.println("remove: "+course);
-        if (orderCourse.isPresent() & (orderCourse.get().decreaseCount()==0))       //case course is no more desired
+        if (orderCourse.isPresent())       
         {
-            orderCourseList.remove(orderCourse.get());
+            if (orderCourse.get().decreaseCount()==0) {
+                orderCourseList.remove(orderCourse.get());
+            }
         }
+        //case course is no more desired
     }
 
     @Override

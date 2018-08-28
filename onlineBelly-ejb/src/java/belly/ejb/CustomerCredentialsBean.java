@@ -10,6 +10,7 @@ import belly.entities.*;
 import belly.exceptions.InvalidCredentialsException;
 import belly.exceptions.NotUniqueCredentialsException;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -31,8 +32,29 @@ public class CustomerCredentialsBean implements CustomerCredentialsBeanLocal {
      * @return customer object
      * @throws InvalidCredentialsException in case the person entry doe not exist
      **/
+    
+    
     @Override
     public Person loginCustomer(String loginName, String password) throws InvalidCredentialsException {
+        System.out.println("are we here?");
+        Person customer;        
+        try
+        {
+            customer = validateCredentials(loginName,password);
+            System.out.println("login validated:" +customer);
+            return customer;
+        }
+        catch (InvalidCredentialsException e)
+        {
+            throw e;
+        }
+    }
+    
+    // by teng in August
+    @Override
+    @Interceptors(UnloggedVisitorInterceptor.class)
+    public Person anonomyLogin(String loginName, String password) throws InvalidCredentialsException {
+        System.out.println("are we here?");
         Person customer;        
         try
         {
@@ -53,6 +75,7 @@ public class CustomerCredentialsBean implements CustomerCredentialsBeanLocal {
      * @throws NotUniqueCredentialsException in case the person cant be created due to parameter constraints
      **/
     @Override
+    @Interceptors(CapitalNameInterceptor.class)
     public Person registerCustomer(String loginName, String password, String personName) throws NotUniqueCredentialsException {
         
         Person customer;

@@ -19,22 +19,38 @@ and open the template in the editor.
     <h:body>
         <p:panelGrid class="myCol-100">
             <p:row class="myCol-100">
-                <p:column class="myCol-20" rowspan="3">
-                    <h:outputText value="Hi #{onlineOrderMBean.greetByName()},order now and get a meal at your doorstep before #{onlineOrderMBean.showTime()}"/>
+                <p:column class="myCol-20" rowspan="4">
+                    <h:outputText value="Hi #{onlineOrderMBean.greetByName()},order now and get a meal at your doorstep before #{onlineOrderMBean.showTime()}, you can now also drop by one of our restaurants for a discount"/>
+                    
+                        <!-- by teng in August
+                             to log out
+                        -->
+                        <p:button value="OUR LOCATIONS" outcome="LocationList"/>             
+                
                 </p:column>
-                <p:column class="myCol-60 myCenter webTitle" rowspan="3">
+                
+                <p:column class="myCol-60 myCenter webTitle" rowspan="4">
                     <h:outputText value="MY ONLINE BELLY"/>
                 </p:column>
                 <p:column class="myCol-20 myEnd">
-                        <p:button value="LOG IN" outcome="LoginPage"/>                   
+                        <p:button value="Log in" outcome="LoginPage"/>                   
                 </p:column>
             </p:row>
             <p:row class="myCol-100">
                 <p:column class="myCol-20 myEnd">
                         <!-- by teng in August
+                             with no user logged in a checkout should not be permitted
+                             so we try first
+                        -->
+                        <p:commandButton value="Anonymous" actionListener="#{onlineOrderMBean.anonyLogIn()}"/>             
+                </p:column>
+             </p:row>
+            <p:row class="myCol-100">
+                <p:column class="myCol-20 myEnd">
+                        <!-- by teng in August
                              to log out
                         -->
-                        <p:commandButton value="LOG OUT" actionListener="#{onlineOrderMBean.tryLogout()}"/>             
+                        <p:commandButton value="Log out" actionListener="#{onlineOrderMBean.tryLogout()}"/>             
                 </p:column>
              </p:row> 
             <p:row class="myCol-100">
@@ -43,18 +59,19 @@ and open the template in the editor.
                              with no user logged in a checkout should not be permitted
                              so we try first
                         -->
-                        <p:commandButton value="CHECK OUT" actionListener="#{onlineOrderMBean.tryAccessCheckout()}"/>             
+                        <p:commandButton value="Check out" actionListener="#{onlineOrderMBean.tryAccessCheckout()}"/>             
                 </p:column>
              </p:row>
+            <!--
             <p:row class="myCol-100">
-                <p:column class="myCol-20 myEnd" style="align-items: right">
-                        <!-- by teng in August
-                             to log out
-                        -->
-                        <p:button value="CHECK OUR LOCATIONS" outcome="LocationList"/>             
+                <p:column class="myCol-20 myEnd">
+                        // by teng in August
+                        //     to log out
+                        
+                        <p:button value="OUR LOCATIONS" outcome="LocationList"/>             
                 </p:column>
              </p:row> 
-            
+            -->
         </p:panelGrid>
         <h:form>
             <center><h2><h:outputText value="FOOD MENU"/></h2></center>

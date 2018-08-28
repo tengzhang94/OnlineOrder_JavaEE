@@ -15,6 +15,7 @@
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/CheckoutPage.xhtml</url-pattern>
+        <url-pattern>/LoginPage.xhtml</url-pattern>
         <url-pattern>/Comment.html</url-pattern>
         <url-pattern>/MenuList.xhtml</url-pattern>
         <url-pattern>/index.xhtml</url-pattern>

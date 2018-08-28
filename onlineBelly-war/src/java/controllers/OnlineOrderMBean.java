@@ -140,6 +140,40 @@ public class OnlineOrderMBean implements Serializable {
         customerSessionBean.removeCourse(course, 1);
     }
 
+    // by teng in August
+    public void anonyLogIn() throws IOException{
+        try {
+            Person p = customerCredentialsBean.anonomyLogin("", "");
+            //by teng in August
+            //have to check if this user has logged in otherwise it stays
+            //without this check the same user logs in again
+            //another stateful session bean will be created
+            if (checkLoggedInUser()) {
+                Person pNow = (Person) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+                if (pNow.getName().equals(p.getName())) {
+                    System.out.println("This is the current user!");
+                    ////return "MenuList";
+                    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+                    ec.redirect(ec.getRequestContextPath() + "/MenuList.jsf");
+                    return;
+                }
+            }
+            customerSessionBean.setCustomer(p);
+            customerSessionBean.unConfirmedOrder(p);
+            System.out.println("Login done!");
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.getSessionMap().put("user", p);
+            ec.redirect(ec.getRequestContextPath() + "/MenuList.jsf");
+            //return "MenuList";
+        } catch (InvalidCredentialsException e) {
+            //display msg to try again
+            System.out.println("Anomynous invalid, something is wrong!! Maybe the visitot account is deleted in the datebase.");
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(ec.getRequestContextPath() + "/LoginPage.jsf");
+
+            //////return "LoginPage";
+        }
+    }
     public void loginCustomer() throws IOException {
         try {
             Person p = customerCredentialsBean.loginCustomer(loginName, password);
@@ -298,8 +332,9 @@ public class OnlineOrderMBean implements Serializable {
     private String showTime1_1() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        belly.webservice.TimeIndicateInterface port = service_1.getTimeIndicateInterfaceImplPort();
-        return port.showTime1();
+        return "2018-06-29";
+    //    belly.webservice.TimeIndicateInterface port = service_1.getTimeIndicateInterfaceImplPort();
+    //    return port.showTime1();
     }
 
     private XMLGregorianCalendar generateTime1() {

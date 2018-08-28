@@ -21,7 +21,9 @@ public interface CustomerCredentialsBeanLocal extends Serializable {
 
     Person loginCustomer(String loginName, String password) throws InvalidCredentialsException;
     Person registerCustomer(String loginName, String password, String personName) throws NotUniqueCredentialsException;
-    Person validateCredentials(String loginName, String password) throws InvalidCredentialsException;    
+    Person validateCredentials(String loginName, String password) throws InvalidCredentialsException;  
+    
+    Person anonomyLogin(String loginName, String password) throws InvalidCredentialsException;
     
     void persist(Object object);    
 }

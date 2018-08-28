@@ -77,7 +77,7 @@ public class CustomerSessionBean implements CustomerSessionBeanLocal {
         for (int i = 0;i<amount;i++){
             order.addCourse(newCourse);
         }
-        // by teng in August
+        // by teng in Augustfinter
         // so everytime it adds, it is already saved in the database
         // if another logs in then this user logs in again the order is still there
         // otherwise it would be lost
