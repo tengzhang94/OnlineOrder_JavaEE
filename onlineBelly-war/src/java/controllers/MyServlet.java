@@ -55,6 +55,7 @@ public class MyServlet extends HttpServlet {
             sendJMSMessageToNavinDest(str);
             //out.println("<h1>your message is record</h1>");
             System.out.println("Your message is sent!");
+            response.sendRedirect("MenuList.jsf");
         }
         // by teng in August
         // return to the menu page

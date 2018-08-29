@@ -21,15 +21,15 @@ public class TimerBean  {
     TimerService timerService;
 
     //@Override
-    @Schedule(minute = "51", hour = "10")
+    @Schedule(minute = "42", hour = "13")
     public void happyHour() {
         System.out.println("ITS HAPPY HOUR") ; //To change body of generated methods, choose Tools | Templates.
     }
 
     //@Override
-    @Schedule( minute = "52", hour = "10")
+    @Schedule( minute = "43", hour = "13")
     public void happyHourOver() {
-        System.out.println("ITS HAPPY HOUR") ; //To change body of generated methods, choose Tools | Templates.
+        System.out.println("HAPPY HOUR OVER") ; //To change body of generated methods, choose Tools | Templates.
     }
 
 }
