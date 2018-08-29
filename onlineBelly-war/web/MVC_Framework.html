@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0108)https://cygnus.cc.kuleuven.be/bbcswebdav/pid-14352243-dt-content-rid-29260566_3/orgs/C130069-B-1415/MVC.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>MVC Framework</title>
+
+</head>
+<body>
+<div id="header">
+Distributed Applications<br>
+KU Leuven - Campus Groep T<br>
+2017-2018<br>
+</div>
+<div id="groupmembers">
+<ul>
+<li>Teng Zhang</li>
+<li>Toon Van Miert</li>
+<li>Zheng Liang</li>
+</ul>
+</div>
+<h1>&lt;JSF - JavaServer Faces&gt;</h1>
+<h2>Short description</h2>
+<p> JavaServer Faces (JSF) is a web framework implementing the MVC paradigm, 
+        it is a Java-based web application framework intended to simplify development integration of web-based user interfaces.
+	 The developer can easily integrate his business logic (model) in it and set the view as he desires,
+	the controller is provided by JSF itself(JSF managed beans), so of no concern (literaly) to the developer.
+	</p>
+<h2>Technical features</h2>
+<h3>MVC solution</h3>
+<p> The view is rendered as a combination of JSP pages and JSF components. The developer uses expression language(dynamically manipulate data), tags(eg. the ajax tag to handle ajax calls) etc. to design it.
+	The developer gets a high performance rendering and many customization options.</p
+<p> The Model is realized with the backing beans. These provide the data and the operations and operations on them. These are linked
+	through a/many managed beans(Controller in the MVC) which serves as a client to the EJB SessionBeans(Model in the MVC), which in return operate on entities that
+	are managed with JPA.</p>
+<p> The controller traditionally delegates the data and page flow. JSF provides these functionalities through Facelets. This is a lightweight 
+	page declaration language that uses xhtml, tags, expression language and components to f.i. render the view.
+	The controller is implemented as a managed bean so that the web service can make use of the session beans(Model in the MVC) managed by ejb.
+	The framework handles the life cycle so that the developer doesn't have to worry about the boiler plate code, but more on
+	his core functionalities</p>
+
+<h3>Navigation</h3>
+<p> JSF resolves a view name to the actual page and renders is. The name can be hard coded or can be provided as a return value 
+	of a method in the managed bean(eg. return to a button's outcome or action atributes). This mechanism is called implicit navigation since the routing is less obvious than stating
+	the full qualified link</p>
+	
+<h3>Form handling</h3>
+<p> JSF has custom tags to achieve form handling. The form can contain child components as html markup.
+	The data from the text and input fields is linked to the managed bean by his getters and setters.</p>
+	
+
+<h3>Validation</h3>
+<p> JSF allows validation through build in and custom defined validators. It happens after the form value fields are 
+	updated and results in a proceed (on success) or jump to the response handler (on failure). An example of built-in 
+	validation are the use of annotations in the managed bean, like they exist in an entity class.</p>
+
+<h3>Type conversion</h3>
+<p> JSF provides standard converters that handle conversion between strings and java objects and vice versa(f:convertDateTime to convert between string and java.util.Date values). The	
+	standard converter handles simple data types and are available through javax.faces.convert.Converter. Primitive types
+	are automatically converted.</p>
+	
+<h3>Server-side handling of user interface events</h3>
+<p> JSF has three types of event handlers: two Listeners for changes in inputtext & actions like clicking a component and also
+	system level event handlers. The event handler for the listeners should be declared in the application code, this can	
+	for instance be a method invocation</p>	
+	
+	
+<h3>Rendering</h3>
+<p> Rendering is the last step in returning a response to the client. The JSF components are put in a tree so that future
+	rendering goes faster. To get the view, the components are translated to the html output. This again eases the web
+	development by simplifying the overhead associated with the design of the web page.</p>
+	
+<h3>I18N and L10N</h3>
+<p> All locale dependent storage can be kept in resource bundles outside of the source code so it has to be dynamically loaded and
+	as such allows the possibility to adapt it to the users locale. Every supported locale is registered in the 'faces-config.xml'
+	file and the resource bundles contain a '.properties' file for every locale. In this way, the correct data format and language can
+	be presented to the user</p>
+	
+<h3>JavaScript integration</h3>
+<p> Since JSF builds on standard web functionalities, it is of course possible to use JavaScript. The tag for a script
+	element is 'outerScript', with properties name and library. As mentioned under 'render', this is translated to html
+	where the fully qualified sourcepath is referred to</p>
+
+<h2>Documentation</h2>
+<h3>Kind of documentation, quality, up-todate</h3>
+<p> The documentation is available on the website of oracle. This documentation is very helpful, but the examples do 
+	not cover all the situations that might occur. The documentation is not problem-solution organized, which is a
+	downside, but that part is covered on fora. Also, for more ease of use, we made use of the primefaces library
+	which has a very nice documentation (+500 pages) where they explain all the attributes of the tags and their
+	usage. The standard tutorial websites also contain their trainings on JSF. These go from basic to really 
+	elaborated</p>
+	
+<h3>Community activity</h3>
+<p> Many 'questions' on JSF have been asked, so common issues can be easily resolved by just googling it. Next to stack overflow
+	we also visited 'coderanch' a lot. It seems that one way or another, issues in usage of jsf and the functionalities can be
+	resolved by doing a quick research</p>
+	
+<h2>Future evolution</h2>
+<p> In recent years, JSF has had a lot of competition from JQuery and AngularJS. The alternatives simply provide a better
+	scalability with their javascript framework and RESTful api backend. Yet, JSF is quite robust due to its maturity. 
+	It is considered as legacy and can serve as a good introduction to front end of full stack developing</p>
+	
+<h2>Your perception</h2>
+<p> JSF gives good vibes <i>because it works and gave us a good start</i>. It really enables you if you are unexperienced in the matter of designing
+	a web application. It is advisable to work up to the more popular frameworks if you really want to exploit the skill of 
+	java EE developer</p>
+	
+<h3>Ease of use</h3>
+<p> As already said, the JSF framework might just be perfect for an introduction to java EE programming. While you might
+	be experienced in coding business logic, you must still take a lot of steps to get the full stack developer status.
+	As always, it is good to start with babysteps, so thats why the ease of use factor of JSF is a big plus</p>
+
+<h3>Ease of installation</h3>
+<p> It comes with the installation of Netbeans so a lot of support is available. Set up goes really fast.</p>
+	
+<h3>Learning curve</h3>
+<p> After some getting to know time, we can really roll through the framework and include many functionalities. With other frameworks
+	we might be able to achieve more, but the step towards them is much higher than to JSF</p>
+	
+<h2>Practical information</h2>
+<h3>Website</h3>
+<p><a href="http://www.javaserverfaces.org/">http://www.javaserverfaces.org/</a></p>
+<h3>Download</h3>
+<p><a href="http://www.javaserverfaces.org/download">http://www.javaserverfaces.org/download</a></p>
+</body></html>
