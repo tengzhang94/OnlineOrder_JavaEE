@@ -48,6 +48,9 @@ public class OnlineOrderMBean implements Serializable {
     private CustomerCredentialsBeanLocal customerCredentialsBean;
     @EJB
     private CourseOverviewBeanLocal courseOverviewBean;
+    
+    @EJB
+    private OrderMadeTimerLocal myTimer;
 
     private String loginName;
     private String password;
@@ -128,6 +131,7 @@ public class OnlineOrderMBean implements Serializable {
         customerSessionBean.confirmOrder();
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.redirect(ec.getRequestContextPath() + "/Comment.html");
+        myTimer.setTimer();
     }
 
     public void deleteCourse() {

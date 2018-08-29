@@ -39,6 +39,7 @@ public class CourseOverviewBean implements CourseOverviewBeanLocal {
      *
      * @return
      */
+   
     @XmlElement
     @Override
     public int getCourseNr()
@@ -47,7 +48,7 @@ public class CourseOverviewBean implements CourseOverviewBeanLocal {
       //  return overview.size();
         //Query query = em.createNamedQuery("Course.getCourseNr");
         //return  ((Long)query.getSingleResult()).intValue();
-        return 8;
+        return 0;
     }
     
     @Override

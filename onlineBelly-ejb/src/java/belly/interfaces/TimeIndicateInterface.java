@@ -12,7 +12,7 @@ import javax.jws.WebService;
 
 /**
  *
- * @author dell
+ * @author teng
  */
 @WebService()
 public interface TimeIndicateInterface extends Serializable {
